@@ -1,0 +1,832 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0474A5974298148683BD189E /* libPods-Itinerary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29F99A3C2C0B30B22B969489 /* libPods-Itinerary.a */; };
+		6E885C3C1B515E85003269D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C3B1B515E85003269D8 /* main.m */; };
+		6E885C3F1B515E85003269D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C3E1B515E85003269D8 /* AppDelegate.m */; };
+		6E885C421B515E85003269D8 /* MAIBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C411B515E85003269D8 /* MAIBaseViewController.m */; };
+		6E885C451B515E85003269D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E885C431B515E85003269D8 /* Main.storyboard */; };
+		6E885C471B515E85003269D8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E885C461B515E85003269D8 /* Images.xcassets */; };
+		6E885C4A1B515E85003269D8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E885C481B515E85003269D8 /* LaunchScreen.xib */; };
+		6E885C621B516147003269D8 /* MAIConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C611B516147003269D8 /* MAIConfiguration.m */; };
+		6E885C6B1B5176CF003269D8 /* MAIServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C6A1B5176CF003269D8 /* MAIServiceTests.m */; };
+		6E885C6F1B51775F003269D8 /* MAIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C6E1B51775F003269D8 /* MAIService.m */; };
+		6E885C751B517960003269D8 /* MAIGeocoderRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C741B517960003269D8 /* MAIGeocoderRepository.m */; };
+		6E885C7B1B5191BB003269D8 /* MAIWaypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C7A1B5191BB003269D8 /* MAIWaypoint.m */; };
+		6E885C7F1B51AC33003269D8 /* NSString+MAIExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C7E1B51AC33003269D8 /* NSString+MAIExtras.m */; };
+		6E885C821B51B8A0003269D8 /* MAIItinerary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C811B51B8A0003269D8 /* MAIItinerary.m */; };
+		6E885C861B51D38D003269D8 /* MAIItineraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C831B51BC76003269D8 /* MAIItineraryTests.m */; };
+		6E885C881B5283F3003269D8 /* MAIItinerariesViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C871B5283F3003269D8 /* MAIItinerariesViewControllerTests.m */; };
+		6E885C8C1B528617003269D8 /* MAIItinerariesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C8B1B528617003269D8 /* MAIItinerariesViewController.m */; };
+		6E885C901B52D089003269D8 /* MAIArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C8F1B52D089003269D8 /* MAIArrayDataSource.m */; };
+		6E885C921B52D88B003269D8 /* MAIArrayDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C911B52D88B003269D8 /* MAIArrayDataSourceTests.m */; };
+		6E885C981B52E96F003269D8 /* MAIItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C971B52E96F003269D8 /* MAIItineraryViewController.m */; };
+		6E885C9D1B52FE6B003269D8 /* MAIWaypointTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885C9B1B52FE6B003269D8 /* MAIWaypointTableViewCell.m */; };
+		6E885C9E1B52FE6B003269D8 /* MAIWaypointTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E885C9C1B52FE6B003269D8 /* MAIWaypointTableViewCell.xib */; };
+		6E885CA41B532302003269D8 /* UITableViewCell+MAIExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E885CA31B532302003269D8 /* UITableViewCell+MAIExtra.m */; };
+		6E8CD5771B53EFCB000867E3 /* MAIItineraryViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8CD5761B53EFCB000867E3 /* MAIItineraryViewControllerTests.m */; };
+		6E8CD57A1B54CF42000867E3 /* MAIItineraryRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8CD5791B54CF42000867E3 /* MAIItineraryRepository.m */; };
+		6E8CD57F1B54E617000867E3 /* MAIItineraryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8CD57D1B54E617000867E3 /* MAIItineraryTableViewCell.m */; };
+		6E8CD5801B54E617000867E3 /* MAIItineraryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8CD57E1B54E617000867E3 /* MAIItineraryTableViewCell.xib */; };
+		6E8CD5831B54F511000867E3 /* UIViewController+MAIExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8CD5821B54F511000867E3 /* UIViewController+MAIExtras.m */; };
+		6E8CD58A1B5654FB000867E3 /* MAIRoutingRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8CD5891B5654FB000867E3 /* MAIRoutingRepository.m */; };
+		6E8CD58E1B567837000867E3 /* MAIRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8CD58D1B567837000867E3 /* MAIRoute.m */; };
+		6E8CD5911B56B184000867E3 /* MAIRouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8CD5901B56B184000867E3 /* MAIRouteViewController.m */; };
+		6E8CD5941B56D6EB000867E3 /* MAIRoutePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8CD5931B56D6EB000867E3 /* MAIRoutePolyline.m */; };
+		6EDA1F141B579F0D00E9F3BB /* MAIBaseHereRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA1F131B579F0D00E9F3BB /* MAIBaseHereRepository.m */; };
+		6EDA1F181B57B06300E9F3BB /* MAIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA1F171B57B06300E9F3BB /* MAIAnnotation.m */; };
+		6EDA1F1B1B57B4FE00E9F3BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EDA1F1D1B57B4FE00E9F3BB /* Localizable.strings */; };
+		6EDA1F221B57B60400E9F3BB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EDA1F241B57B60400E9F3BB /* InfoPlist.strings */; };
+		6EDA1F2A1B57BADC00E9F3BB /* MATLoadingOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA1F281B57BADC00E9F3BB /* MATLoadingOverlayViewController.m */; };
+		6EDA1F2B1B57BADC00E9F3BB /* MATLoadingOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDA1F291B57BADC00E9F3BB /* MATLoadingOverlayViewController.xib */; };
+		6EDA1F2E1B57C45500E9F3BB /* UILabel+MAIExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA1F2D1B57C45500E9F3BB /* UILabel+MAIExtra.m */; };
+		B1707B92331B52F767DD64F1 /* libPods-ItineraryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E42F85C7F87E2CE0EA921CE4 /* libPods-ItineraryTests.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E885C501B515E85003269D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E885C2E1B515E85003269D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E885C351B515E85003269D8;
+			remoteInfo = Itinerary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		29F99A3C2C0B30B22B969489 /* libPods-Itinerary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Itinerary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3634FB6071284455C7A5724D /* Pods-Itinerary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Itinerary.release.xcconfig"; path = "Pods/Target Support Files/Pods-Itinerary/Pods-Itinerary.release.xcconfig"; sourceTree = "<group>"; };
+		6E885C361B515E85003269D8 /* Itinerary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Itinerary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E885C3A1B515E85003269D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E885C3B1B515E85003269D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6E885C3D1B515E85003269D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6E885C3E1B515E85003269D8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6E885C401B515E85003269D8 /* MAIBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAIBaseViewController.h; sourceTree = "<group>"; };
+		6E885C411B515E85003269D8 /* MAIBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAIBaseViewController.m; sourceTree = "<group>"; };
+		6E885C441B515E85003269D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E885C461B515E85003269D8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6E885C491B515E85003269D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		6E885C4F1B515E85003269D8 /* ItineraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ItineraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E885C541B515E85003269D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E885C601B516147003269D8 /* MAIConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIConfiguration.h; sourceTree = "<group>"; };
+		6E885C611B516147003269D8 /* MAIConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIConfiguration.m; sourceTree = "<group>"; };
+		6E885C6A1B5176CF003269D8 /* MAIServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIServiceTests.m; sourceTree = "<group>"; };
+		6E885C6D1B51775F003269D8 /* MAIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIService.h; sourceTree = "<group>"; };
+		6E885C6E1B51775F003269D8 /* MAIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIService.m; sourceTree = "<group>"; };
+		6E885C731B517960003269D8 /* MAIGeocoderRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIGeocoderRepository.h; sourceTree = "<group>"; };
+		6E885C741B517960003269D8 /* MAIGeocoderRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIGeocoderRepository.m; sourceTree = "<group>"; };
+		6E885C761B517FC5003269D8 /* MAIGeocoderRepositoryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIGeocoderRepositoryDelegate.h; sourceTree = "<group>"; };
+		6E885C791B5191BB003269D8 /* MAIWaypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIWaypoint.h; sourceTree = "<group>"; };
+		6E885C7A1B5191BB003269D8 /* MAIWaypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIWaypoint.m; sourceTree = "<group>"; };
+		6E885C7D1B51AC33003269D8 /* NSString+MAIExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MAIExtras.h"; sourceTree = "<group>"; };
+		6E885C7E1B51AC33003269D8 /* NSString+MAIExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MAIExtras.m"; sourceTree = "<group>"; };
+		6E885C801B51B8A0003269D8 /* MAIItinerary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIItinerary.h; sourceTree = "<group>"; };
+		6E885C811B51B8A0003269D8 /* MAIItinerary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIItinerary.m; sourceTree = "<group>"; };
+		6E885C831B51BC76003269D8 /* MAIItineraryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIItineraryTests.m; sourceTree = "<group>"; };
+		6E885C871B5283F3003269D8 /* MAIItinerariesViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIItinerariesViewControllerTests.m; sourceTree = "<group>"; };
+		6E885C8A1B528617003269D8 /* MAIItinerariesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIItinerariesViewController.h; sourceTree = "<group>"; };
+		6E885C8B1B528617003269D8 /* MAIItinerariesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIItinerariesViewController.m; sourceTree = "<group>"; };
+		6E885C8E1B52D089003269D8 /* MAIArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIArrayDataSource.h; sourceTree = "<group>"; };
+		6E885C8F1B52D089003269D8 /* MAIArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIArrayDataSource.m; sourceTree = "<group>"; };
+		6E885C911B52D88B003269D8 /* MAIArrayDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIArrayDataSourceTests.m; sourceTree = "<group>"; };
+		6E885C961B52E96F003269D8 /* MAIItineraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIItineraryViewController.h; sourceTree = "<group>"; };
+		6E885C971B52E96F003269D8 /* MAIItineraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIItineraryViewController.m; sourceTree = "<group>"; };
+		6E885C9A1B52FE6B003269D8 /* MAIWaypointTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIWaypointTableViewCell.h; sourceTree = "<group>"; };
+		6E885C9B1B52FE6B003269D8 /* MAIWaypointTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIWaypointTableViewCell.m; sourceTree = "<group>"; };
+		6E885C9C1B52FE6B003269D8 /* MAIWaypointTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MAIWaypointTableViewCell.xib; sourceTree = "<group>"; };
+		6E885CA21B532302003269D8 /* UITableViewCell+MAIExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+MAIExtra.h"; sourceTree = "<group>"; };
+		6E885CA31B532302003269D8 /* UITableViewCell+MAIExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+MAIExtra.m"; sourceTree = "<group>"; };
+		6E885CA51B532ADF003269D8 /* MAIItineraryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIItineraryDelegate.h; sourceTree = "<group>"; };
+		6E8CD5761B53EFCB000867E3 /* MAIItineraryViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIItineraryViewControllerTests.m; sourceTree = "<group>"; };
+		6E8CD5781B54CF42000867E3 /* MAIItineraryRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIItineraryRepository.h; sourceTree = "<group>"; };
+		6E8CD5791B54CF42000867E3 /* MAIItineraryRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIItineraryRepository.m; sourceTree = "<group>"; };
+		6E8CD57B1B54CF6B000867E3 /* MAIItineraryRepositoryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIItineraryRepositoryDelegate.h; sourceTree = "<group>"; };
+		6E8CD57C1B54E617000867E3 /* MAIItineraryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIItineraryTableViewCell.h; sourceTree = "<group>"; };
+		6E8CD57D1B54E617000867E3 /* MAIItineraryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIItineraryTableViewCell.m; sourceTree = "<group>"; };
+		6E8CD57E1B54E617000867E3 /* MAIItineraryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MAIItineraryTableViewCell.xib; sourceTree = "<group>"; };
+		6E8CD5811B54F511000867E3 /* UIViewController+MAIExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MAIExtras.h"; sourceTree = "<group>"; };
+		6E8CD5821B54F511000867E3 /* UIViewController+MAIExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MAIExtras.m"; sourceTree = "<group>"; };
+		6E8CD5871B555BA1000867E3 /* MAIItinerary-PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MAIItinerary-PrefixHeader.pch"; sourceTree = "<group>"; };
+		6E8CD5881B5654FB000867E3 /* MAIRoutingRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIRoutingRepository.h; sourceTree = "<group>"; };
+		6E8CD5891B5654FB000867E3 /* MAIRoutingRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIRoutingRepository.m; sourceTree = "<group>"; };
+		6E8CD58B1B56613F000867E3 /* MAIRoutingRepositoryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIRoutingRepositoryDelegate.h; sourceTree = "<group>"; };
+		6E8CD58C1B567837000867E3 /* MAIRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIRoute.h; sourceTree = "<group>"; };
+		6E8CD58D1B567837000867E3 /* MAIRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIRoute.m; sourceTree = "<group>"; };
+		6E8CD58F1B56B184000867E3 /* MAIRouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIRouteViewController.h; sourceTree = "<group>"; };
+		6E8CD5901B56B184000867E3 /* MAIRouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIRouteViewController.m; sourceTree = "<group>"; };
+		6E8CD5921B56D6EB000867E3 /* MAIRoutePolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIRoutePolyline.h; sourceTree = "<group>"; };
+		6E8CD5931B56D6EB000867E3 /* MAIRoutePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIRoutePolyline.m; sourceTree = "<group>"; };
+		6E8CD5951B57355D000867E3 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
+		6E8CD5961B57355D000867E3 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		6EDA1F121B579F0D00E9F3BB /* MAIBaseHereRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIBaseHereRepository.h; sourceTree = "<group>"; };
+		6EDA1F131B579F0D00E9F3BB /* MAIBaseHereRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIBaseHereRepository.m; sourceTree = "<group>"; };
+		6EDA1F161B57B06300E9F3BB /* MAIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIAnnotation.h; sourceTree = "<group>"; };
+		6EDA1F171B57B06300E9F3BB /* MAIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIAnnotation.m; sourceTree = "<group>"; };
+		6EDA1F1C1B57B4FE00E9F3BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6EDA1F1E1B57B50700E9F3BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6EDA1F1F1B57B50A00E9F3BB /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6EDA1F231B57B60400E9F3BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6EDA1F251B57B60600E9F3BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6EDA1F261B57B60700E9F3BB /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6EDA1F271B57BADC00E9F3BB /* MATLoadingOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATLoadingOverlayViewController.h; sourceTree = "<group>"; };
+		6EDA1F281B57BADC00E9F3BB /* MATLoadingOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATLoadingOverlayViewController.m; sourceTree = "<group>"; };
+		6EDA1F291B57BADC00E9F3BB /* MATLoadingOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MATLoadingOverlayViewController.xib; sourceTree = "<group>"; };
+		6EDA1F2C1B57C45500E9F3BB /* UILabel+MAIExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+MAIExtra.h"; sourceTree = "<group>"; };
+		6EDA1F2D1B57C45500E9F3BB /* UILabel+MAIExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+MAIExtra.m"; sourceTree = "<group>"; };
+		815DF793BDDB94431AF42FC0 /* Pods-ItineraryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ItineraryTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ItineraryTests/Pods-ItineraryTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8C1CCFFED829D467FB68A2BE /* Pods-Itinerary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Itinerary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Itinerary/Pods-Itinerary.debug.xcconfig"; sourceTree = "<group>"; };
+		E42F85C7F87E2CE0EA921CE4 /* libPods-ItineraryTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ItineraryTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7C46F24A6889A136005CEB8 /* Pods-ItineraryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ItineraryTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ItineraryTests/Pods-ItineraryTests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E885C331B515E85003269D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0474A5974298148683BD189E /* libPods-Itinerary.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E885C4C1B515E85003269D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1707B92331B52F767DD64F1 /* libPods-ItineraryTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5D56EEAD6C45E1CB5387669A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29F99A3C2C0B30B22B969489 /* libPods-Itinerary.a */,
+				E42F85C7F87E2CE0EA921CE4 /* libPods-ItineraryTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5EB57EA2C2934B9325DD44F3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8C1CCFFED829D467FB68A2BE /* Pods-Itinerary.debug.xcconfig */,
+				3634FB6071284455C7A5724D /* Pods-Itinerary.release.xcconfig */,
+				815DF793BDDB94431AF42FC0 /* Pods-ItineraryTests.debug.xcconfig */,
+				E7C46F24A6889A136005CEB8 /* Pods-ItineraryTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6E885C2D1B515E85003269D8 = {
+			isa = PBXGroup;
+			children = (
+				6E885C381B515E85003269D8 /* Itinerary */,
+				6E885C521B515E85003269D8 /* ItineraryTests */,
+				6E885C371B515E85003269D8 /* Products */,
+				5EB57EA2C2934B9325DD44F3 /* Pods */,
+				5D56EEAD6C45E1CB5387669A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6E885C371B515E85003269D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C361B515E85003269D8 /* Itinerary.app */,
+				6E885C4F1B515E85003269D8 /* ItineraryTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E885C381B515E85003269D8 /* Itinerary */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C991B52FE2D003269D8 /* Cells */,
+				6E885C781B51915E003269D8 /* Domain */,
+				6E885C701B517821003269D8 /* Protocols */,
+				6E885C6C1B517720003269D8 /* Services */,
+				6E885C721B517920003269D8 /* Repository */,
+				6E885C8D1B52D05F003269D8 /* DataSources */,
+				6E885C891B5285ED003269D8 /* Controllers */,
+				6EDA1F151B57B03900E9F3BB /* Controls */,
+				6E885C7C1B51ABFE003269D8 /* Categories */,
+				6E885C5F1B516122003269D8 /* Configuration */,
+				6E885C3D1B515E85003269D8 /* AppDelegate.h */,
+				6E885C3E1B515E85003269D8 /* AppDelegate.m */,
+				6E885C431B515E85003269D8 /* Main.storyboard */,
+				6E885C461B515E85003269D8 /* Images.xcassets */,
+				6E885C481B515E85003269D8 /* LaunchScreen.xib */,
+				6E885C391B515E85003269D8 /* Supporting Files */,
+			);
+			path = Itinerary;
+			sourceTree = "<group>";
+		};
+		6E885C391B515E85003269D8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6EDA1F1D1B57B4FE00E9F3BB /* Localizable.strings */,
+				6EDA1F241B57B60400E9F3BB /* InfoPlist.strings */,
+				6E885C3A1B515E85003269D8 /* Info.plist */,
+				6E885C3B1B515E85003269D8 /* main.m */,
+				6E8CD5871B555BA1000867E3 /* MAIItinerary-PrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E885C521B515E85003269D8 /* ItineraryTests */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C531B515E85003269D8 /* Supporting Files */,
+				6E885C6A1B5176CF003269D8 /* MAIServiceTests.m */,
+				6E885C831B51BC76003269D8 /* MAIItineraryTests.m */,
+				6E885C871B5283F3003269D8 /* MAIItinerariesViewControllerTests.m */,
+				6E885C911B52D88B003269D8 /* MAIArrayDataSourceTests.m */,
+				6E8CD5761B53EFCB000867E3 /* MAIItineraryViewControllerTests.m */,
+			);
+			path = ItineraryTests;
+			sourceTree = "<group>";
+		};
+		6E885C531B515E85003269D8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C541B515E85003269D8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E885C5F1B516122003269D8 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C601B516147003269D8 /* MAIConfiguration.h */,
+				6E885C611B516147003269D8 /* MAIConfiguration.m */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		6E885C6C1B517720003269D8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C6D1B51775F003269D8 /* MAIService.h */,
+				6E885C6E1B51775F003269D8 /* MAIService.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6E885C701B517821003269D8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C761B517FC5003269D8 /* MAIGeocoderRepositoryDelegate.h */,
+				6E885CA51B532ADF003269D8 /* MAIItineraryDelegate.h */,
+				6E8CD57B1B54CF6B000867E3 /* MAIItineraryRepositoryDelegate.h */,
+				6E8CD58B1B56613F000867E3 /* MAIRoutingRepositoryDelegate.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6E885C721B517920003269D8 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				6EDA1F121B579F0D00E9F3BB /* MAIBaseHereRepository.h */,
+				6EDA1F131B579F0D00E9F3BB /* MAIBaseHereRepository.m */,
+				6E885C731B517960003269D8 /* MAIGeocoderRepository.h */,
+				6E885C741B517960003269D8 /* MAIGeocoderRepository.m */,
+				6E8CD5781B54CF42000867E3 /* MAIItineraryRepository.h */,
+				6E8CD5791B54CF42000867E3 /* MAIItineraryRepository.m */,
+				6E8CD5881B5654FB000867E3 /* MAIRoutingRepository.h */,
+				6E8CD5891B5654FB000867E3 /* MAIRoutingRepository.m */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		6E885C781B51915E003269D8 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C791B5191BB003269D8 /* MAIWaypoint.h */,
+				6E885C7A1B5191BB003269D8 /* MAIWaypoint.m */,
+				6E885C801B51B8A0003269D8 /* MAIItinerary.h */,
+				6E885C811B51B8A0003269D8 /* MAIItinerary.m */,
+				6E8CD58C1B567837000867E3 /* MAIRoute.h */,
+				6E8CD58D1B567837000867E3 /* MAIRoute.m */,
+				6E8CD5921B56D6EB000867E3 /* MAIRoutePolyline.h */,
+				6E8CD5931B56D6EB000867E3 /* MAIRoutePolyline.m */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		6E885C7C1B51ABFE003269D8 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C7D1B51AC33003269D8 /* NSString+MAIExtras.h */,
+				6E885C7E1B51AC33003269D8 /* NSString+MAIExtras.m */,
+				6E885CA21B532302003269D8 /* UITableViewCell+MAIExtra.h */,
+				6E885CA31B532302003269D8 /* UITableViewCell+MAIExtra.m */,
+				6E8CD5811B54F511000867E3 /* UIViewController+MAIExtras.h */,
+				6E8CD5821B54F511000867E3 /* UIViewController+MAIExtras.m */,
+				6EDA1F2C1B57C45500E9F3BB /* UILabel+MAIExtra.h */,
+				6EDA1F2D1B57C45500E9F3BB /* UILabel+MAIExtra.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		6E885C891B5285ED003269D8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C401B515E85003269D8 /* MAIBaseViewController.h */,
+				6E885C411B515E85003269D8 /* MAIBaseViewController.m */,
+				6E885C8A1B528617003269D8 /* MAIItinerariesViewController.h */,
+				6E885C8B1B528617003269D8 /* MAIItinerariesViewController.m */,
+				6E885C961B52E96F003269D8 /* MAIItineraryViewController.h */,
+				6E885C971B52E96F003269D8 /* MAIItineraryViewController.m */,
+				6E8CD58F1B56B184000867E3 /* MAIRouteViewController.h */,
+				6E8CD5901B56B184000867E3 /* MAIRouteViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6E885C8D1B52D05F003269D8 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C8E1B52D089003269D8 /* MAIArrayDataSource.h */,
+				6E885C8F1B52D089003269D8 /* MAIArrayDataSource.m */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		6E885C991B52FE2D003269D8 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6E885C9A1B52FE6B003269D8 /* MAIWaypointTableViewCell.h */,
+				6E885C9B1B52FE6B003269D8 /* MAIWaypointTableViewCell.m */,
+				6E885C9C1B52FE6B003269D8 /* MAIWaypointTableViewCell.xib */,
+				6E8CD57C1B54E617000867E3 /* MAIItineraryTableViewCell.h */,
+				6E8CD57D1B54E617000867E3 /* MAIItineraryTableViewCell.m */,
+				6E8CD57E1B54E617000867E3 /* MAIItineraryTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		6EDA1F151B57B03900E9F3BB /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				6EDA1F271B57BADC00E9F3BB /* MATLoadingOverlayViewController.h */,
+				6EDA1F281B57BADC00E9F3BB /* MATLoadingOverlayViewController.m */,
+				6EDA1F291B57BADC00E9F3BB /* MATLoadingOverlayViewController.xib */,
+				6EDA1F161B57B06300E9F3BB /* MAIAnnotation.h */,
+				6EDA1F171B57B06300E9F3BB /* MAIAnnotation.m */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E885C351B515E85003269D8 /* Itinerary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E885C591B515E85003269D8 /* Build configuration list for PBXNativeTarget "Itinerary" */;
+			buildPhases = (
+				FB9842876409CA1B5186DE78 /* Check Pods Manifest.lock */,
+				6E885C321B515E85003269D8 /* Sources */,
+				6E885C331B515E85003269D8 /* Frameworks */,
+				6E885C341B515E85003269D8 /* Resources */,
+				5EF98DE584F5913BD3AF506B /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Itinerary;
+			productName = Itinerary;
+			productReference = 6E885C361B515E85003269D8 /* Itinerary.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6E885C4E1B515E85003269D8 /* ItineraryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E885C5C1B515E85003269D8 /* Build configuration list for PBXNativeTarget "ItineraryTests" */;
+			buildPhases = (
+				A1F7C7039BDB79CD3707AE93 /* Check Pods Manifest.lock */,
+				6E885C4B1B515E85003269D8 /* Sources */,
+				6E885C4C1B515E85003269D8 /* Frameworks */,
+				6E885C4D1B515E85003269D8 /* Resources */,
+				5123E7DD8398D9822F42ACFB /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E885C511B515E85003269D8 /* PBXTargetDependency */,
+			);
+			name = ItineraryTests;
+			productName = ItineraryTests;
+			productReference = 6E885C4F1B515E85003269D8 /* ItineraryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E885C2E1B515E85003269D8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MAI;
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Marco Attanasio";
+				TargetAttributes = {
+					6E885C351B515E85003269D8 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 868RNGCAT7;
+					};
+					6E885C4E1B515E85003269D8 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 6E885C351B515E85003269D8;
+					};
+				};
+			};
+			buildConfigurationList = 6E885C311B515E85003269D8 /* Build configuration list for PBXProject "Itinerary" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				it,
+			);
+			mainGroup = 6E885C2D1B515E85003269D8;
+			productRefGroup = 6E885C371B515E85003269D8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E885C351B515E85003269D8 /* Itinerary */,
+				6E885C4E1B515E85003269D8 /* ItineraryTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E885C341B515E85003269D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E885C451B515E85003269D8 /* Main.storyboard in Resources */,
+				6EDA1F221B57B60400E9F3BB /* InfoPlist.strings in Resources */,
+				6EDA1F1B1B57B4FE00E9F3BB /* Localizable.strings in Resources */,
+				6E885C4A1B515E85003269D8 /* LaunchScreen.xib in Resources */,
+				6E885C9E1B52FE6B003269D8 /* MAIWaypointTableViewCell.xib in Resources */,
+				6EDA1F2B1B57BADC00E9F3BB /* MATLoadingOverlayViewController.xib in Resources */,
+				6E8CD5801B54E617000867E3 /* MAIItineraryTableViewCell.xib in Resources */,
+				6E885C471B515E85003269D8 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E885C4D1B515E85003269D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5123E7DD8398D9822F42ACFB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ItineraryTests/Pods-ItineraryTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5EF98DE584F5913BD3AF506B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Itinerary/Pods-Itinerary-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1F7C7039BDB79CD3707AE93 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FB9842876409CA1B5186DE78 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E885C321B515E85003269D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E885C8C1B528617003269D8 /* MAIItinerariesViewController.m in Sources */,
+				6E885C6F1B51775F003269D8 /* MAIService.m in Sources */,
+				6E885C751B517960003269D8 /* MAIGeocoderRepository.m in Sources */,
+				6E8CD5831B54F511000867E3 /* UIViewController+MAIExtras.m in Sources */,
+				6EDA1F141B579F0D00E9F3BB /* MAIBaseHereRepository.m in Sources */,
+				6E885C621B516147003269D8 /* MAIConfiguration.m in Sources */,
+				6E8CD58E1B567837000867E3 /* MAIRoute.m in Sources */,
+				6E885C7F1B51AC33003269D8 /* NSString+MAIExtras.m in Sources */,
+				6E8CD58A1B5654FB000867E3 /* MAIRoutingRepository.m in Sources */,
+				6E8CD5911B56B184000867E3 /* MAIRouteViewController.m in Sources */,
+				6E885C7B1B5191BB003269D8 /* MAIWaypoint.m in Sources */,
+				6E885CA41B532302003269D8 /* UITableViewCell+MAIExtra.m in Sources */,
+				6E885C421B515E85003269D8 /* MAIBaseViewController.m in Sources */,
+				6E885C981B52E96F003269D8 /* MAIItineraryViewController.m in Sources */,
+				6E885C3F1B515E85003269D8 /* AppDelegate.m in Sources */,
+				6EDA1F2E1B57C45500E9F3BB /* UILabel+MAIExtra.m in Sources */,
+				6E8CD57A1B54CF42000867E3 /* MAIItineraryRepository.m in Sources */,
+				6E8CD57F1B54E617000867E3 /* MAIItineraryTableViewCell.m in Sources */,
+				6E885C3C1B515E85003269D8 /* main.m in Sources */,
+				6EDA1F181B57B06300E9F3BB /* MAIAnnotation.m in Sources */,
+				6E885C821B51B8A0003269D8 /* MAIItinerary.m in Sources */,
+				6E885C9D1B52FE6B003269D8 /* MAIWaypointTableViewCell.m in Sources */,
+				6E8CD5941B56D6EB000867E3 /* MAIRoutePolyline.m in Sources */,
+				6E885C901B52D089003269D8 /* MAIArrayDataSource.m in Sources */,
+				6EDA1F2A1B57BADC00E9F3BB /* MATLoadingOverlayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E885C4B1B515E85003269D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E885C921B52D88B003269D8 /* MAIArrayDataSourceTests.m in Sources */,
+				6E8CD5771B53EFCB000867E3 /* MAIItineraryViewControllerTests.m in Sources */,
+				6E885C861B51D38D003269D8 /* MAIItineraryTests.m in Sources */,
+				6E885C6B1B5176CF003269D8 /* MAIServiceTests.m in Sources */,
+				6E885C881B5283F3003269D8 /* MAIItinerariesViewControllerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6E885C511B515E85003269D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E885C351B515E85003269D8 /* Itinerary */;
+			targetProxy = 6E885C501B515E85003269D8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6E885C431B515E85003269D8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E885C441B515E85003269D8 /* Base */,
+				6E8CD5951B57355D000867E3 /* it */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6E885C481B515E85003269D8 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E885C491B515E85003269D8 /* Base */,
+				6E8CD5961B57355D000867E3 /* it */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		6EDA1F1D1B57B4FE00E9F3BB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EDA1F1C1B57B4FE00E9F3BB /* Base */,
+				6EDA1F1E1B57B50700E9F3BB /* en */,
+				6EDA1F1F1B57B50A00E9F3BB /* it */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6EDA1F241B57B60400E9F3BB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EDA1F231B57B60400E9F3BB /* Base */,
+				6EDA1F251B57B60600E9F3BB /* en */,
+				6EDA1F261B57B60700E9F3BB /* it */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E885C571B515E85003269D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E885C581B515E85003269D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E885C5A1B515E85003269D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C1CCFFED829D467FB68A2BE /* Pods-Itinerary.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Itinerary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6E885C5B1B515E85003269D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3634FB6071284455C7A5724D /* Pods-Itinerary.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Itinerary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6E885C5D1B515E85003269D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 815DF793BDDB94431AF42FC0 /* Pods-ItineraryTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Itinerary/MAIItinerary-PrefixHeader.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ItineraryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Itinerary.app/Itinerary";
+			};
+			name = Debug;
+		};
+		6E885C5E1B515E85003269D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7C46F24A6889A136005CEB8 /* Pods-ItineraryTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Itinerary/MAIItinerary-PrefixHeader.pch";
+				INFOPLIST_FILE = ItineraryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Itinerary.app/Itinerary";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E885C311B515E85003269D8 /* Build configuration list for PBXProject "Itinerary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E885C571B515E85003269D8 /* Debug */,
+				6E885C581B515E85003269D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E885C591B515E85003269D8 /* Build configuration list for PBXNativeTarget "Itinerary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E885C5A1B515E85003269D8 /* Debug */,
+				6E885C5B1B515E85003269D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E885C5C1B515E85003269D8 /* Build configuration list for PBXNativeTarget "ItineraryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E885C5D1B515E85003269D8 /* Debug */,
+				6E885C5E1B515E85003269D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E885C2E1B515E85003269D8 /* Project object */;
+}

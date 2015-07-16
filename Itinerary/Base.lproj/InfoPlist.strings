@@ -1,0 +1,9 @@
+//
+// InfoPlist.strings
+//  Itinerary
+//
+//  Created by marco attanasio on 15/07/2015.
+//  Copyright (c) 2015 Marco Attanasio. All rights reserved.
+//
+ 
+"NSLocationWhenInUseUsageDescription" = "Needed to show your current location on the map.";

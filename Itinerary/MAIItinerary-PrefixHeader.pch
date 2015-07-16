@@ -1,0 +1,20 @@
+//
+//  MAIItinerary-PrefixHeader.pch
+//  Itinerary
+//
+//  Created by marco attanasio on 14/07/2015.
+//  Copyright (c) 2015 Marco Attanasio. All rights reserved.
+//
+
+#ifndef Itinerary_MAIItinerary_PrefixHeader_pch
+#define Itinerary_MAIItinerary_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
+
+
+#ifndef DEBUG
+#define NSLog(...);
+#endif

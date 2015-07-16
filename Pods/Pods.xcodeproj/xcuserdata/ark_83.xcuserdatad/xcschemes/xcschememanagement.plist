@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-Itinerary-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Itinerary.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ItineraryTests-OCMock.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ItineraryTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>371BEE6F094FB308DE6A6CE5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6C6AFAD0F7262C8111C653EA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8E89B0C2683CC0649DEC9E24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A1E9EA8DDCC6A54683426509</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
