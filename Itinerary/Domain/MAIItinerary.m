@@ -11,6 +11,12 @@
 
 @implementation MAIItinerary
 
+static dispatch_queue_t _queue;
+
++ (void)initialize {
+    _queue = dispatch_queue_create("com.marcoattanasio.itinerary", DISPATCH_QUEUE_CONCURRENT);
+}
+
 - (MAIItinerary*)init {
     self = [super init];
     if (self) {
@@ -19,27 +25,41 @@
     return self;
 }
 
+- (NSMutableArray*) waypoints {
+    __block id obj = nil;
+    dispatch_sync(_queue, ^{
+        obj = _waypoints;
+    });
+    return obj;
+}
+
 - (void) addItem:(MAIWaypoint *)waypoint {
-    [_waypoints addObject:[waypoint copy]];
+    dispatch_barrier_async(_queue, ^{
+         [_waypoints addObject:[waypoint copy]];
+    });
 }
 
 - (void) removeItemAtIndex:(NSUInteger)index{
-    if(index<_waypoints.count) {
-        [_waypoints removeObjectAtIndex:index];
-    }
+    dispatch_barrier_async(_queue, ^{
+        if(index<_waypoints.count) {
+            [_waypoints removeObjectAtIndex:index];
+        }
+    });
 }
 
 - (void) moveItemAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)destinationIndex {
-    if(sourceIndex<self.waypoints.count) {
-        MAIWaypoint *waypoint = [[_waypoints objectAtIndex:sourceIndex] copy];
-        [_waypoints removeObjectAtIndex:sourceIndex];
-        if(destinationIndex<_waypoints.count) {
-            [_waypoints insertObject:waypoint atIndex:destinationIndex];
+    dispatch_barrier_async(_queue, ^{
+        if(sourceIndex<_waypoints.count) {
+            MAIWaypoint *waypoint = [[_waypoints objectAtIndex:sourceIndex] copy];
+            [_waypoints removeObjectAtIndex:sourceIndex];
+            if(destinationIndex<_waypoints.count) {
+                [_waypoints insertObject:waypoint atIndex:destinationIndex];
+            }
+            else {
+                [_waypoints addObject:waypoint];
+            }
         }
-        else {
-            [_waypoints addObject:waypoint];
-        }
-    }
+    });
 }
 
 #pragma mark NSCopying
@@ -76,11 +96,12 @@
         return nil;
     }
     
-    _itineraryId = [decoder decodeObjectForKey:@"itineraryId"];
-    _friendlyName = [decoder decodeObjectForKey:@"friendlyName"];
-    _waypoints = [decoder decodeObjectForKey:@"waypoints"];
-    _route  = [decoder decodeObjectForKey:@"route"];
-    
+    dispatch_sync(_queue, ^{
+        _itineraryId = [decoder decodeObjectForKey:@"itineraryId"];
+        _friendlyName = [decoder decodeObjectForKey:@"friendlyName"];
+        _waypoints = [decoder decodeObjectForKey:@"waypoints"];
+        _route  = [decoder decodeObjectForKey:@"route"];
+    });
     return self;
 }
 
@@ -89,10 +110,12 @@
     if([NSString ext_IsNullOrEmpty:_itineraryId]) {
         _itineraryId = [NSString ext_GetGUID];
     }
-    [encoder encodeObject:_itineraryId forKey:@"itineraryId"];
-    [encoder encodeObject:_friendlyName forKey:@"friendlyName"];
-    [encoder encodeObject:_waypoints forKey:@"waypoints"];
-    [encoder encodeObject:_route forKey:@"route"];
+    dispatch_sync(_queue, ^{
+        [encoder encodeObject:_itineraryId forKey:@"itineraryId"];
+        [encoder encodeObject:_friendlyName forKey:@"friendlyName"];
+        [encoder encodeObject:_waypoints forKey:@"waypoints"];
+        [encoder encodeObject:_route forKey:@"route"];
+    });
 }
 
 @end

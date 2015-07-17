@@ -11,13 +11,13 @@
 #import "MAIRoute.h"
 
 @interface MAIItinerary : NSObject<NSCopying, NSCoding>{
-
+    NSMutableArray  *_waypoints;
 }
-
-@property (nonatomic, copy)             NSString        *itineraryId;
-@property (nonatomic, copy)             NSString        *friendlyName;
-@property (nonatomic, readonly)         NSMutableArray  *waypoints;
-@property (nonatomic, copy)             MAIRoute        *route;
+                                       
+@property (nonatomic, copy)                                 NSString        *itineraryId;
+@property (nonatomic, copy)                                 NSString        *friendlyName;
+@property (nonatomic, readonly)                             NSMutableArray  *waypoints;
+@property (nonatomic, copy)                                 MAIRoute        *route;
 
 - (MAIItinerary*)init;
 
