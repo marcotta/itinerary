@@ -85,7 +85,7 @@
     btmConstraint = nil;
     
     NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:holdingView
-                                                                      attribute:NSLayoutAttributeLeft
+                                                                      attribute:NSLayoutAttributeLeading
                                                                       relatedBy:0
                                                                          toItem:innerView
                                                                       attribute:NSLayoutAttributeLeading
@@ -98,7 +98,7 @@
                                                                        attribute:NSLayoutAttributeTrailing
                                                                        relatedBy:0
                                                                           toItem:holdingView
-                                                                       attribute:NSLayoutAttributeRight
+                                                                       attribute:NSLayoutAttributeTrailing
                                                                       multiplier:1.0
                                                                         constant:margin];
     [holdingView  addConstraint:rightConstraint];

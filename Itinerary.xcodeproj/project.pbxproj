@@ -396,6 +396,7 @@
 				6E885C331B515E85003269D8 /* Frameworks */,
 				6E885C341B515E85003269D8 /* Resources */,
 				5EF98DE584F5913BD3AF506B /* Copy Pods Resources */,
+				E9079CA966FA877A80BA643E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -415,6 +416,7 @@
 				6E885C4C1B515E85003269D8 /* Frameworks */,
 				6E885C4D1B515E85003269D8 /* Resources */,
 				5123E7DD8398D9822F42ACFB /* Copy Pods Resources */,
+				38AF14A2E2C9AFB91C93E23A /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -492,6 +494,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		38AF14A2E2C9AFB91C93E23A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ItineraryTests/Pods-ItineraryTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5123E7DD8398D9822F42ACFB /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,6 +552,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E9079CA966FA877A80BA643E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Itinerary/Pods-Itinerary-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FB9842876409CA1B5186DE78 /* Check Pods Manifest.lock */ = {

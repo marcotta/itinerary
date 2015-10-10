@@ -4,17 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Itinerary-AFNetworking.xcscheme</key>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>OCMock.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-Itinerary.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ItineraryTests-OCMock.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>371BEE6F094FB308DE6A6CE5</key>
+		<key>01DA86037DA6AEFE51085374F3BC5339</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C6AFAD0F7262C8111C653EA</key>
+		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8E89B0C2683CC0649DEC9E24</key>
+		<key>4A2CAA839F2722C796C6F1DFDC806B92</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A1E9EA8DDCC6A54683426509</key>
+		<key>ED0C5302128A3E6B8B4CD5375B64F9B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
