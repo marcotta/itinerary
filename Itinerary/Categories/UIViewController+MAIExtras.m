@@ -12,7 +12,7 @@
 
 // UIAlertController has a leak on ios8 of 48 bytes
 // http://www.openradar.appspot.com/20021758
-- (void) ext_showAlert:(NSString*)aTitle withMessage:(NSString *)aMessage andShowCancel:(bool)showCancel withOkHandler:(void (^)(UIAlertAction *action))okHandler withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler{
+- (void) ext_showAlert:(NSString*)aTitle withMessage:(NSString *)aMessage andShowCancel:(BOOL)showCancel withOkHandler:(void (^)(UIAlertAction *action))okHandler withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler{
     if([UIAlertController class]){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:aTitle message:aMessage preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK",nil) style:UIAlertActionStyleDefault
