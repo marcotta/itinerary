@@ -18,7 +18,7 @@
        [operation.responseObject isKindOfClass:[NSDictionary class]] &&
        [operation.responseObject objectForKey:@"details"] &&
        ![[operation.responseObject objectForKey:@"details"] isKindOfClass:[NSNull class]]
-       ){
+       ) {
         NSMutableString *errorMessage = [[NSMutableString alloc] initWithString:[operation.responseObject objectForKey:@"details"]];
         if([operation.responseObject objectForKey:@"additionalData"] &&
            ![[operation.responseObject objectForKey:@"additionalData"] isKindOfClass:[NSNull class]])

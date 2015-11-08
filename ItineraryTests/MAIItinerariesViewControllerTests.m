@@ -9,9 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "OCMock.h"
+
 #import "MAIItinerariesViewController.h"
 #import "MAIItineraryViewController.h"
 #import "MAIItinerary.h"
+
+@interface MAIItinerariesViewController(UnderTest)
+
+@property (nonatomic) IBOutlet  UITableView         *mainTableView;
+@property (nonatomic) IBOutlet  UIButton            *createNewItineraryButton;
+
+@end
 
 @interface MAIItinerariesViewControllerTests : XCTestCase
 

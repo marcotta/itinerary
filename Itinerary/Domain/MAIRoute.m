@@ -10,7 +10,7 @@
 
 @implementation MAIRoute
 
-- (MAIRoute*) initWithRouteId:(NSString*)aRouteId withSummary:(NSString*)aSummary {
+- (MAIRoute*)initWithRouteId:(NSString*)aRouteId withSummary:(NSString*)aSummary {
     self = [super init];
     if (self) {
         _routeId = aRouteId;
@@ -19,13 +19,13 @@
     return self;
 }
 
-- (MAIRoute*) initWithJson:(NSDictionary*)data {
+- (MAIRoute*)initWithJson:(NSDictionary*)data {
     self = [super init];
     if (self) {
         if(data && data!=(id)[NSNull null]
            && ![[data objectForKey:@"routeId"] isKindOfClass:[NSNull class]]
            ) {
-        
+            
             NSString *remoteRouteId = [data objectForKey:@"routeId"];
             NSDictionary *remoteSummary = [data objectForKey:@"summary"];
             NSString *remoteSummaryDescription=@"";
@@ -40,7 +40,7 @@
     return self;
 }
 
-- (BOOL) isEqual:(id)object{
+- (BOOL)isEqual:(id)object {
     if(!object) {
         return NO;
     }
@@ -55,12 +55,7 @@
 
 #pragma mark NSCopying
 - (id)copyWithZone:(NSZone *)zone {
-    MAIRoute *newRoute = [[[self class] allocWithZone:zone] init];
-    if(newRoute) {
-        [newRoute setRouteId:self.routeId];
-        [newRoute setSummary:self.summary];
-    }
-    return newRoute;
+    return [[[self class] allocWithZone:zone] initWithRouteId:self.routeId withSummary:self.summary];
 }
 
 #pragma mark NSCoding
@@ -72,13 +67,13 @@
     
     _routeId = [decoder decodeObjectForKey:@"routeId"];
     _summary = [decoder decodeObjectForKey:@"summary"];
- 
+    
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_routeId forKey:@"routeId"];
-    [encoder encodeObject:_summary forKey:@"summary"];
+    [encoder encodeObject:self.routeId forKey:@"routeId"];
+    [encoder encodeObject:self.summary forKey:@"summary"];
 }
 
 @end

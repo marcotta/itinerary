@@ -11,10 +11,13 @@
 
 @interface MAIRoutePolyline : NSObject
 
-@property (nonatomic) MKPolyline *polyline;
-@property (nonatomic) CLLocationCoordinate2D topLeft;
-@property (nonatomic) CLLocationCoordinate2D bottomRight;
+@property (nonatomic, readonly) MKPolyline *polyline;
+@property (nonatomic, readonly) CLLocationCoordinate2D topLeft;
+@property (nonatomic, readonly) CLLocationCoordinate2D bottomRight;
 
 
--(MAIRoutePolyline*) initWithPolyline:(MKPolyline*)aPolyline withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate;
+-(MAIRoutePolyline*)initWithPolyline:(MKPolyline*)aPolyline
+        withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate
+    withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate;
+
 @end

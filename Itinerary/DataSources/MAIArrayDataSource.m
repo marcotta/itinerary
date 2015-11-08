@@ -15,7 +15,14 @@
     return nil;
 }
 
-- (id)initWithItems:(NSArray *)anItems withCellIdentifier:(NSString *)aCellIdentifier withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock withDeleteCellBlock:(DeleteCellBlock)aDeleteCellBlock andEditable:(BOOL)canBeEdited withSortCellBlock:(SortCellBlock)aSortCellBlock andSortable:(BOOL)canBeSorted{
+- (id)initWithItems:(NSArray *)anItems
+ withCellIdentifier:(NSString *)aCellIdentifier
+withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock
+withDeleteCellBlock:(DeleteCellBlock)aDeleteCellBlock
+        andEditable:(BOOL)canBeEdited
+  withSortCellBlock:(SortCellBlock)aSortCellBlock
+        andSortable:(BOOL)canBeSorted
+{
     self = [super init];
     if (self) {
         _items = anItems;
@@ -29,15 +36,32 @@
     return self;
 }
 
-- (id)initWithItems:(NSArray *)anItems withCellIdentifier:(NSString *)aCellIdentifier withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock{
-    return [self initWithItems:anItems withCellIdentifier:aCellIdentifier withConfigureCellBlock:aConfigureCellBlock withDeleteCellBlock:nil andEditable:NO withSortCellBlock:nil andSortable:NO];
+- (id)initWithItems:(NSArray *)anItems
+ withCellIdentifier:(NSString *)aCellIdentifier
+withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock
+{
+    return [self initWithItems:anItems
+            withCellIdentifier:aCellIdentifier
+        withConfigureCellBlock:aConfigureCellBlock
+           withDeleteCellBlock:nil
+                   andEditable:NO
+             withSortCellBlock:nil
+                   andSortable:NO];
 }
 
-- (id)initWithItems:(NSArray *)anItems withCellIdentifier:(NSString *)aCellIdentifier withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock withDeleteCellBlock:(DeleteCellBlock)aDeleteCellBlock andEditable:(BOOL)canBeEdited {
-    return [self initWithItems:anItems withCellIdentifier:aCellIdentifier withConfigureCellBlock:aConfigureCellBlock withDeleteCellBlock:aDeleteCellBlock andEditable:canBeEdited withSortCellBlock:nil andSortable:NO];
+- (id)initWithItems:(NSArray *)anItems
+ withCellIdentifier:(NSString *)aCellIdentifier
+withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock
+withDeleteCellBlock:(DeleteCellBlock)aDeleteCellBlock
+        andEditable:(BOOL)canBeEdited {
+    return [self initWithItems:anItems
+            withCellIdentifier:aCellIdentifier
+        withConfigureCellBlock:aConfigureCellBlock
+           withDeleteCellBlock:aDeleteCellBlock
+                   andEditable:canBeEdited
+             withSortCellBlock:nil
+                   andSortable:NO];
 }
-
-
 
 - (id)itemAtIndexPath:(NSIndexPath*)indexPath {
     return [self.items objectAtIndex:(NSUInteger)indexPath.row];
@@ -74,7 +98,7 @@
     return [self isSortable];
 }
 
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     if(self.sortCellBlock) {
         self.sortCellBlock(sourceIndexPath.row, destinationIndexPath.row);
     }

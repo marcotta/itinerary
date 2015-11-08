@@ -14,6 +14,10 @@
 
 @interface MAIItinerariesViewController ()
 
+@property (nonatomic) IBOutlet UITableView         *mainTableView;
+@property (nonatomic) IBOutlet UIButton            *createNewItineraryButton;
+@property (nonatomic)           MAIArrayDataSource  *dataSource;
+
 @end
 
 @implementation MAIItinerariesViewController
@@ -21,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-   
+    
     NSString *cellIdentifier = @"ItineraryCell";
     [self.mainTableView registerNib:[UINib nibWithNibName:@"MAIItineraryTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
     
@@ -44,7 +48,7 @@
     [self setupDataSource:nil];
 }
 
-- (void) viewWillAppear:(BOOL)animated{
+- (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self showNetworkActivityWithMessage:@"Loading"];
@@ -64,11 +68,6 @@
             });
         }];
     });
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)setupDataSource:(NSArray*)items {
@@ -109,7 +108,7 @@
     // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"Itinerary"])
     {
-        [(MAIItineraryViewController*)segue.destinationViewController setItinerary:(MAIItinerary*)sender];
+        ((MAIItineraryViewController*)segue.destinationViewController).itinerary = (MAIItinerary*)sender;
     }
 }
 
@@ -133,7 +132,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//  Show Itinerary Details screen
+    //  Show Itinerary Details screen
     MAIItinerary *selectedItinerary = [self.dataSource.items objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"Itinerary" sender:selectedItinerary];
 }

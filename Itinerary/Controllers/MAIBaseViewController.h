@@ -11,8 +11,6 @@
 
 @interface MAIBaseViewController : UIViewController
 
-@property (nonatomic) MATLoadingOverlayViewController   *loadingOverlay;
-
 - (void) showNetworkActivityWithMessage:(NSString*) message;
 - (void) hideNetworkActivity;
 @end

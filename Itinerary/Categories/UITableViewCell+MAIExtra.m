@@ -13,7 +13,7 @@
 
 
 -(void) ext_resizeToMatchTableWidth:(UITableView*)tableView {
-
+    
     //HACK: IMPORTANT FOR IPHONE 6 and 6+ cell reports the wrong width and gets caluclations wrong.
     CGRect cellFrame = self.frame;
     cellFrame.size.width = tableView.frame.size.width;

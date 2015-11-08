@@ -38,7 +38,7 @@
         return;
     }
     
-    if(!anItinerary.waypoints || (anItinerary.waypoints && anItinerary.waypoints.count<2)){
+    if(!anItinerary.waypoints || (anItinerary.waypoints && anItinerary.waypoints.count<2)) {
         failureDataHandler(@"Must specify at least 2 waypoint.");
         return;
     }
@@ -47,7 +47,7 @@
     
     //Disable NSURLCache and let the service handle caching
     [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
-
+    
     NSString *url= [NSString stringWithFormat:@"%@", CALCULATE_ROUTE_END_POINT];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:@{@"app_id":APP_ID,
                                                                                         @"app_code":APP_CODE,
@@ -69,20 +69,20 @@
     [manager GET:url
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                           NSLog(@"JSON: %@", responseObject);
+             //                           NSLog(@"JSON: %@", responseObject);
              
              NSDictionary *response = (NSDictionary*)[responseObject objectForKey:@"response"];
              NSArray *remoteRoutes = [response objectForKey:@"route"];
              NSDictionary *remoteRoute = [remoteRoutes firstObject];
-
+             
              MAIRoute *route = [[MAIRoute alloc] initWithJson:remoteRoute];
              
-             if(successDataHandler){
+             if(successDataHandler) {
                  successDataHandler(route);
              }
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             if(failureDataHandler){
+             if(failureDataHandler) {
                  failureDataHandler([self parseErrorMessage:operation withError:error]);
              }
          }];
@@ -111,7 +111,7 @@
     [manager GET:url
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                                        NSLog(@"JSON: %@", responseObject);
+             //                                        NSLog(@"JSON: %@", responseObject);
              
              NSDictionary *response = (NSDictionary*)[responseObject objectForKey:@"response"];
              NSDictionary *remoteRoute = [response objectForKey:@"route"];
@@ -140,12 +140,12 @@
              
              MAIRoutePolyline *routePolyline = [[MAIRoutePolyline alloc] initWithPolyline:polyline withRegionTopLeftCoordinates:topLeft withRegionBottomRightCoordinates:bottomRight];
              
-             if(successDataHandler){
+             if(successDataHandler) {
                  successDataHandler(routePolyline);
              }
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             if(failureDataHandler){
+             if(failureDataHandler) {
                  failureDataHandler([self parseErrorMessage:operation withError:error]);
              }
          }];

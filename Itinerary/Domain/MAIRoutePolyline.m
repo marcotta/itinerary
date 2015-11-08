@@ -10,8 +10,10 @@
 
 @implementation MAIRoutePolyline
 
-
--(MAIRoutePolyline*) initWithPolyline:(MKPolyline*)aPolyline withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate {
+-(MAIRoutePolyline*)initWithPolyline:(MKPolyline*)aPolyline
+        withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate
+    withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate
+{
     self = [super init];
     if (self) {
         _polyline = aPolyline;

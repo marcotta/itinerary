@@ -8,6 +8,15 @@
 
 #import "MAIItineraryTableViewCell.h"
 
+@interface MAIItineraryTableViewCell ()
+
+@property (nonatomic) IBOutlet UILabel *headerLabel;
+@property (nonatomic) IBOutlet NSLayoutConstraint *leftMargin;
+@property (nonatomic) IBOutlet NSLayoutConstraint *rightMargin;
+
+@end
+
+
 @implementation MAIItineraryTableViewCell
 
 - (void)awakeFromNib {
@@ -28,7 +37,7 @@
     // Configure the view for the selected state
 }
 
-- (void) prepareForReuse{
+- (void) prepareForReuse {
     [self.headerLabel setText:@""];
 }
 

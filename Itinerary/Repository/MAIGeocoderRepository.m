@@ -5,7 +5,7 @@
 //  Created by marco attanasio on 11/07/2015.
 //  Copyright (c) 2015 Marco Attanasio. All rights reserved.
 //
-//  This class only responsibility is to retrieve data and hand it back 
+//  This class only responsibility is to retrieve data and hand it back
 
 #import "MAIGeocoderRepository.h"
 #import "MAIConfiguration.h"
@@ -34,15 +34,15 @@
     }
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
+    
     //Disable NSURLCache and let the service handle caching
     [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
     //Setting the header does not seem to work, will be passing appid and appcode as parameters, which works fine
-//    [manager.requestSerializer setValue:[[MAIConfiguration alloc] getAuthorizationHeader] forHTTPHeaderField:@"Authorization"];
-//    NSDictionary *parameters = @{@"searchtext": query,
-//                                 @"language":language,
-//                                 @"gen":@"8"};
-//    NSLog(@"Headers: %@", [manager.requestSerializer HTTPRequestHeaders]);
+    //    [manager.requestSerializer setValue:[[MAIConfiguration alloc] getAuthorizationHeader] forHTTPHeaderField:@"Authorization"];
+    //    NSDictionary *parameters = @{@"searchtext": query,
+    //                                 @"language":language,
+    //                                 @"gen":@"8"};
+    //    NSLog(@"Headers: %@", [manager.requestSerializer HTTPRequestHeaders]);
     
     NSString *url= [NSString stringWithFormat:@"%@", GEOCODER_END_POINT];
     NSDictionary *parameters = @{@"searchtext": query,
@@ -50,32 +50,32 @@
                                  @"app_code":APP_CODE,
                                  @"language":language,
                                  @"gen":@"8"};
-   
+    
     [manager GET:url
-       parameters:parameters
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//              NSLog(@"JSON: %@", responseObject);
-          
-              NSDictionary *response = (NSDictionary*)[responseObject objectForKey:@"Response"];
-              NSArray *view = [response objectForKey:@"View"];
-              NSArray *results = [[view firstObject] objectForKey:@"Result"];
-              
-               __block NSMutableArray *remoteLocations = [[NSMutableArray alloc] initWithCapacity:0];
-              [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                  MAIWaypoint *newLocation = [[MAIWaypoint alloc] initWithJson:obj];
-                  [remoteLocations addObject:newLocation];
-                  newLocation = nil;
-              }];
-              
-              if(successDataHandler){
-                  successDataHandler(remoteLocations);
-              }
-          }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              if(failureDataHandler){
-                  failureDataHandler([self parseErrorMessage:operation withError:error]);
-              }
-          }];
+      parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             //              NSLog(@"JSON: %@", responseObject);
+             
+             NSDictionary *response = (NSDictionary*)[responseObject objectForKey:@"Response"];
+             NSArray *view = [response objectForKey:@"View"];
+             NSArray *results = [[view firstObject] objectForKey:@"Result"];
+             
+             __block NSMutableArray *remoteLocations = [[NSMutableArray alloc] initWithCapacity:0];
+             [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                 MAIWaypoint *newLocation = [[MAIWaypoint alloc] initWithJson:obj];
+                 [remoteLocations addObject:newLocation];
+                 newLocation = nil;
+             }];
+             
+             if(successDataHandler) {
+                 successDataHandler(remoteLocations);
+             }
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             if(failureDataHandler) {
+                 failureDataHandler([self parseErrorMessage:operation withError:error]);
+             }
+         }];
 }
 
 @end

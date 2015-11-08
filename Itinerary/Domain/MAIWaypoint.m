@@ -8,10 +8,13 @@
 
 #import "MAIWaypoint.h"
 
-
 @implementation MAIWaypoint
 
-- (MAIWaypoint*) initWithLocationId:(NSString*)aLocationId withName:(NSString*)aName withAddress:(NSString*)anAddress withPosition:(CLLocationCoordinate2D)aPosition {
+- (MAIWaypoint*)initWithLocationId:(NSString*)aLocationId
+                          withName:(NSString*)aName
+                       withAddress:(NSString*)anAddress
+                      withPosition:(CLLocationCoordinate2D)aPosition
+{
     self = [super init];
     if (self) {
         _locationId = aLocationId;
@@ -22,22 +25,23 @@
     return self;
 }
 
-- (MAIWaypoint*) initWithJson:(NSDictionary*)data {
+- (MAIWaypoint*)initWithJson:(NSDictionary*)data
+{
     self = [super init];
     if (self) {
         NSDictionary *remoteLocation = (NSDictionary*)[data objectForKey:@"Location"];
         if(remoteLocation!=(id)[NSNull null]
            && ![[remoteLocation objectForKey:@"NavigationPosition"] isKindOfClass:[NSNull class]]
            && ![[remoteLocation objectForKey:@"Address"]isKindOfClass:[NSNull class]]
-           ){
+           ) {
             
             NSArray *remoteNavigationPositions = [remoteLocation objectForKey:@"NavigationPosition"];
             if (remoteNavigationPositions && remoteNavigationPositions.count>0) {
                 NSDictionary *remoteCoords = remoteNavigationPositions.firstObject;
                 NSDictionary *remoteAddress = [remoteLocation objectForKey:@"Address"];
                 
-                NSString *aLocationId = [remoteLocation objectForKey:@"LocationId"]!=(id)[NSNull null]?[remoteLocation objectForKey:@"LocationId"]:nil;
-                NSString *aName = [remoteLocation objectForKey:@"Name"]!=(id)[NSNull null]?[remoteLocation objectForKey:@"Name"]:nil;
+                NSString *aLocationId = [remoteLocation objectForKey:@"LocationId"]!=(id)[NSNull null] ?[remoteLocation objectForKey:@"LocationId"] : nil;
+                NSString *aName = [remoteLocation objectForKey:@"Name"]!=(id)[NSNull null] ?[remoteLocation objectForKey:@"Name"] : nil;
                 NSString *anAddress = @"";
                 
                 if(![[remoteAddress objectForKey:@"Label"] isKindOfClass:[NSNull class]]) {
@@ -49,7 +53,10 @@
                     float aLongitude = [[remoteCoords objectForKey:@"Longitude"] floatValue];
                     CLLocationCoordinate2D aPosition = CLLocationCoordinate2DMake(aLatitude, aLongitude);
                     
-                    self = [self initWithLocationId:aLocationId withName:aName withAddress:anAddress withPosition:aPosition];
+                    self = [self initWithLocationId:aLocationId
+                                           withName:aName
+                                        withAddress:anAddress
+                                       withPosition:aPosition];
                 }
             }
         }
@@ -57,7 +64,7 @@
     return self;
 }
 
-- (BOOL) isEqual:(id)object{
+- (BOOL)isEqual:(id)object {
     if(!object) {
         return NO;
     }
@@ -72,13 +79,10 @@
 
 #pragma mark NSCopying
 - (id)copyWithZone:(NSZone *)zone {
-    MAIWaypoint *newWaypoint = [[[self class] allocWithZone:zone] init];
-    if(newWaypoint) {
-        [newWaypoint setLocationId:self.locationId];
-        [newWaypoint setName:self.name];
-        [newWaypoint setAddress:self.address];
-        [newWaypoint setPosition:self.position];
-    }
+    MAIWaypoint *newWaypoint = [[[self class] allocWithZone:zone] initWithLocationId:self.locationId
+                                                                            withName:self.name
+                                                                         withAddress:self.address
+                                                                        withPosition:self.position];
     return newWaypoint;
 }
 
@@ -98,12 +102,11 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_locationId forKey:@"locationId"];
-    [encoder encodeObject:_name forKey:@"name"];
-    [encoder encodeObject:_address forKey:@"address"];
-    [encoder encodeDouble:_position.latitude forKey:@"latitude"];
-    [encoder encodeDouble:_position.longitude forKey:@"longitude"];
+    [encoder encodeObject:self.locationId forKey:@"locationId"];
+    [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.address forKey:@"address"];
+    [encoder encodeDouble:self.position.latitude forKey:@"latitude"];
+    [encoder encodeDouble:self.position.longitude forKey:@"longitude"];
 }
-
 
 @end

@@ -13,15 +13,16 @@
 @interface MAIItinerary : NSObject<NSCopying, NSCoding>{
     NSMutableArray  *_waypoints;
 }
-                                       
-@property (nonatomic, copy)                                 NSString        *itineraryId;
-@property (nonatomic, copy)                                 NSString        *friendlyName;
+
+@property (copy, nonatomic)                                 NSString        *itineraryId;
+@property (copy, nonatomic)                                 NSString        *friendlyName;
 @property (nonatomic, readonly)                             NSMutableArray  *waypoints;
-@property (nonatomic, copy)                                 MAIRoute        *route;
+@property (copy, nonatomic)                                 MAIRoute        *route;
 
 - (MAIItinerary*)init;
 
-- (void) addItem:(MAIWaypoint*)waypoint;
-- (void) removeItemAtIndex:(NSUInteger)index;
-- (void) moveItemAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)destinationIndex;
+- (void)addItem:(MAIWaypoint*)waypoint;
+- (void)removeItemAtIndex:(NSUInteger)index;
+- (void)moveItemAtIndex:(NSUInteger)sourceIndex
+                toIndex:(NSUInteger)destinationIndex;
 @end

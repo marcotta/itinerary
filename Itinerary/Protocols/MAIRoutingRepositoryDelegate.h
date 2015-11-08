@@ -13,9 +13,14 @@
 
 @protocol MAIRoutingRepositoryDelegate <NSObject>
 
-- (void) calculateRoute:(MAIItinerary*)anItinerary withLanguage:(NSString*)language withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)calculateRoute:(MAIItinerary*)anItinerary
+          withLanguage:(NSString*)language
+withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
-
-- (void) getRoute:(MAIRoute*)aRoute withLanguage:(NSString*)language withSuccessDataHandler:(void (^)(MAIRoutePolyline *routePolyline))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)getRoute:(MAIRoute*)aRoute
+    withLanguage:(NSString*)language
+withSuccessDataHandler:(void (^)(MAIRoutePolyline *routePolyline))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 @end

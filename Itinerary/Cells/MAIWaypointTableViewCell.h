@@ -14,12 +14,6 @@ typedef void (^AccessoryButtonTappedBlock)(id sender);
 
 @interface MAIWaypointTableViewCell : UITableViewCell
 
-@property (nonatomic) IBOutlet  UILabel *headerLabel;
-@property (nonatomic) IBOutlet  UILabel *addressLabel;
-@property (nonatomic) IBOutlet  NSLayoutConstraint *leftMargin;
-@property (nonatomic) IBOutlet  NSLayoutConstraint *rightMargin;
-@property (nonatomic, copy)     AccessoryButtonTappedBlock onAccessoryButtonTappedBlock;
-
 - (void) bind:(MAIWaypoint*)aWaypoint withAcessoryButtonTappedBlock:(AccessoryButtonTappedBlock)addButtonBlock;
 
 @end

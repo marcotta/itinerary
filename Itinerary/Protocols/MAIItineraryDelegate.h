@@ -11,8 +11,8 @@
 
 @protocol MAIItineraryDelegate <NSObject>
 
-- (void) onAddWaypoint:(MAIWaypoint*)waypoint withSender:(id) sender;
-- (void) onRemoveWaypointAtIndex:(NSUInteger)index;
-- (void) onMoveWaypointAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)destinationIndex;
+- (void)onAddWaypoint:(MAIWaypoint*)waypoint withSender:(id) sender;
+- (void)onRemoveWaypointAtIndex:(NSUInteger)index;
+- (void)onMoveWaypointAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)destinationIndex;
 
 @end

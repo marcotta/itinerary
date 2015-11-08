@@ -24,7 +24,7 @@ static NSString *filePath;
 
 
 - (void) getSavedItineraries:(void (^)(NSArray *items))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler {
-
+    
     NSArray *items = [[NSArray alloc] init];
     NSString *errorMessage = @"";
     
@@ -38,7 +38,7 @@ static NSString *filePath;
     @catch (NSException *exception) {
         errorMessage = [exception description];
     }
-
+    
     if(![NSString ext_IsNullOrEmpty:errorMessage])
     {
         if(failureDataHandler)
@@ -54,7 +54,7 @@ static NSString *filePath;
 }
 
 - (void) saveItineraries:(NSArray*)items withSuccessDataHandler:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler {
-
+    
     NSString *errorMessage = @"";
     @try {
         [NSKeyedArchiver archiveRootObject:items toFile:filePath];
@@ -97,9 +97,9 @@ static NSString *filePath;
         [savedItineraries insertObject:anItinerary atIndex:0];
         
         [self saveItineraries:savedItineraries withSuccessDataHandler:^{
-                if (successDataHandler) {
-                    successDataHandler(anItinerary);
-                }
+            if (successDataHandler) {
+                successDataHandler(anItinerary);
+            }
         } withFailureDataHandler:^(NSString *errorMessage) {
             if(failureDataHandler) {
                 failureDataHandler(errorMessage);
@@ -119,7 +119,7 @@ static NSString *filePath;
         NSError *error;
         [fileManager removeItemAtPath:filePath error:&error];
         
-        if(error){
+        if(error) {
             if(failureDataHandler)
             {
                 failureDataHandler([error localizedDescription]);
@@ -129,7 +129,7 @@ static NSString *filePath;
             successDataHandler();
         }
     }
-    else if(failureDataHandler){
+    else if(failureDataHandler) {
         failureDataHandler(@"No items found");
     }
 }

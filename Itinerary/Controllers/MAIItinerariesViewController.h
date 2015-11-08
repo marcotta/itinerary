@@ -9,14 +9,7 @@
 #import "MAIBaseViewController.h"
 #import "MAIArrayDataSource.h"
 
-@interface MAIItinerariesViewController : MAIBaseViewController<UITableViewDelegate>{
-
-}
-@property (nonatomic) IBOutlet  UITableView         *mainTableView;
-@property (nonatomic) IBOutlet  UIButton            *createNewItineraryButton;
-
-@property (nonatomic)           MAIArrayDataSource  *dataSource;
-
+@interface MAIItinerariesViewController : MAIBaseViewController<UITableViewDelegate>
 
 - (void) updateItineraryView;
 - (IBAction) onCreateItinerary:(id)sender;

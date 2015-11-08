@@ -15,6 +15,13 @@
 
 @interface MAIRouteViewController ()
 
+@property (nonatomic)           MAIItinerary        *itinerary;
+@property (nonatomic)  IBOutlet MKMapView           *mapView;
+@property (nonatomic)           MAIRoutePolyline    *routePolyline;
+@property (nonatomic)           CLLocationManager   *locationManager;
+@property (nonatomic)           BOOL userLocationFound;
+@property (nonatomic)  IBOutlet UILabel             *summaryLabel;
+
 @end
 
 @implementation MAIRouteViewController
@@ -24,7 +31,7 @@
     // Do any additional setup after loading the view.
     [self setLocationManager:[[CLLocationManager alloc] init]];
     
-    if([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
+    if([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.mapView setShowsUserLocation:NO];
         [self.locationManager setDelegate:self];
         [self.locationManager requestWhenInUseAuthorization];
@@ -84,20 +91,10 @@
 {
     //Update the user location only the first time
     //comment out this code if we want to update the user location on the movement and call updatemap all the times
-    if(userLocation && userLocation.location && !_userLocationFound){
+    if(userLocation && userLocation.location && !_userLocationFound) {
         [self updateMap];
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - MAP -
 - (void) updateMap
@@ -114,10 +111,10 @@
     
     if(self.routePolyline) {
         //Add polyline as an overlay
-        if(self.routePolyline.polyline){
+        if(self.routePolyline.polyline) {
             [self.mapView addOverlay:self.routePolyline.polyline level:MKOverlayLevelAboveRoads];
         }
-    
+        
         CLLocationCoordinate2D topLeft = self.routePolyline.topLeft;
         CLLocationCoordinate2D bottomRight = self.routePolyline.bottomRight;
         
@@ -161,8 +158,8 @@
         return nil;
     static NSString* AnnotationIdentifier = @"AnnotationIdentifier";
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
-    if(!annotationView){
-       annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
+    if(!annotationView) {
+        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
     }
     annotationView.image = [UIImage imageNamed:@"Marker"];
     annotationView.annotation = annotation;
@@ -177,27 +174,27 @@
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     
     
-    if([UIAlertController class]){
+    if([UIAlertController class]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Options", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
-//        //Car
-//        UIAlertAction *carModeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Route by car",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            //Calculate route by car and set viewmode property
-//        }];
-//        [alert addAction:carModeAction];
-//        
-//        
-//        //Public transport
-//        UIAlertAction *publicTransportModeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Route by public transport",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            //Calculate route by public transport and set viewmode property
-//        }];
-//        [alert addAction:publicTransportModeAction];
-//        
-//        //Walk
-//        UIAlertAction *walkModeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Route by walk",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            //Calculate route by public transport and set viewmode property
-//        }];
-//        [alert addAction:walkModeAction];
+        //        //Car
+        //        UIAlertAction *carModeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Route by car",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //            //Calculate route by car and set viewmode property
+        //        }];
+        //        [alert addAction:carModeAction];
+        //
+        //
+        //        //Public transport
+        //        UIAlertAction *publicTransportModeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Route by public transport",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //            //Calculate route by public transport and set viewmode property
+        //        }];
+        //        [alert addAction:publicTransportModeAction];
+        //
+        //        //Walk
+        //        UIAlertAction *walkModeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Route by walk",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //            //Calculate route by public transport and set viewmode property
+        //        }];
+        //        [alert addAction:walkModeAction];
         
         //My location
         if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways) {
@@ -223,7 +220,7 @@
                                                              handler:nil];
         [alert addAction:cancelAction];
         
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             if(sender) {
                 alert.popoverPresentationController.sourceView = sender;
             }

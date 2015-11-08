@@ -12,24 +12,9 @@
 #import "MAIItineraryDelegate.h"
 #import "MAIItinerary.h"
 
-@interface MAIItineraryViewController : MAIBaseViewController<UITableViewDelegate, MAIItineraryDelegate, UITextFieldDelegate>{
-
-}
+@interface MAIItineraryViewController : MAIBaseViewController<UITableViewDelegate, MAIItineraryDelegate, UITextFieldDelegate>
 
 @property (nonatomic)           MAIItinerary         *itinerary;
-
-@property (nonatomic)           MAIArrayDataSource   *dataSource;
-@property (nonatomic)           MAIArrayDataSource   *resultsDataSource;
-
-@property (nonatomic) IBOutlet  UIButton             *mapButton;
-
-@property (nonatomic) IBOutlet  UILabel              *titleLabel;
-@property (nonatomic) IBOutlet  UITextField          *titleField;
-@property (nonatomic) IBOutlet  UILabel              *infoLabel;
-@property (nonatomic) IBOutlet  UISearchBar          *searchBar;
-@property (nonatomic) IBOutlet  UITableView          *searchResultsTableView;
-@property (nonatomic) IBOutlet  UITableView          *mainTableView;
-
 
 - (void)setupDataSource:(MAIItinerary*)anItinerary;
 - (void)setupResultsDataSource:(NSArray*)items;

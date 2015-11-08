@@ -17,6 +17,16 @@
 
 @interface MAIItineraryViewController ()
 
+@property (nonatomic)           MAIArrayDataSource   *dataSource;
+@property (nonatomic)           MAIArrayDataSource   *resultsDataSource;
+@property (nonatomic) IBOutlet UIButton             *mapButton;
+@property (nonatomic) IBOutlet UILabel              *titleLabel;
+@property (nonatomic) IBOutlet UITextField          *titleField;
+@property (nonatomic) IBOutlet UILabel              *infoLabel;
+@property (nonatomic) IBOutlet UISearchBar          *searchBar;
+@property (nonatomic) IBOutlet UITableView          *searchResultsTableView;
+@property (nonatomic) IBOutlet UITableView          *mainTableView;
+
 @end
 
 
@@ -54,18 +64,18 @@ static NSString *cellIdentifier = @"WaypointCell";
     };
     
     self.dataSource = [[MAIArrayDataSource alloc] initWithItems:self.itinerary.waypoints
-                                                 withCellIdentifier:cellIdentifier
-                                             withConfigureCellBlock:configureCell
+                                             withCellIdentifier:cellIdentifier
+                                         withConfigureCellBlock:configureCell
                                             withDeleteCellBlock:deleteCellBlock
                                                     andEditable:YES
                                               withSortCellBlock:sortCellBlock
                                                     andSortable:YES];
     self.mainTableView.dataSource = self.dataSource;
     [self.mainTableView setEditing:YES animated:YES];
-
+    
     self.resultsDataSource = [[MAIArrayDataSource alloc] initWithItems:nil
-                                                        withCellIdentifier:cellIdentifier
-                                                    withConfigureCellBlock:configureResultCell];
+                                                    withCellIdentifier:cellIdentifier
+                                                withConfigureCellBlock:configureResultCell];
     self.searchResultsTableView.dataSource = self.resultsDataSource;
     
     [self.titleLabel setText:NSLocalizedString(@"Title", nil)];
@@ -100,7 +110,7 @@ static NSString *cellIdentifier = @"WaypointCell";
 }
 
 - (void)setupResultsDataSource:(NSArray*)items {
-//    NSLog(@"Results data source");
+    //    NSLog(@"Results data source");
     [self.resultsDataSource setItems:items];
     [self.searchResultsTableView reloadData];
 }
@@ -192,7 +202,7 @@ static NSString *cellIdentifier = @"WaypointCell";
     
     MAIWaypoint *item = nil;
     
-    if(tableView==self.searchResultsTableView){
+    if(tableView==self.searchResultsTableView) {
         item = [self.resultsDataSource itemAtIndexPath:indexPath];
     }
     else{
@@ -207,7 +217,7 @@ static NSString *cellIdentifier = @"WaypointCell";
 
 #pragma mark TitleField
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
-    if(textField== self.titleField){
+    if(textField== self.titleField) {
         [textField resignFirstResponder];
         return NO;
     }
@@ -222,7 +232,7 @@ static NSString *cellIdentifier = @"WaypointCell";
 
 
 
-- (void)saveItinerary{
+- (void)saveItinerary {
     if([self.searchBar isFirstResponder]) {
         [self hideSearchResults:self.searchBar];
     }

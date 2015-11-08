@@ -11,11 +11,6 @@
 
 @interface MAIItineraryTableViewCell : UITableViewCell
 
-@property (nonatomic) IBOutlet  UILabel *headerLabel;
-@property (nonatomic) IBOutlet  NSLayoutConstraint *leftMargin;
-@property (nonatomic) IBOutlet  NSLayoutConstraint *rightMargin;
-
 - (void) bind:(MAIItinerary*)anItinerary;
-
 
 @end

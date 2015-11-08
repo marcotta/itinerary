@@ -12,6 +12,8 @@
 
 @interface MAIBaseViewController ()
 
+@property (nonatomic) MATLoadingOverlayViewController   *loadingOverlay;
+
 @end
 
 @implementation MAIBaseViewController

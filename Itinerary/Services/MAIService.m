@@ -23,7 +23,7 @@
     return sharedInstance;
 }
 
-- (MAIService*) init {
+- (MAIService*)init {
     self = [super init];
     if (self) {
         _geocoderRepository = [MAIGeocoderRepository new];
@@ -35,7 +35,10 @@
 
 #pragma mark Geocoder
 //  Any other business logic will be added to this method, including caching or conditions checks
-- (void) search:(NSString*)query withDataSourceCompletionHandler:(void (^)(NSArray *))successDataHandler withDataSourceErrorHandler:(void (^)(NSString *))failureDataHandler {
+- (void)search:(NSString*)query
+withDataSourceCompletionHandler:(void (^)(NSArray *))successDataHandler
+withDataSourceErrorHandler:(void (^)(NSString *))failureDataHandler
+{
     
     if(!_geocoderRepository) {
         failureDataHandler(@"Repository cannot be nil.");
@@ -48,7 +51,7 @@
     }
     
     NSString *language = [[[NSBundle mainBundle] preferredLocalizations] firstObject];
-//    NSLog(@"Language %@", language);
+    //    NSLog(@"Language %@", language);
     
     [_geocoderRepository search:query withLanguage:language withSuccessDataHandler:^(NSArray *items) {
         if(successDataHandler) {
@@ -62,7 +65,9 @@
 }
 
 #pragma  mark Itinerary
-- (void) getSavedItineraries:(void (^)(NSArray *items))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler {
+- (void)getSavedItineraries:(void (^)(NSArray *items))successDataHandler
+     withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
+{
     
     if(!_itineraryRepository) {
         failureDataHandler(@"Repository cannot be nil.");
@@ -81,7 +86,10 @@
     
 }
 
-- (void)storeItinerary:(MAIItinerary *)anItinerary withSuccessDataHandler:(void (^)(MAIItinerary *amendeItinerary))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler{
+- (void)storeItinerary:(MAIItinerary *)anItinerary
+withSuccessDataHandler:(void (^)(MAIItinerary *amendeItinerary))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
+{
     [_itineraryRepository saveItinerary:anItinerary withSuccessDataHandler:^(MAIItinerary *amendedItinerary) {
         if(successDataHandler) {
             successDataHandler(amendedItinerary);
@@ -93,7 +101,10 @@
     }];
 }
 
-- (void) saveItinerary:(MAIItinerary*)anItinerary withSuccessDataHandler:(void (^)(MAIItinerary *amendeItinerary))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler {
+- (void)saveItinerary:(MAIItinerary*)anItinerary
+withSuccessDataHandler:(void (^)(MAIItinerary *amendeItinerary))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
+{
     if(!_itineraryRepository) {
         failureDataHandler(@"Repository cannot be nil.");
         return;
@@ -105,7 +116,7 @@
     }
     
     //Everytime the itinerary changes and has more than 1 waypoint lets update the route info
-    if(anItinerary.waypoints && anItinerary.waypoints.count>1){
+    if(anItinerary.waypoints && anItinerary.waypoints.count>1) {
         [self calculateRoute:anItinerary withSuccessDataHandler:^(MAIRoute *route) {
             anItinerary.route = route;
             [self storeItinerary:anItinerary withSuccessDataHandler:successDataHandler withFailureDataHandler:failureDataHandler];
@@ -122,7 +133,10 @@
     }
 }
 
-- (void) saveItineraries:(NSArray*)items withSuccessDataHandler:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler {
+- (void)saveItineraries:(NSArray*)items
+ withSuccessDataHandler:(void (^)(void))successDataHandler
+ withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
+{
     
     if(!_itineraryRepository) {
         failureDataHandler(@"Repository cannot be nil.");
@@ -140,8 +154,9 @@
     }];
 }
 
-- (void) deleteItineraries:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler {
-    
+- (void)deleteItineraries:(void (^)(void))successDataHandler
+   withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
+{
     if(!_itineraryRepository) {
         failureDataHandler(@"Repository cannot be nil.");
         return;
@@ -159,7 +174,10 @@
 }
 
 #pragma mark Routing
-- (void) calculateRoute:(MAIItinerary*)anItinerary withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler {
+- (void)calculateRoute:(MAIItinerary*)anItinerary
+withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
+{
     if(!_routingRepository) {
         failureDataHandler(@"Repository cannot be nil.");
         return;
@@ -189,7 +207,10 @@
     }];
 }
 
-- (void) getRoute:(MAIRoute *)aRoute withSuccessDataHandler:(void (^)(MAIRoutePolyline *routePolyline))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler {
+- (void)getRoute:(MAIRoute *)aRoute
+withSuccessDataHandler:(void (^)(MAIRoutePolyline *routePolyline))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
+{
     if(!_routingRepository) {
         failureDataHandler(@"Repository cannot be nil.");
         return;
@@ -213,7 +234,7 @@
     }];
 }
 
-- (void) dealloc {
+- (void)dealloc {
     _geocoderRepository = nil;
     _itineraryRepository = nil;
     _routingRepository = nil;

@@ -12,6 +12,16 @@
 #import "MAIItineraryViewController.h"
 #import "NSString+MAIExtras.h"
 
+@interface MAIItineraryViewController(UnderTest)
+
+@property (nonatomic)           MAIArrayDataSource   *dataSource;
+@property (nonatomic) IBOutlet  UITableView          *mainTableView;
+@property (nonatomic) IBOutlet  UILabel              *titleLabel;
+@property (nonatomic) IBOutlet  UITextField          *titleField;
+@property (nonatomic) IBOutlet  UIButton             *mapButton;
+
+@end
+
 @interface MAIItineraryViewControllerTests : XCTestCase{
 
 }

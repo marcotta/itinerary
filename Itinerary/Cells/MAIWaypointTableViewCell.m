@@ -8,6 +8,16 @@
 
 #import "MAIWaypointTableViewCell.h"
 
+@interface MAIWaypointTableViewCell ()
+
+@property (nonatomic) IBOutlet UILabel *headerLabel;
+@property (nonatomic) IBOutlet UILabel *addressLabel;
+@property (nonatomic) IBOutlet NSLayoutConstraint *leftMargin;
+@property (nonatomic) IBOutlet NSLayoutConstraint *rightMargin;
+@property (nonatomic, copy)     AccessoryButtonTappedBlock onAccessoryButtonTappedBlock;
+
+@end
+
 @implementation MAIWaypointTableViewCell
 
 - (void)awakeFromNib {
@@ -35,7 +45,7 @@
     // Configure the view for the selected state
 }
 
-- (void) prepareForReuse{
+- (void) prepareForReuse {
     [self.headerLabel setText:@""];
     [self.addressLabel setText:@""];
     [self.accessoryView setHidden:NO];

@@ -11,10 +11,9 @@
 
 @protocol MAIItineraryRepositoryDelegate <NSObject>
 
-
-- (void) getSavedItineraries:(void (^)(NSArray *items))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void) saveItinerary:(MAIItinerary*)anItinerary withSuccessDataHandler:(void (^)(MAIItinerary *amendedItinerary))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void) saveItineraries:(NSArray*)items withSuccessDataHandler:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void) deleteItineraries:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)getSavedItineraries:(void (^)(NSArray *items))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)saveItinerary:(MAIItinerary*)anItinerary withSuccessDataHandler:(void (^)(MAIItinerary *amendedItinerary))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)saveItineraries:(NSArray*)items withSuccessDataHandler:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)deleteItineraries:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 @end

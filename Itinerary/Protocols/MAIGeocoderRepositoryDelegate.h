@@ -11,6 +11,9 @@
 @protocol MAIGeocoderRepositoryDelegate <NSObject>
 
 
-- (void) search:(NSString*)query withLanguage:(NSString*)language withSuccessDataHandler:(void (^)(NSArray *items))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)search:(NSString*)query
+  withLanguage:(NSString*)language
+withSuccessDataHandler:(void (^)(NSArray *items))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 @end

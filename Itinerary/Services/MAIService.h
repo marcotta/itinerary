@@ -12,9 +12,7 @@
 #import "MAIRoutingRepositoryDelegate.h"
 #import "MAIRoutePolyline.h"
 
-@interface MAIService : NSObject{
-
-}
+@interface MAIService : NSObject
 
 + (MAIService*)sharedInstance;
 @property (nonatomic, readonly) id<MAIGeocoderRepositoryDelegate> geocoderRepository;
@@ -22,16 +20,26 @@
 @property (nonatomic, readonly) id<MAIRoutingRepositoryDelegate> routingRepository;
 
 #pragma mark Gecocoder
-- (void) search:(NSString*)query withDataSourceCompletionHandler:(void (^)(NSArray *items))successDataHandler withDataSourceErrorHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)search:(NSString*)query withDataSourceCompletionHandler:(void (^)(NSArray *items))successDataHandler withDataSourceErrorHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 #pragma mark Itinerary
-- (void) getSavedItineraries:(void (^)(NSArray *items))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void) saveItinerary:(MAIItinerary*)anItinerary withSuccessDataHandler:(void (^)(MAIItinerary *amendedItinerary))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void) saveItineraries:(NSArray*)items withSuccessDataHandler:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void) deleteItineraries:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)getSavedItineraries:(void (^)(NSArray *items))successDataHandler
+     withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void) saveItinerary:(MAIItinerary*)anItinerary
+withSuccessDataHandler:(void (^)(MAIItinerary *amendedItinerary))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)saveItineraries:(NSArray*)items
+ withSuccessDataHandler:(void (^)(void))successDataHandler
+ withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)deleteItineraries:(void (^)(void))successDataHandler
+   withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 #pragma mark Routing
-- (void) calculateRoute:(MAIItinerary*)anItinerary withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void) getRoute:(MAIRoute *)aRoute withSuccessDataHandler:(void (^)(MAIRoutePolyline *routePolyline))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)calculateRoute:(MAIItinerary*)anItinerary
+withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)getRoute:(MAIRoute *)aRoute
+withSuccessDataHandler:(void (^)(MAIRoutePolyline *routePolyline))successDataHandler
+withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 @end
