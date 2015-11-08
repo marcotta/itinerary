@@ -14,7 +14,7 @@
 @property (nonatomic) IBOutlet UILabel *addressLabel;
 @property (nonatomic) IBOutlet NSLayoutConstraint *leftMargin;
 @property (nonatomic) IBOutlet NSLayoutConstraint *rightMargin;
-@property (nonatomic, copy)     AccessoryButtonTappedBlock onAccessoryButtonTappedBlock;
+@property (copy, nonatomic)     AccessoryButtonTappedBlock onAccessoryButtonTappedBlock;
 
 @end
 
@@ -31,24 +31,18 @@
     [super layoutSubviews];
     [self.contentView layoutIfNeeded];
     if([self.headerLabel respondsToSelector:@selector(setPreferredMaxLayoutWidth:)]) {
-        [self.headerLabel setPreferredMaxLayoutWidth:(self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant))];
+        self.headerLabel.preferredMaxLayoutWidth = (self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant));
     }
     
     if([self.addressLabel respondsToSelector:@selector(setPreferredMaxLayoutWidth:)]) {
-        [self.addressLabel setPreferredMaxLayoutWidth:(self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant))];
+        self.addressLabel.preferredMaxLayoutWidth = (self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant));
     }
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
 - (void)prepareForReuse {
-    [self.headerLabel setText:@""];
-    [self.addressLabel setText:@""];
-    [self.accessoryView setHidden:NO];
+    self.headerLabel.text = @"";
+    self.addressLabel.text = @"";
+    self.accessoryView.hidden = NO;
 }
 
 - (void)bind:(MAIWaypoint*)aWaypoint
@@ -57,10 +51,10 @@ withAcessoryButtonTappedBlock:(AccessoryButtonTappedBlock)addButtonBlock {
         [self setOnAccessoryButtonTappedBlock:addButtonBlock];
     }
     else {
-        [self.accessoryView setHidden:YES];
+        self.accessoryView.hidden = YES;
     }
-    [self.headerLabel setText:aWaypoint.name];
-    [self.addressLabel setText:aWaypoint.address];
+    self.headerLabel.text = aWaypoint.name;
+    self.addressLabel.text = aWaypoint.address;
 }
 
 - (IBAction)accessoryButtonTapped:(id)sender {
