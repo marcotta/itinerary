@@ -14,6 +14,7 @@ typedef void (^AccessoryButtonTappedBlock)(id sender);
 
 @interface MAIWaypointTableViewCell : UITableViewCell
 
-- (void) bind:(MAIWaypoint*)aWaypoint withAcessoryButtonTappedBlock:(AccessoryButtonTappedBlock)addButtonBlock;
+- (void)bind:(MAIWaypoint*)aWaypoint
+withAcessoryButtonTappedBlock:(AccessoryButtonTappedBlock)addButtonBlock;
 
 @end

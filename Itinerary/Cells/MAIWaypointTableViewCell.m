@@ -27,7 +27,7 @@
     self.accessoryView = moreButton;
 }
 
--(void) layoutSubviews {
+-(void)layoutSubviews {
     [super layoutSubviews];
     [self.contentView layoutIfNeeded];
     if([self.headerLabel respondsToSelector:@selector(setPreferredMaxLayoutWidth:)]) {
@@ -45,13 +45,14 @@
     // Configure the view for the selected state
 }
 
-- (void) prepareForReuse {
+- (void)prepareForReuse {
     [self.headerLabel setText:@""];
     [self.addressLabel setText:@""];
     [self.accessoryView setHidden:NO];
 }
 
-- (void) bind:(MAIWaypoint*)aWaypoint withAcessoryButtonTappedBlock:(AccessoryButtonTappedBlock)addButtonBlock {
+- (void)bind:(MAIWaypoint*)aWaypoint
+withAcessoryButtonTappedBlock:(AccessoryButtonTappedBlock)addButtonBlock {
     if(addButtonBlock) {
         [self setOnAccessoryButtonTappedBlock:addButtonBlock];
     }
