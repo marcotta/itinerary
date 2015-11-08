@@ -13,9 +13,7 @@
 #import "MAIWaypoint.h"
 #import "NSString+MAIExtras.h"
 
-@interface MAIServiceTests : XCTestCase {
-
-}
+@interface MAIServiceTests : XCTestCase
 
 @property (nonatomic) NSMutableArray *itineraries;
 
@@ -84,7 +82,6 @@
         }
     }];
 }
-
 
 #pragma mark Itinerary
 - (void) testGetItineraries {
