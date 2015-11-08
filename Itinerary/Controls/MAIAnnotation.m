@@ -11,31 +11,38 @@
 
 @implementation MAIAnnotation
 
-- (id)initWithWaypoint:(MAIWaypoint*)aWaypoint {
-    if (self = [super init]) {
+- (id)initWithWaypoint:(MAIWaypoint*)aWaypoint
+{
+    if (self = [super init])
+	{
         _waypoint = aWaypoint;
     }
     return self;
 }
 
--(NSString*) title {
-    if([NSString ext_IsNullOrEmpty:self.waypoint.name] && ![NSString ext_IsNullOrEmpty:self.waypoint.address]) {
+- (NSString*) title
+{
+    if([NSString ext_IsNullOrEmpty:self.waypoint.name] && ![NSString ext_IsNullOrEmpty:self.waypoint.address])
+	{
         return self.waypoint.address;
     }
     
     return self.waypoint.name;
 }
 
--(NSString*) subtitle {
+- (NSString*) subtitle
+{
     //address would have been returned as a title;
-    if([NSString ext_IsNullOrEmpty:self.waypoint.name]) {
+    if([NSString ext_IsNullOrEmpty:self.waypoint.name])
+	{
         return @"";
     }
     
     return self.waypoint.address;
 }
 
--(CLLocationCoordinate2D) coordinate {
+- (CLLocationCoordinate2D) coordinate
+{
     return self.waypoint.position;
 }
 

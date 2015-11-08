@@ -16,33 +16,26 @@
 
 @end
 
-
 @implementation MAIItineraryTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+-(void)layoutSubviews
+{
+	[super layoutSubviews];
+	[self.contentView layoutIfNeeded];
+	if([self.headerLabel respondsToSelector:@selector(setPreferredMaxLayoutWidth:)])
+	{
+		[self.headerLabel setPreferredMaxLayoutWidth:(self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant))];
+	}
 }
 
--(void) layoutSubviews {
-    [super layoutSubviews];
-    [self.contentView layoutIfNeeded];
-    if([self.headerLabel respondsToSelector:@selector(setPreferredMaxLayoutWidth:)]) {
-        [self.headerLabel setPreferredMaxLayoutWidth:(self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant))];
-    }
+- (void)prepareForReuse
+{
+	[self.headerLabel setText:@""];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
-- (void) prepareForReuse {
-    [self.headerLabel setText:@""];
-}
-
-- (void) bind:(MAIItinerary*)anItinerary {
-    [self.headerLabel setText:anItinerary.friendlyName];
+- (void)bind:(MAIItinerary*)anItinerary
+{
+	[self.headerLabel setText:anItinerary.friendlyName];
 }
 
 

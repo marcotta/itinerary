@@ -20,12 +20,14 @@
 @property (nonatomic, readonly) id<MAIRoutingRepositoryDelegate> routingRepository;
 
 #pragma mark Gecocoder
-- (void)search:(NSString*)query withDataSourceCompletionHandler:(void (^)(NSArray *items))successDataHandler withDataSourceErrorHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)search:(NSString*)query
+withDataSourceCompletionHandler:(void (^)(NSArray *items))successDataHandler
+withDataSourceErrorHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 #pragma mark Itinerary
 - (void)getSavedItineraries:(void (^)(NSArray *items))successDataHandler
-     withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void) saveItinerary:(MAIItinerary*)anItinerary
+	 withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)saveItinerary:(MAIItinerary*)anItinerary
 withSuccessDataHandler:(void (^)(MAIItinerary *amendedItinerary))successDataHandler
 withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 - (void)saveItineraries:(NSArray*)items

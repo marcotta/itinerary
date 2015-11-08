@@ -11,8 +11,8 @@
 
 @interface MATLoadingOverlayViewController : UIViewController
 
-- (void) showWithMessage:(NSString *)aMessage;
-- (void) hideWithTick:(BOOL)showTick;
-- (void) fadeDown;
+- (void)showWithMessage:(NSString *)aMessage;
+- (void)hideWithTick:(BOOL)showTick;
+- (void)fadeDown;
 
 @end

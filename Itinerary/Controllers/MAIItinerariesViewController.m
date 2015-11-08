@@ -14,15 +14,16 @@
 
 @interface MAIItinerariesViewController ()
 
-@property (nonatomic) IBOutlet UITableView         *mainTableView;
-@property (nonatomic) IBOutlet UIButton            *createNewItineraryButton;
-@property (nonatomic)           MAIArrayDataSource  *dataSource;
+@property (nonatomic) IBOutlet UITableView *mainTableView;
+@property (nonatomic) IBOutlet UIButton *createNewItineraryButton;
+@property (nonatomic) MAIArrayDataSource  *dataSource;
 
 @end
 
 @implementation MAIItinerariesViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -48,7 +49,8 @@
     [self setupDataSource:nil];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
     [self showNetworkActivityWithMessage:@"Loading"];
@@ -57,45 +59,53 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [[MAIService sharedInstance] getSavedItineraries:^(NSArray *items) {
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [weakSelf setupDataSource:items];
-                [weakSelf hideNetworkActivity];
-            });
-        } withFailureDataHandler:^(NSString *errorMessage) {
-            //Hide spinner
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [weakSelf hideNetworkActivity];
-            });
-        }];
+										dispatch_async(dispatch_get_main_queue(), ^(void){
+											[weakSelf setupDataSource:items];
+											[weakSelf hideNetworkActivity];
+										});
+									}
+								  withFailureDataHandler:^(NSString *errorMessage) {
+										//Hide spinner
+										dispatch_async(dispatch_get_main_queue(), ^(void){
+											[weakSelf hideNetworkActivity];
+										});
+									}];
     });
 }
 
-- (void)setupDataSource:(NSArray*)items {
+- (void)setupDataSource:(NSArray*)items
+{
     [self.dataSource setItems:items];
     [self updateItineraryView];
 }
 
-- (void) updateItineraryView {
-    if(self.dataSource && self.dataSource.items && self.dataSource.items.count>0) {
+- (void)updateItineraryView
+{
+    if(self.dataSource && self.dataSource.items && self.dataSource.items.count>0)
+	{
         [self showItineraries];
     }
-    else{
+    else
+	{
         [self showCreateFirstItinerary];
     }
 }
 
-- (void) showItineraries {
+- (void)showItineraries
+{
     [self.createNewItineraryButton setHidden:YES];
     [self.mainTableView setHidden:NO];
     [self.mainTableView reloadData];
 }
 
-- (void) showCreateFirstItinerary {
+- (void)showCreateFirstItinerary
+{
     [self.createNewItineraryButton setHidden:NO];
     [self.mainTableView setHidden:YES];
 }
 
-- (IBAction) onCreateItinerary:(id)sender {
+- (IBAction)onCreateItinerary:(id)sender
+{
     [self performSegueWithIdentifier:@"Create Itinerary" sender:nil];
 }
 
@@ -103,7 +113,8 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"Itinerary"])
@@ -115,23 +126,28 @@
 
 #pragma mark - UITableView Delegate methods
 
-- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
-- (UIView*) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
     return 0;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
     return 0;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     //  Show Itinerary Details screen
     MAIItinerary *selectedItinerary = [self.dataSource.items objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"Itinerary" sender:selectedItinerary];

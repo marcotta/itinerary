@@ -27,7 +27,6 @@
 
 @interface MAIConfiguration : NSObject
 
-
 - (NSString*) getAuthorizationHeader;
 
 @end

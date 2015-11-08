@@ -12,32 +12,37 @@
 
 //TODO: This should be expanded to managed the various types of errors reported from the API
 //ApplicationError | SystemError | PermissionError
-- (NSString *)parseErrorMessage:(AFHTTPRequestOperation *)operation withError:(NSError*)error {
-    if(operation &&
-       operation.responseObject &&
-       [operation.responseObject isKindOfClass:[NSDictionary class]] &&
-       [operation.responseObject objectForKey:@"details"] &&
-       ![[operation.responseObject objectForKey:@"details"] isKindOfClass:[NSNull class]]
-       ) {
-        NSMutableString *errorMessage = [[NSMutableString alloc] initWithString:[operation.responseObject objectForKey:@"details"]];
-        if([operation.responseObject objectForKey:@"additionalData"] &&
-           ![[operation.responseObject objectForKey:@"additionalData"] isKindOfClass:[NSNull class]])
-        {
-            if([[operation.responseObject objectForKey:@"additionalData"] isKindOfClass:[NSArray class]]) {
-                NSDictionary *remoteError = [[operation.responseObject objectForKey:@"additionalData"] firstObject];
-                if([remoteError objectForKey:@"value"] &&
-                   ![[remoteError objectForKey:@"value"] isKindOfClass:[NSNull class]])
-                {
-                    errorMessage = [remoteError objectForKey:@"value"];
-                }
-            }
-            else {
-                errorMessage = [operation.responseObject objectForKey:@"additionalData"];
-            }
-        }
-        //convert any error code to human readable text in Localizable.strings
-        return NSLocalizedString(((NSString*)errorMessage), nil);
-    }
+- (NSString *)parseErrorMessage:(AFHTTPRequestOperation *)operation
+					  withError:(NSError*)error
+{
+	if(operation &&
+	   operation.responseObject &&
+	   [operation.responseObject isKindOfClass:[NSDictionary class]] &&
+	   operation.responseObject[@"details"] &&
+	   ![operation.responseObject[@"details"] isKindOfClass:[NSNull class]]
+	   )
+	{
+		NSMutableString *errorMessage = [[NSMutableString alloc] initWithString:operation.responseObject[@"details"]];
+		if(operation.responseObject[@"additionalData"] &&
+		   ![operation.responseObject[@"additionalData"] isKindOfClass:[NSNull class]])
+		{
+			if([operation.responseObject[@"additionalData"] isKindOfClass:[NSArray class]])
+			{
+				NSDictionary *remoteError = [operation.responseObject[@"additionalData"] firstObject];
+				if(remoteError[@"value"] &&
+				   ![remoteError[@"value"] isKindOfClass:[NSNull class]])
+				{
+					errorMessage = remoteError[@"value"];
+				}
+			}
+			else
+			{
+				errorMessage = operation.responseObject[@"additionalData"];
+			}
+		}
+		//convert any error code to human readable text in Localizable.strings
+		return NSLocalizedString(((NSString*)errorMessage), nil);
+	}
     
     return error.localizedDescription;
 }

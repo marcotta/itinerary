@@ -20,47 +20,57 @@
 
 @implementation MAIWaypointTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    [moreButton addTarget:self action:@selector(accessoryButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    self.accessoryView = moreButton;
+- (void)awakeFromNib
+{
+	// Initialization code
+	UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+	[moreButton addTarget:self action:@selector(accessoryButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+	self.accessoryView = moreButton;
 }
 
--(void)layoutSubviews {
-    [super layoutSubviews];
-    [self.contentView layoutIfNeeded];
-    if([self.headerLabel respondsToSelector:@selector(setPreferredMaxLayoutWidth:)]) {
-        self.headerLabel.preferredMaxLayoutWidth = (self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant));
-    }
-    
-    if([self.addressLabel respondsToSelector:@selector(setPreferredMaxLayoutWidth:)]) {
-        self.addressLabel.preferredMaxLayoutWidth = (self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant));
-    }
+-(void)layoutSubviews
+{
+	[super layoutSubviews];
+	[self.contentView layoutIfNeeded];
+	if([self.headerLabel respondsToSelector:@selector(setPreferredMaxLayoutWidth:)])
+	{
+		self.headerLabel.preferredMaxLayoutWidth = (self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant));
+	}
+	
+	if([self.addressLabel respondsToSelector:@selector(setPreferredMaxLayoutWidth:)])
+	{
+		self.addressLabel.preferredMaxLayoutWidth = (self.contentView.frame.size.width - (self.leftMargin.constant+self.rightMargin.constant));
+	}
 }
 
-- (void)prepareForReuse {
-    self.headerLabel.text = @"";
-    self.addressLabel.text = @"";
-    self.accessoryView.hidden = NO;
+- (void)prepareForReuse
+{
+	self.headerLabel.text = @"";
+	self.addressLabel.text = @"";
+	self.accessoryView.hidden = NO;
 }
 
 - (void)bind:(MAIWaypoint*)aWaypoint
-withAcessoryButtonTappedBlock:(AccessoryButtonTappedBlock)addButtonBlock {
-    if(addButtonBlock) {
-        [self setOnAccessoryButtonTappedBlock:addButtonBlock];
-    }
-    else {
-        self.accessoryView.hidden = YES;
-    }
-    self.headerLabel.text = aWaypoint.name;
-    self.addressLabel.text = aWaypoint.address;
+withAcessoryButtonTappedBlock:(AccessoryButtonTappedBlock)addButtonBlock
+{
+	if(addButtonBlock)
+	{
+		[self setOnAccessoryButtonTappedBlock:addButtonBlock];
+	}
+	else
+	{
+		self.accessoryView.hidden = YES;
+	}
+	self.headerLabel.text = aWaypoint.name;
+	self.addressLabel.text = aWaypoint.address;
 }
 
-- (IBAction)accessoryButtonTapped:(id)sender {
-    if(self.onAccessoryButtonTappedBlock) {
-        self.onAccessoryButtonTappedBlock(sender);
-    }
+- (IBAction)accessoryButtonTapped:(id)sender
+{
+	if(self.onAccessoryButtonTappedBlock)
+	{
+		self.onAccessoryButtonTappedBlock(sender);
+	}
 }
 
 @end

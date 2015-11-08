@@ -10,11 +10,9 @@
 #import <MapKit/MapKit.h>
 #import "MAIWaypoint.h"
 
-@interface MAIAnnotation : NSObject <MKAnnotation> {
-}
+@interface MAIAnnotation : NSObject <MKAnnotation>
 
 @property (nonatomic)           MAIWaypoint              *waypoint;
-
 
 - (id)initWithWaypoint:(MAIWaypoint*)aWaypoint;
 

@@ -20,29 +20,31 @@
 
 @implementation MAIItineraryTests
 
-
-
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     _existingItinerary = [[MAIItinerary alloc] init];
     _waypoint = [[MAIWaypoint alloc] initWithLocationId:@"test" withName:@"Eiffel Tower" withAddress:@"some address" withPosition:CLLocationCoordinate2DMake(0, 0)];
 }
 
-- (void)tearDown {
+- (void)tearDown
+{
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     _existingItinerary = nil;
     [super tearDown];
 }
 
-- (void)testAddWaypointToItineary {
+- (void)testAddWaypointToItineary
+{
     NSInteger numberOfItemsBeforeAddition = _existingItinerary.waypoints.count;
     [_existingItinerary addItem:_waypoint];
     NSInteger numberOfItemsAfterAddition = _existingItinerary.waypoints.count;
     XCTAssertEqual(numberOfItemsBeforeAddition+1, numberOfItemsAfterAddition, @"Waypoint list wrong size");
 }
 
-- (void)testRemoveWaypointFromItineary {
+- (void)testRemoveWaypointFromItineary
+{
     //Add one item that can be removed
     [_existingItinerary addItem:_waypoint];
     
@@ -52,14 +54,16 @@
     XCTAssertEqual(numberOfItemsBeforeRemoving-1, numberOfItemsAfterRemoving, @"Waypoint list wrong size");
 }
 
-- (void)testRemoveWaypointThatDoesNotExistInItineary {
+- (void)testRemoveWaypointThatDoesNotExistInItineary
+{
     NSInteger numberOfItemsBeforeRemoving = _existingItinerary.waypoints.count;
     [_existingItinerary removeItemAtIndex:10];
     NSInteger numberOfItemsAfterRemoving = _existingItinerary.waypoints.count;
     XCTAssertEqual(numberOfItemsBeforeRemoving, numberOfItemsAfterRemoving, @"Waypoint list wrong size");
 }
 
-- (void)testChangeWaypointOrderInItineary {
+- (void)testChangeWaypointOrderInItineary
+{
     //Add one item that can be removed
     MAIWaypoint *itemToBeMoved = [[MAIWaypoint alloc] initWithLocationId:@"To be moved" withName:@"To be moved" withAddress:@"To be moved" withPosition:CLLocationCoordinate2DMake(0, 0)];
     [_existingItinerary addItem:itemToBeMoved];
@@ -74,7 +78,8 @@
     XCTAssertTrue([itemAtIndex3.name isEqualToString:@"To be moved"], @"Waypoint wrong positiong");
 }
 
-- (void)testMoveWaypointOutOfBoundary {
+- (void)testMoveWaypointOutOfBoundary
+{
     //Add one item that can be removed
     MAIWaypoint *itemToBeMoved = [[MAIWaypoint alloc] initWithLocationId:@"To be moved" withName:@"To be moved" withAddress:@"To be moved" withPosition:CLLocationCoordinate2DMake(0, 0)];
     [_existingItinerary addItem:itemToBeMoved];
@@ -89,7 +94,8 @@
     XCTAssertTrue([lastItem.name isEqualToString:@"To be moved"], @"Waypoint wrong positiong");
 }
 
-- (void)testTryMovingWaypointThatDoesNotExistInItinerary {
+- (void)testTryMovingWaypointThatDoesNotExistInItinerary
+{
     [_existingItinerary addItem:_waypoint];
     [_existingItinerary addItem:_waypoint];
     [_existingItinerary addItem:_waypoint];
@@ -100,7 +106,5 @@
     
     XCTAssertEqual(numberOfItemsBeforeMoving, numberOfItemsAfterMoving, @"Waypoint wrong size");
 }
-
-
 
 @end

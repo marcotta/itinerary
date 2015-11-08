@@ -13,6 +13,4 @@
 
 @interface MAIRouteViewController : MAIBaseViewController<MKMapViewDelegate, CLLocationManagerDelegate>
 
-- (IBAction)showOptions:(id)sender;
-
 @end

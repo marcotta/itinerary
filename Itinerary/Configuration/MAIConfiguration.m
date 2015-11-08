@@ -14,8 +14,10 @@ static NSString *_authorizationHeader;
 
 
 
-+ (void)initialize {
-    if (self == [MAIConfiguration class]) {
++ (void)initialize
+{
+    if (self == [MAIConfiguration class])
+	{
         //Combine AppId and AppCode separated by ':'
         NSString *header = [NSString stringWithFormat:@"%@:%@", APP_ID, APP_CODE];
         //Encode using base64
@@ -26,7 +28,8 @@ static NSString *_authorizationHeader;
     }
 }
 
-- (NSString*) getAuthorizationHeader {
+- (NSString*) getAuthorizationHeader
+{
     return _authorizationHeader;
 }
 

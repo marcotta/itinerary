@@ -26,7 +26,11 @@
 
 #pragma mark MAIGeocoderRepositoryDelegate
 
-- (void) search:(NSString*)query withLanguage:(NSString*)language withSuccessDataHandler:(void (^)(NSArray *))successDataHandler withFailureDataHandler:(void (^)(NSString *))failureDataHandler {
+- (void)search:(NSString*)query
+   withLanguage:(NSString*)language
+withSuccessDataHandler:(void (^)(NSArray *))successDataHandler
+withFailureDataHandler:(void (^)(NSString *))failureDataHandler
+{
     if([NSString ext_IsNullOrEmpty:query])
     {
         failureDataHandler(@"Query parameter cannot be empty.");
@@ -56,9 +60,9 @@
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              //              NSLog(@"JSON: %@", responseObject);
              
-             NSDictionary *response = (NSDictionary*)[responseObject objectForKey:@"Response"];
-             NSArray *view = [response objectForKey:@"View"];
-             NSArray *results = [[view firstObject] objectForKey:@"Result"];
+             NSDictionary *response = (NSDictionary*)responseObject[@"Response"];
+             NSArray *view = response[@"View"];
+             NSArray *results = [view firstObject][@"Result"];
              
              __block NSMutableArray *remoteLocations = [[NSMutableArray alloc] initWithCapacity:0];
              [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -67,12 +71,14 @@
                  newLocation = nil;
              }];
              
-             if(successDataHandler) {
+             if(successDataHandler)
+			 {
                  successDataHandler(remoteLocations);
              }
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             if(failureDataHandler) {
+             if(failureDataHandler)
+			 {
                  failureDataHandler([self parseErrorMessage:operation withError:error]);
              }
          }];

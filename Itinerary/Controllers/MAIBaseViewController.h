@@ -11,7 +11,7 @@
 
 @interface MAIBaseViewController : UIViewController
 
-- (void) showNetworkActivityWithMessage:(NSString*) message;
-- (void) hideNetworkActivity;
+- (void)showNetworkActivityWithMessage:(NSString*)message;
+- (void)hideNetworkActivity;
 @end
 

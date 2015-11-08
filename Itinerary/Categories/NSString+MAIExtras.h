@@ -10,8 +10,8 @@
 
 @interface NSString (MAIExtras)
 
-+ (BOOL) ext_IsNullOrEmpty:(NSString*)obj;
-+ (BOOL) ext_IsEmpty:(NSString*)obj;
-+ (NSString*) ext_GetGUID;
++ (BOOL)ext_IsNullOrEmpty:(NSString*)obj;
++ (BOOL)ext_IsEmpty:(NSString*)obj;
++ (NSString*)ext_GetGUID;
 
 @end

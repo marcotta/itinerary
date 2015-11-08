@@ -12,8 +12,14 @@
 
 // UIAlertController has a leak on ios8 of 48 bytes
 // http://www.openradar.appspot.com/20021758
-- (void) ext_showAlert:(NSString*)aTitle withMessage:(NSString *)aMessage andShowCancel:(BOOL)showCancel withOkHandler:(void (^)(UIAlertAction *action))okHandler withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler {
-    if([UIAlertController class]) {
+- (void)ext_showAlert:(NSString*)aTitle
+		  withMessage:(NSString *)aMessage
+		andShowCancel:(BOOL)showCancel
+		withOkHandler:(void (^)(UIAlertAction *action))okHandler
+	withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler
+{
+    if([UIAlertController class])
+	{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:aTitle message:aMessage preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK",nil) style:UIAlertActionStyleDefault
                                                          handler:okHandler];
@@ -32,8 +38,14 @@
 
 // UIAlertController has a leak on ios8 of 48 bytes
 // http://www.openradar.appspot.com/20021758
-- (void) ext_showActionSheet:(NSString *)aMessage withOkCopy:(NSString*)okCopy withOkHandler:(void (^)(UIAlertAction *action))okHandler withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler withSender:(id)sender {
-    if([UIAlertController class]) {
+- (void)ext_showActionSheet:(NSString *)aMessage
+				 withOkCopy:(NSString*)okCopy
+			  withOkHandler:(void (^)(UIAlertAction *action))okHandler
+		  withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler
+				 withSender:(id)sender
+{
+    if([UIAlertController class])
+	{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:aMessage preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:okCopy style:UIAlertActionStyleDefault
                                                          handler:okHandler];
@@ -44,11 +56,14 @@
                                                              handler:cancelHandler];
         [alert addAction:cancelAction];
         
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            if(sender) {
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		{
+            if(sender)
+			{
                 alert.popoverPresentationController.sourceView = sender;
             }
-            else{
+            else
+			{
                 //Not attached to any control
                 alert.popoverPresentationController.sourceView = self.view;
                 //center it
@@ -59,8 +74,10 @@
     }
 }
 
-
-- (void)addFullScreenConstraints:(UIView*)holdingView innerView:(UIView*)innerView withMargins:(CGFloat)margin {
+- (void)addFullScreenConstraints:(UIView*)holdingView
+					   innerView:(UIView*)innerView
+					 withMargins:(CGFloat)margin
+{
     [innerView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:innerView
@@ -105,7 +122,10 @@
     rightConstraint = nil;
 }
 
-- (void)addFullScreenConstraints:(UIView*)holdingView innerView:(UIView*)innerView {
+- (void)addFullScreenConstraints:(UIView*)holdingView
+					   innerView:(UIView*)innerView
+{
     [self addFullScreenConstraints:holdingView innerView:innerView withMargins:0];
 }
+
 @end

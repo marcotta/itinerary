@@ -12,6 +12,7 @@
 @interface MAIBaseHereRepository : NSObject
 
 
-- (NSString *)parseErrorMessage:(AFHTTPRequestOperation *)operation withError:(NSError*)error;
+- (NSString *)parseErrorMessage:(AFHTTPRequestOperation *)operation
+					  withError:(NSError*)error;
 
 @end

@@ -10,17 +10,17 @@
 
 @implementation MAIRoutePolyline
 
--(MAIRoutePolyline*)initWithPolyline:(MKPolyline*)aPolyline
-        withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate
-    withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate
+- (instancetype)initWithPolyline:(MKPolyline*)aPolyline
+   withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate
+withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate
 {
-    self = [super init];
-    if (self) {
-        _polyline = aPolyline;
-        _topLeft = aTopLeftCoordinate;
-        _bottomRight = aBottomRightCoordinate;
-    }
-    return self;
+	self = [super init];
+	if (self) {
+		_polyline = aPolyline;
+		_topLeft = aTopLeftCoordinate;
+		_bottomRight = aBottomRightCoordinate;
+	}
+	return self;
 }
 
 

@@ -11,6 +11,6 @@
 
 @interface UITableViewCell (MAIExtra)
 
--(void) ext_resizeToMatchTableWidth:(UITableView*)tableView;
+- (void)ext_resizeToMatchTableWidth:(UITableView*)tableView;
 
 @end

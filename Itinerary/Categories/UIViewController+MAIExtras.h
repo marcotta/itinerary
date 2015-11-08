@@ -10,9 +10,20 @@
 
 @interface UIViewController (MAIExtras)
 
-- (void) ext_showAlert:(NSString*)aTitle withMessage:(NSString *)aMessage andShowCancel:(BOOL)showCancel withOkHandler:(void (^)(UIAlertAction *action))okHandler withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler;
-- (void) ext_showActionSheet:(NSString *)aMessage withOkCopy:(NSString*)okCopy withOkHandler:(void (^)(UIAlertAction *action))okHandler withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler withSender:(id)sender;
-- (void) addFullScreenConstraints:(UIView*)holdingView innerView:(UIView*)innerView withMargins:(CGFloat)margin;
-- (void) addFullScreenConstraints:(UIView*)holdingView innerView:(UIView*)innerView;
+- (void)ext_showAlert:(NSString*)aTitle
+		  withMessage:(NSString *)aMessage
+		andShowCancel:(BOOL)showCancel
+		withOkHandler:(void (^)(UIAlertAction *action))okHandler
+	withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler;
+- (void)ext_showActionSheet:(NSString *)aMessage
+				 withOkCopy:(NSString*)okCopy
+			  withOkHandler:(void (^)(UIAlertAction *action))okHandler
+		  withCancelHandler:(void (^)(UIAlertAction *action))cancelHandler
+				 withSender:(id)sender;
+- (void)addFullScreenConstraints:(UIView*)holdingView
+					   innerView:(UIView*)innerView
+					 withMargins:(CGFloat)margin;
+- (void)addFullScreenConstraints:(UIView*)holdingView
+					   innerView:(UIView*)innerView;
 
 @end

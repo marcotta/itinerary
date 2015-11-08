@@ -14,12 +14,12 @@
     NSMutableArray  *_waypoints;
 }
 
-@property (copy, nonatomic)                                 NSString        *itineraryId;
-@property (copy, nonatomic)                                 NSString        *friendlyName;
-@property (nonatomic, readonly)                             NSMutableArray  *waypoints;
-@property (copy, nonatomic)                                 MAIRoute        *route;
+@property (copy, nonatomic) NSString *itineraryId;
+@property (copy, nonatomic) NSString *friendlyName;
+@property (nonatomic, readonly) NSMutableArray *waypoints;
+@property (copy, nonatomic) MAIRoute *route;
 
-- (MAIItinerary*)init;
+- (instancetype)init;
 
 - (void)addItem:(MAIWaypoint*)waypoint;
 - (void)removeItemAtIndex:(NSUInteger)index;

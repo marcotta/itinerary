@@ -17,26 +17,24 @@
 
 @interface MAIItineraryViewController ()
 
-@property (nonatomic)           MAIArrayDataSource   *dataSource;
-@property (nonatomic)           MAIArrayDataSource   *resultsDataSource;
-@property (nonatomic) IBOutlet UIButton             *mapButton;
-@property (nonatomic) IBOutlet UILabel              *titleLabel;
-@property (nonatomic) IBOutlet UITextField          *titleField;
-@property (nonatomic) IBOutlet UILabel              *infoLabel;
-@property (nonatomic) IBOutlet UISearchBar          *searchBar;
-@property (nonatomic) IBOutlet UITableView          *searchResultsTableView;
-@property (nonatomic) IBOutlet UITableView          *mainTableView;
+@property (nonatomic) MAIArrayDataSource *dataSource;
+@property (nonatomic) MAIArrayDataSource *resultsDataSource;
+@property (nonatomic) IBOutlet UIButton *mapButton;
+@property (nonatomic) IBOutlet UILabel *titleLabel;
+@property (nonatomic) IBOutlet UITextField *titleField;
+@property (nonatomic) IBOutlet UILabel *infoLabel;
+@property (nonatomic) IBOutlet UISearchBar *searchBar;
+@property (nonatomic) IBOutlet UITableView *searchResultsTableView;
+@property (nonatomic) IBOutlet UITableView *mainTableView;
 
 @end
-
 
 @implementation MAIItineraryViewController
 
 static NSString *cellIdentifier = @"WaypointCell";
 
-
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configureUI:_itinerary];
@@ -83,33 +81,34 @@ static NSString *cellIdentifier = @"WaypointCell";
     [self.infoLabel setText:NSLocalizedString(@"Search for addresses or places and add them to your itinerary", nil)];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void) configureUI:(MAIItinerary *)anItinerary {
-    if (!anItinerary) {
+- (void)configureUI:(MAIItinerary *)anItinerary
+{
+    if (!anItinerary)
+	{
         self.title = NSLocalizedString(@"New Itinerary", nil);
         _itinerary = [MAIItinerary new];
     }
-    else{
+    else
+	{
         self.title = anItinerary.friendlyName;
         [self.titleField setText:anItinerary.friendlyName];
     }
     [self.mapButton setHidden:!anItinerary.route];
 }
 
-- (void)setupDataSource:(MAIItinerary*)anItinerary {
+- (void)setupDataSource:(MAIItinerary*)anItinerary
+{
     [self configureUI:anItinerary];
-    if(self.navigationItem.rightBarButtonItem) {
+    if(self.navigationItem.rightBarButtonItem)
+	{
         [self.navigationItem.rightBarButtonItem setEnabled:(anItinerary.waypoints!=nil && anItinerary.waypoints.count>0)];
     }
     [self.dataSource setItems:anItinerary.waypoints];
     [self.mainTableView reloadData];
 }
 
-- (void)setupResultsDataSource:(NSArray*)items {
+- (void)setupResultsDataSource:(NSArray*)items
+{
     //    NSLog(@"Results data source");
     [self.resultsDataSource setItems:items];
     [self.searchResultsTableView reloadData];
@@ -118,7 +117,8 @@ static NSString *cellIdentifier = @"WaypointCell";
 
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"Route"])
@@ -127,13 +127,9 @@ static NSString *cellIdentifier = @"WaypointCell";
     }
 }
 
-
-
-
-
-
 #pragma mark - Search Methods
-- (void)hideSearchResults:(UISearchBar *)aSearchBar {
+- (void)hideSearchResults:(UISearchBar *)aSearchBar
+{
     [aSearchBar setText:@""];
     [aSearchBar setShowsCancelButton:NO animated:YES];
     [aSearchBar resignFirstResponder];
@@ -142,11 +138,13 @@ static NSString *cellIdentifier = @"WaypointCell";
     [self.mainTableView setHidden:NO];
 }
 
-- (void) searchBarTextDidBeginEditing:(UISearchBar*)aSearchBar {
+- (void)searchBarTextDidBeginEditing:(UISearchBar*)aSearchBar
+{
     [aSearchBar setShowsCancelButton:YES animated:YES];
 }
 
-- (void) searchBar:(UISearchBar*)aSearchBar textDidChange:(NSString *)searchText {
+- (void)searchBar:(UISearchBar*)aSearchBar textDidChange:(NSString *)searchText
+{
     if([searchText isEqualToString:@""])
     {
         [self setupResultsDataSource:nil];
@@ -171,41 +169,49 @@ static NSString *cellIdentifier = @"WaypointCell";
     }
 }
 
-- (void) searchBarCancelButtonClicked:(UISearchBar*) aSearchBar {
+- (void)searchBarCancelButtonClicked:(UISearchBar*)aSearchBar
+{
     [self hideSearchResults:aSearchBar];
 }
 
 
 #pragma mark - UITableView Delegate methods
 
-- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
-- (UIView*) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
     return 0.0001;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
     return 0.0001;
 }
 
 //TODO: Cache the height in both landscape and portrait for better scrolling
--(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     MAIWaypointTableViewCell *cell = (MAIWaypointTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     [cell ext_resizeToMatchTableWidth:tableView];
     
     MAIWaypoint *item = nil;
     
-    if(tableView==self.searchResultsTableView) {
+    if(tableView==self.searchResultsTableView)
+	{
         item = [self.resultsDataSource itemAtIndexPath:indexPath];
     }
-    else{
+    else
+	{
         item = [self.dataSource itemAtIndexPath:indexPath];
     }
     [cell bind:item withAcessoryButtonTappedBlock:nil];
@@ -216,8 +222,10 @@ static NSString *cellIdentifier = @"WaypointCell";
 }
 
 #pragma mark TitleField
-- (BOOL) textFieldShouldReturn:(UITextField *)textField {
-    if(textField== self.titleField) {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField== self.titleField)
+	{
         [textField resignFirstResponder];
         return NO;
     }
@@ -225,15 +233,16 @@ static NSString *cellIdentifier = @"WaypointCell";
     return YES;
 }
 
-- (IBAction) titleDidChange:(id)sender {
+- (IBAction)titleDidChange:(id)sender
+{
     [_itinerary setFriendlyName:self.titleField.text];
     [self saveItinerary];
 }
 
-
-
-- (void)saveItinerary {
-    if([self.searchBar isFirstResponder]) {
+- (void)saveItinerary
+{
+    if([self.searchBar isFirstResponder])
+	{
         [self hideSearchResults:self.searchBar];
     }
     
@@ -246,38 +255,45 @@ static NSString *cellIdentifier = @"WaypointCell";
     
     __weak MAIItineraryViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[MAIService sharedInstance] saveItinerary:_itinerary withSuccessDataHandler:^(MAIItinerary *amendedItinerary) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf setupDataSource:amendedItinerary];
-                [weakSelf hideNetworkActivity];
-            });
-        } withFailureDataHandler:^(NSString *errorMessage) {
-            NSLog(@"%@", errorMessage);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf ext_showAlert:NSLocalizedString(@"APP_NAME", nil) withMessage:errorMessage andShowCancel:NO withOkHandler:nil withCancelHandler:nil];
-                [weakSelf hideNetworkActivity];
-            });
-        }];
+        [[MAIService sharedInstance] saveItinerary:_itinerary
+							withSuccessDataHandler:^(MAIItinerary *amendedItinerary) {
+								dispatch_async(dispatch_get_main_queue(), ^{
+									[weakSelf setupDataSource:amendedItinerary];
+									[weakSelf hideNetworkActivity];
+								});
+							}
+							withFailureDataHandler:^(NSString *errorMessage) {
+								NSLog(@"%@", errorMessage);
+								dispatch_async(dispatch_get_main_queue(), ^{
+									[weakSelf ext_showAlert:NSLocalizedString(@"APP_NAME", nil) withMessage:errorMessage andShowCancel:NO withOkHandler:nil withCancelHandler:nil];
+									[weakSelf hideNetworkActivity];
+								});
+							}];
     });
 }
 
-- (IBAction) showRoute:(id)sender {
+- (IBAction)showRoute:(id)sender
+{
     [self performSegueWithIdentifier:@"Route" sender:_itinerary];
 }
 
 #pragma mark MAIItineraryDelegate
-- (void) onAddWaypoint:(MAIWaypoint *)waypoint withSender:(id)sender {
+- (void)onAddWaypoint:(MAIWaypoint *)waypoint withSender:(id)sender
+{
     NSLog(@"Waypoint selected %@", waypoint.address);
     
-    [self ext_showActionSheet:self.title withOkCopy:NSLocalizedString(@"Add to itinerary", nil) withOkHandler:^(UIAlertAction *action){
-        [self.itinerary addItem:waypoint];
-        [self setupDataSource:self.itinerary];
-        [self hideSearchResults:self.searchBar];
-        [self saveItinerary];
-    } withCancelHandler:nil withSender:sender];
+    [self ext_showActionSheet:self.title withOkCopy:NSLocalizedString(@"Add to itinerary", nil)
+				withOkHandler:^(UIAlertAction *action){
+					[self.itinerary addItem:waypoint];
+					[self setupDataSource:self.itinerary];
+					[self hideSearchResults:self.searchBar];
+					[self saveItinerary];
+				}
+			withCancelHandler:nil withSender:sender];
 }
 
-- (void) onRemoveWaypointAtIndex:(NSUInteger)index {
+- (void)onRemoveWaypointAtIndex:(NSUInteger)index
+{
     __weak MAIItineraryViewController *weakSelf = self;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -289,7 +305,8 @@ static NSString *cellIdentifier = @"WaypointCell";
     });
 }
 
-- (void) onMoveWaypointAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)destinationIndex {
+- (void)onMoveWaypointAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)destinationIndex
+{
     __weak MAIItineraryViewController *weakSelf = self;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

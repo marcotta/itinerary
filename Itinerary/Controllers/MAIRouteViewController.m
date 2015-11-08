@@ -15,73 +15,80 @@
 
 @interface MAIRouteViewController ()
 
-@property (nonatomic)           MAIItinerary        *itinerary;
-@property (nonatomic)  IBOutlet MKMapView           *mapView;
-@property (nonatomic)           MAIRoutePolyline    *routePolyline;
-@property (nonatomic)           CLLocationManager   *locationManager;
-@property (nonatomic)           BOOL userLocationFound;
-@property (nonatomic)  IBOutlet UILabel             *summaryLabel;
+@property (nonatomic) MAIItinerary *itinerary;
+@property (nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic) MAIRoutePolyline *routePolyline;
+@property (nonatomic) CLLocationManager *locationManager;
+@property (nonatomic) BOOL userLocationFound;
+@property (nonatomic) IBOutlet UILabel *summaryLabel;
 
 @end
 
 @implementation MAIRouteViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setLocationManager:[[CLLocationManager alloc] init]];
     
-    if([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+    if([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+	{
         [self.mapView setShowsUserLocation:NO];
         [self.locationManager setDelegate:self];
         [self.locationManager requestWhenInUseAuthorization];
     }
-    else{
+    else
+	{
         [self.mapView setShowsUserLocation:YES];
     }
     
     [self setTitle:NSLocalizedString(@"Route", nil)];
-    if(self.itinerary && self.itinerary.route && self.itinerary.route.summary) {
+    if(self.itinerary && self.itinerary.route && self.itinerary.route.summary)
+	{
         [self.summaryLabel ext_setFomattedText:self.itinerary.route.summary];
     }
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
-    if(!self.routePolyline) {
-        if(self.itinerary && self.itinerary.route) {
+    if(!self.routePolyline)
+	{
+        if(self.itinerary && self.itinerary.route)
+		{
             [self showNetworkActivityWithMessage:@"Calculating..."];
             __weak MAIRouteViewController *weakSelf = self;
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [[MAIService sharedInstance] getRoute:self.itinerary.route withSuccessDataHandler:^(MAIRoutePolyline *routePolyline) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf setRoutePolyline:routePolyline];
-                        [weakSelf updateMap];
-                        [weakSelf hideNetworkActivity];
-                    });
-                } withFailureDataHandler:^(NSString *errorMessage) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf ext_showAlert:NSLocalizedString(@"APP_NAME", nil) withMessage:errorMessage andShowCancel:NO withOkHandler:nil withCancelHandler:nil];
-                        [weakSelf hideNetworkActivity];
-                    });
-                }];
+                [[MAIService sharedInstance] getRoute:self.itinerary.route
+							   withSuccessDataHandler:^(MAIRoutePolyline *routePolyline) {
+									dispatch_async(dispatch_get_main_queue(), ^{
+										[weakSelf setRoutePolyline:routePolyline];
+										[weakSelf updateMap];
+										[weakSelf hideNetworkActivity];
+									});
+								}
+							   withFailureDataHandler:^(NSString *errorMessage) {
+									dispatch_async(dispatch_get_main_queue(), ^{
+										[weakSelf ext_showAlert:NSLocalizedString(@"APP_NAME", nil) withMessage:errorMessage andShowCancel:NO withOkHandler:nil withCancelHandler:nil];
+										[weakSelf hideNetworkActivity];
+									});
+								}];
             });
         }
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted) {
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted)
+	{
         // permission denied
         [self.mapView setShowsUserLocation:NO];
     }
-    else if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways) {
+    else if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways)
+	{
         // permission granted
         [self.mapView setShowsUserLocation:YES];
     }
@@ -97,7 +104,7 @@
 }
 
 #pragma mark - MAP -
-- (void) updateMap
+- (void)updateMap
 {
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
@@ -109,9 +116,11 @@
         [self.mapView addAnnotation:annotation];
     }
     
-    if(self.routePolyline) {
+    if(self.routePolyline)
+	{
         //Add polyline as an overlay
-        if(self.routePolyline.polyline) {
+        if(self.routePolyline.polyline)
+		{
             [self.mapView addOverlay:self.routePolyline.polyline level:MKOverlayLevelAboveRoads];
         }
         
@@ -119,7 +128,8 @@
         CLLocationCoordinate2D bottomRight = self.routePolyline.bottomRight;
         
         //Update region to show user location
-        if(self.mapView.showsUserLocation && self.mapView.userLocation && self.mapView.userLocation.location) {
+        if(self.mapView.showsUserLocation && self.mapView.userLocation && self.mapView.userLocation.location)
+		{
             [self setUserLocationFound:YES];
             topLeft = CLLocationCoordinate2DMake(fmax(topLeft.latitude, self.mapView.userLocation.coordinate.latitude), fmin(topLeft.longitude, self.mapView.userLocation.coordinate.longitude));
             bottomRight = CLLocationCoordinate2DMake(fmin(bottomRight.latitude, self.mapView.userLocation.coordinate.latitude), fmax(bottomRight.longitude, self.mapView.userLocation.coordinate.longitude));
@@ -155,10 +165,13 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
     if ([annotation isKindOfClass:[MKUserLocation class]])
-        return nil;
+	{
+		return nil;
+	}
     static NSString* AnnotationIdentifier = @"AnnotationIdentifier";
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
-    if(!annotationView) {
+    if(!annotationView)
+	{
         annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
     }
     annotationView.image = [UIImage imageNamed:@"Marker"];
@@ -170,11 +183,11 @@
 
 // UIAlertController has a leak on ios8 of 48 bytes
 // http://www.openradar.appspot.com/20021758
-- (IBAction)showOptions:(id)sender {
+- (IBAction)showOptions:(id)sender
+{
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    
-    
-    if([UIAlertController class]) {
+	if([UIAlertController class])
+	{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Options", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
         //        //Car
@@ -197,8 +210,10 @@
         //        [alert addAction:walkModeAction];
         
         //My location
-        if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways) {
-            if(self.mapView.showsUserLocation) {
+        if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways)
+		{
+            if(self.mapView.showsUserLocation)
+			{
                 //Hide my location
                 UIAlertAction *hideLocationAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Hide my location",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self.mapView setShowsUserLocation:NO];
@@ -206,7 +221,8 @@
                 }];
                 [alert addAction:hideLocationAction];
             }
-            else {
+            else
+			{
                 //Show my location
                 UIAlertAction *showLocationAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Show my location",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self.mapView setShowsUserLocation:YES];
@@ -220,11 +236,14 @@
                                                              handler:nil];
         [alert addAction:cancelAction];
         
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            if(sender) {
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		{
+            if(sender)
+			{
                 alert.popoverPresentationController.sourceView = sender;
             }
-            else{
+            else
+			{
                 //Not attached to any control
                 alert.popoverPresentationController.sourceView = self.view;
                 //center it

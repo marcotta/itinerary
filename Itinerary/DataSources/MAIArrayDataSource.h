@@ -15,31 +15,33 @@ typedef void (^SortCellBlock)(NSUInteger sourceIndex, NSUInteger destinationInde
 
 @interface MAIArrayDataSource : NSObject<UITableViewDataSource>
 
-@property (nonatomic)       NSArray                     *items;
-@property (copy, nonatomic) NSString                    *cellIdentifier;
+@property (nonatomic) NSArray *items;
+@property (copy, nonatomic) NSString *cellIdentifier;
 @property (copy, nonatomic) ConfigureCellBlock configureCellBlock;
 @property (nonatomic, copy) DeleteCellBlock deleteCellBlock;
 @property (nonatomic, copy) SortCellBlock sortCellBlock;
-@property (nonatomic, getter=isEditable)       BOOL editable;
-@property (nonatomic, getter=isSortable)       BOOL sortable;
+@property (nonatomic, getter=isEditable) BOOL editable;
+@property (nonatomic, getter=isSortable) BOOL sortable;
 
-- (id)initWithItems:(NSArray *)anItems
- withCellIdentifier:(NSString *)aCellIdentifier
-withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock;
+- (instancetype)init NS_UNAVAILABLE;
 
-- (id)initWithItems:(NSArray *)anItems
- withCellIdentifier:(NSString *)aCellIdentifier
-withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock
-withDeleteCellBlock:(DeleteCellBlock)aDeleteCellBlock
-        andEditable:(BOOL)canBeEdited;
+- (instancetype)initWithItems:(NSArray *)anItems
+		   withCellIdentifier:(NSString *)aCellIdentifier
+	   withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock;
 
-- (id)initWithItems:(NSArray *)anItems
- withCellIdentifier:(NSString *)aCellIdentifier
-withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock
-withDeleteCellBlock:(DeleteCellBlock)aDeleteCellBlock
-        andEditable:(BOOL)canBeEdited
-  withSortCellBlock:(SortCellBlock)aSortCellBlock
-        andSortable:(BOOL)canBeSorted;
+- (instancetype)initWithItems:(NSArray *)anItems
+		   withCellIdentifier:(NSString *)aCellIdentifier
+	   withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock
+		  withDeleteCellBlock:(DeleteCellBlock)aDeleteCellBlock
+				  andEditable:(BOOL)canBeEdited;
+
+- (instancetype)initWithItems:(NSArray *)anItems
+		   withCellIdentifier:(NSString *)aCellIdentifier
+	   withConfigureCellBlock:(ConfigureCellBlock)aConfigureCellBlock
+		  withDeleteCellBlock:(DeleteCellBlock)aDeleteCellBlock
+				  andEditable:(BOOL)canBeEdited
+			withSortCellBlock:(SortCellBlock)aSortCellBlock
+				  andSortable:(BOOL)canBeSorted NS_DESIGNATED_INITIALIZER;
 
 - (id)itemAtIndexPath:(NSIndexPath*)indexPath;
 

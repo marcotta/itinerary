@@ -34,7 +34,8 @@
 
 @implementation MAIItineraryViewControllerTests
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -55,7 +56,8 @@
     [_existingItinerary addItem:brandenburgGate];
 }
 
-- (void)tearDown {
+- (void)tearDown
+{
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     _waypoint = nil;
     _existingItinerary = nil;
@@ -64,7 +66,8 @@
     [super tearDown];
 }
 
-- (void) testAddWaypointToItineraryLaunchesActionSheet {
+- (void)testAddWaypointToItineraryLaunchesActionSheet
+{
     [_controller setItinerary:_existingItinerary];
     [_controller viewDidLoad];
     
@@ -75,7 +78,8 @@
 }
 
 
-- (void) testRemoveWaypointFromItinerary {
+- (void)testRemoveWaypointFromItinerary
+{
     id controllerMock = OCMPartialMock(_controller);
     [controllerMock setItinerary:_existingItinerary];
     [controllerMock viewDidLoad];
@@ -93,7 +97,8 @@
     [self waitForExpectationsWithTimeout:1 handler:nil];
 }
 
-- (void) testReorderWaypoints{
+- (void)testReorderWaypoints
+{
     id controllerMock = OCMPartialMock(_controller);
     [controllerMock setItinerary:_existingItinerary];
     [controllerMock viewDidLoad];
@@ -113,7 +118,8 @@
     [self waitForExpectationsWithTimeout:1 handler:nil];
 }
 
-- (void) testCreateNewItinerary {
+- (void)testCreateNewItinerary
+{
     [_controller viewDidLoad];
     
     XCTAssertNotNil(_controller.view, @"View not loaded");
@@ -123,7 +129,8 @@
     XCTAssertTrue(_controller.mapButton.hidden, @"Map Icon should be hidden in create mode");
 }
 
-- (void) testLoadExistingItinerary {
+- (void)testLoadExistingItinerary
+{
     [_controller setItinerary:_existingItinerary];
     [_controller viewDidLoad];
     

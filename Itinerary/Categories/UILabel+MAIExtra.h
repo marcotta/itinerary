@@ -10,6 +10,6 @@
 
 @interface UILabel (MAIExtra)
 
-- (void) ext_setFomattedText:(NSString*)htmlText;
+- (void)ext_setFomattedText:(NSString*)htmlText;
 
 @end

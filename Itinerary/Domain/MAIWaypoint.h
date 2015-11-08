@@ -16,11 +16,13 @@
 @property (copy, nonatomic, readonly) NSString *address;
 @property (nonatomic, readonly)       CLLocationCoordinate2D position;
 
-- (MAIWaypoint*)initWithLocationId:(NSString*)aLocationId
+
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithLocationId:(NSString*)aLocationId
                           withName:(NSString*)aName
                        withAddress:(NSString*)anAddress
-                      withPosition:(CLLocationCoordinate2D)aPosition;
-- (MAIWaypoint*)initWithJson:(NSDictionary*)data;
+                      withPosition:(CLLocationCoordinate2D)aPosition NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithJson:(NSDictionary*)data;
 
 
 @end

@@ -16,8 +16,8 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D bottomRight;
 
 
--(MAIRoutePolyline*)initWithPolyline:(MKPolyline*)aPolyline
-        withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate
-    withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate;
+- (instancetype)initWithPolyline:(MKPolyline*)aPolyline
+   withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate
+withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate;
 
 @end

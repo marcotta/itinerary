@@ -21,7 +21,8 @@ static dispatch_queue_t _queue;
 - (MAIItinerary*)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+	{
         _waypoints = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
@@ -46,7 +47,8 @@ static dispatch_queue_t _queue;
 - (void)removeItemAtIndex:(NSUInteger)index
 {
     dispatch_barrier_async(_queue, ^{
-        if(index<_waypoints.count) {
+        if(index<_waypoints.count)
+		{
             [_waypoints removeObjectAtIndex:index];
         }
     });
@@ -56,13 +58,16 @@ static dispatch_queue_t _queue;
                 toIndex:(NSUInteger)destinationIndex
 {
     dispatch_barrier_async(_queue, ^{
-        if(sourceIndex<_waypoints.count) {
+        if(sourceIndex<_waypoints.count)
+		{
             MAIWaypoint *waypoint = [[_waypoints objectAtIndex:sourceIndex] copy];
             [_waypoints removeObjectAtIndex:sourceIndex];
-            if(destinationIndex<_waypoints.count) {
+            if(destinationIndex<_waypoints.count)
+			{
                 [_waypoints insertObject:waypoint atIndex:destinationIndex];
             }
-            else {
+            else
+			{
                 [_waypoints addObject:waypoint];
             }
         }
@@ -70,26 +75,31 @@ static dispatch_queue_t _queue;
 }
 
 #pragma mark NSCopying
-- (id)copyWithZone:(NSZone *)zone {
+- (instancetype)copyWithZone:(NSZone *)zone
+{
     MAIItinerary *newItinerary = [[[self class] allocWithZone:zone] init];
-    if(newItinerary) {
+    if(newItinerary)
+	{
         [newItinerary setItineraryId:self.itineraryId];
         [newItinerary setFriendlyName:self.friendlyName];
         //AddItem takes care of making a copy of the waypoint
-        for(MAIWaypoint *waypoint in self.waypoints) {
+        for(MAIWaypoint *waypoint in self.waypoints)
+		{
             [newItinerary addItem:waypoint];
-        };
+        }
     }
     return newItinerary;
 }
 
 - (BOOL)isEqual:(id)object
 {
-    if(!object) {
+    if(!object)
+	{
         return NO;
     }
     
-    if(![object isKindOfClass:[MAIItinerary class]]) {
+    if(![object isKindOfClass:[MAIItinerary class]])
+	{
         return NO;
     }
     
@@ -98,10 +108,11 @@ static dispatch_queue_t _queue;
 }
 
 #pragma mark NSCoding
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
-    if (!self) {
+    if (!self)
+	{
         return nil;
     }
     
@@ -117,7 +128,8 @@ static dispatch_queue_t _queue;
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     //Make sure it always has an id
-    if([NSString ext_IsNullOrEmpty:_itineraryId]) {
+    if([NSString ext_IsNullOrEmpty:_itineraryId])
+	{
         _itineraryId = [NSString ext_GetGUID];
     }
     dispatch_sync(_queue, ^{

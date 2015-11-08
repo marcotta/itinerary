@@ -8,16 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MAIRoute : NSObject<NSCopying, NSCoding> {
-    
-}
+@interface MAIRoute : NSObject<NSCopying, NSCoding>
 
 @property (copy, nonatomic, readonly) NSString *routeId;
 @property (copy, nonatomic, readonly) NSString *summary;
 
 
-- (MAIRoute*) initWithRouteId:(NSString*)aRouteId
-                  withSummary:(NSString*)aSummary;
-- (MAIRoute*) initWithJson:(NSDictionary*)data;
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithRouteId:(NSString*)aRouteId
+					withSummary:(NSString*)aSummary NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithJson:(NSDictionary*)data;
 
 @end

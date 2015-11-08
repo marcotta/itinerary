@@ -11,6 +11,6 @@
 
 @interface MAIItineraryTableViewCell : UITableViewCell
 
-- (void) bind:(MAIItinerary*)anItinerary;
+- (void)bind:(MAIItinerary*)anItinerary;
 
 @end

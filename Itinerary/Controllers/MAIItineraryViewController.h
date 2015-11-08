@@ -22,5 +22,5 @@
 
 - (IBAction) titleDidChange:(id)sender;
 - (IBAction) showRoute:(id)sender;
-- (void) saveItinerary;
+- (void)saveItinerary;
 @end

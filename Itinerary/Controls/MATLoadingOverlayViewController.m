@@ -23,7 +23,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+	{
         // Custom initialization
     }
     return self;
@@ -40,7 +41,8 @@
 }
 
 
-- (void) showWithMessage:(NSString *)aMessage {
+- (void)showWithMessage:(NSString *)aMessage
+{
     [self.activityIndicator setHidden:NO];
     [self.tick setHidden:YES];
     [self.message setText:aMessage];
@@ -48,22 +50,26 @@
     [self.view setAlpha:1];
 }
 
-- (void) hideWithTick:(BOOL)showTick {
-    
+- (void)hideWithTick:(BOOL)showTick
+{
     [self.activityIndicator setHidden:YES];
     [self.tick setHidden:!showTick];
     [self.message setHidden:YES];
-    if (showTick) {
+    if (showTick)
+	{
         __weak typeof(self) weakSelf = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf fadeDown];
         });
-    } else {
+    }
+	else
+	{
         [self fadeDown];
     }
 }
 
-- (void) fadeDown {
+- (void)fadeDown
+{
     [UIView beginAnimations:NULL context:nil];
     [self.view setAlpha:0];
     [UIView commitAnimations];
@@ -76,4 +82,5 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
+
 @end

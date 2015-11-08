@@ -11,11 +11,11 @@
 
 @interface MAIItinerariesViewController : MAIBaseViewController<UITableViewDelegate>
 
-- (void) updateItineraryView;
+- (void)updateItineraryView;
 - (IBAction) onCreateItinerary:(id)sender;
 
-- (void) showItineraries;
-- (void) showCreateFirstItinerary;
-- (void) setupDataSource:(NSArray*)items;
+- (void)showItineraries;
+- (void)showCreateFirstItinerary;
+- (void)setupDataSource:(NSArray*)items;
 
 @end

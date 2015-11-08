@@ -19,25 +19,8 @@
 
 @implementation MAIArrayDataSourceTests
 
-
-
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-   
-
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testInitializeWithNoParameters {
-    XCTAssertNil([[MAIArrayDataSource alloc] init], @"Should not be allowed.");
-}
-
-- (void)testInitializeWithParameters {
+- (void)testInitializeWithParameters
+{
     ConfigureCellBlock configureBlock = ^(UITableViewCell *aCell, id item){};
     id obj1 = [[MAIArrayDataSource alloc] initWithItems:@[]
                                       withCellIdentifier:@"foo"
@@ -46,7 +29,8 @@
     XCTAssertNotNil(obj1, @"Pass.");
 }
 
-- (void)testInitializeWithEditableParameters {
+- (void)testInitializeWithEditableParameters
+{
     ConfigureCellBlock configureBlock = ^(UITableViewCell *aCell, id item){};
     DeleteCellBlock deleteBlock = ^(NSUInteger index){};
     id obj1 = [[MAIArrayDataSource alloc] initWithItems:@[]
@@ -58,7 +42,8 @@
     XCTAssertNotNil(obj1, @"Pass.");
 }
 
-- (void)testInitializeWithEditableAndSortableParameters {
+- (void)testInitializeWithEditableAndSortableParameters
+{
     ConfigureCellBlock configureBlock = ^(UITableViewCell *aCell, id item){};
     DeleteCellBlock deleteBlock = ^(NSUInteger index){};
     SortCellBlock sortBlock = ^(NSUInteger sourceIndex, NSUInteger destinationIndex){};
@@ -73,8 +58,8 @@
     XCTAssertNotNil(obj1, @"Pass.");
 }
 
-- (void)testCellConfiguration{
-    
+- (void)testCellConfiguration
+{
     NSArray *items = @[@"a", @"b", @"c"];
     
     __block UITableViewCell *configuredCell = nil;
@@ -107,7 +92,8 @@
     [mockTableView verify];
 }
 
-- (void)testCellDeletion{
+- (void)testCellDeletion
+{
     
     NSArray *items = @[@"a", @"b", @"c"];
     
@@ -139,8 +125,8 @@
     XCTAssertEqual(deletedObjectIndex, indexPath.row, @"This should have been passed to the block.");
 }
 
-- (void)testCellSorting{
-    
+- (void)testCellSorting
+{
     NSArray *items = @[@"a", @"b", @"c"];
     
     __block UITableViewCell *configuredCell = nil;
@@ -180,7 +166,5 @@
     XCTAssertEqual(movedObjectSourceIndex, indexPath.row, @"This should have been passed to the block.");
     XCTAssertEqual(movedObjectDestinationIndex, destinationIndexPath.row, @"This should have been passed to the block.");
 }
-
-
 
 @end
