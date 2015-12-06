@@ -75,7 +75,7 @@
     });
 }
 
-#pragma mark IBActions
+#pragma mark - IBActions
 
 - (IBAction)actionCreateItinerary:(id)sender
 {

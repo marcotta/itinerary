@@ -54,8 +54,8 @@
 	
 	NSString *url= [NSString stringWithFormat:@"%@", CALCULATE_ROUTE_END_POINT];
 	NSMutableDictionary *parameters =
-	  [[NSMutableDictionary alloc] initWithDictionary:@{@"app_id":APP_ID,
-													  @"app_code":APP_CODE,
+	  [[NSMutableDictionary alloc] initWithDictionary:@{@"app_id":kAppId,
+													  @"app_code":kAppCode,
 													  @"language":language,
 													  @"instructionFormatType":@"txt",
 													  @"routeAttributes":@"none,routeId,summary",
@@ -113,8 +113,8 @@
 	[manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
 	
 	NSString *url= [NSString stringWithFormat:@"%@", GET_ROUTE_END_POINT];
-	NSDictionary *parameters = @{@"app_id":APP_ID,
-								 @"app_code":APP_CODE,
+	NSDictionary *parameters = @{@"app_id":kAppId,
+								 @"app_code":kAppCode,
 								 @"language":language,
 								 @"routeId": aRoute.routeId,
 								 @"routeAttributes":@"none,shape,boundingBox",

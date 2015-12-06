@@ -12,7 +12,7 @@
 
 @protocol MAIGeocoderRepositoryDelegate <NSObject>
 
-- (void)geocoderRepositorySearch:(MAIGeocoderRepository *)repostiry
+- (void)geocoderRepositorySearch:(MAIGeocoderRepository *)repository
 						   query:(NSString*)query
 					withLanguage:(NSString*)language
 		  withSuccessDataHandler:(void (^)(NSArray *items))successDataHandler

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MAIWaypoint.h"
-#import "MAIItineraryDelegate.h"
+
+@class MAIWaypoint;
 
 typedef void (^AccessoryButtonTappedBlock)(id sender);
 

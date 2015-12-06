@@ -7,6 +7,8 @@
 //
 
 #import "MAIAnnotation.h"
+#import "MAIWaypoint.h"
+
 #import "NSString+MAIExtras.h"
 
 @implementation MAIAnnotation

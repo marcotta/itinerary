@@ -7,6 +7,7 @@
 //
 
 #import "MAIItineraryTableViewCell.h"
+#import "MAIItinerary.h"
 
 @interface MAIItineraryTableViewCell ()
 

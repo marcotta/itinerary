@@ -30,7 +30,7 @@
     return self;
 }
 
-#pragma mark - View lifecycle
+#pragma mark - Lifecycle
 
 - (void)viewDidLoad
 {

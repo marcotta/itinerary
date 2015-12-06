@@ -41,6 +41,7 @@
 	return self;
 }
 
+#pragma mark - NSObject
 - (BOOL)isEqual:(id)object
 {
 	if(!object)
@@ -57,13 +58,13 @@
 	return [self.routeId isEqualToString:compareObject.routeId];
 }
 
-#pragma mark NSCopying
+#pragma mark - NSCopying
 - (id)copyWithZone:(NSZone *)zone
 {
 	return [[[self class] allocWithZone:zone] initWithRouteId:self.routeId withSummary:self.summary];
 }
 
-#pragma mark NSCoding
+#pragma mark - NSCoding
 - (id)initWithCoder:(NSCoder *)decoder
 {
 	return [self initWithRouteId:[decoder decodeObjectForKey:@"routeId"]

@@ -52,7 +52,7 @@
     [super tearDown];
 }
 
-#pragma mark Geocoder
+#pragma mark - Geocoder
 - (void)DISABLED_testSearchAddresses
 {
     //Make sure service can return results and api call are correctly built
@@ -100,7 +100,7 @@
     }];
 }
 
-#pragma mark Itinerary
+#pragma mark - Itinerary
 - (void)DISABLED_testGetItineraries
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Find saved itineraries"];
@@ -202,7 +202,7 @@
     }];
 }
 
-#pragma mark Routing
+#pragma mark - Routing
 - (void)DISABLED_testCalculateRoute
 {
     MAIItinerary *routeItinerary = [[MAIItinerary alloc] init];

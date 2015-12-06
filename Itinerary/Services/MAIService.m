@@ -38,7 +38,7 @@
     return self;
 }
 
-#pragma mark Geocoder
+#pragma mark - Geocoder
 //  Any other business logic will be added to this method, including caching or conditions checks
 - (void)search:(NSString*)query
 withDataSourceCompletionHandler:(void (^)(NSArray *))successDataHandler
@@ -214,7 +214,7 @@ withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 											}];
 }
 
-#pragma mark Routing
+#pragma mark - Routing
 - (void)calculateRoute:(MAIItinerary*)anItinerary
 withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler
 withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler

@@ -8,7 +8,11 @@
 
 #import "MAIConfiguration.h"
 
-static NSString *_authorizationHeader;
+NSString * const kAppName = @"Itinerary";
+NSString * const kAppId = @"hu2Io86XfXzpEzF0fjH3";
+NSString * const kAppCode = @"aRA5LwpVvfydJYsIN6qpMg";
+
+static NSString * authorizationHeader;
 
 @implementation MAIConfiguration
 
@@ -19,18 +23,18 @@ static NSString *_authorizationHeader;
     if (self == [MAIConfiguration class])
 	{
         //Combine AppId and AppCode separated by ':'
-        NSString *header = [NSString stringWithFormat:@"%@:%@", APP_ID, APP_CODE];
+        NSString *header = [NSString stringWithFormat:@"%@:%@", kAppId, kAppCode];
         //Encode using base64
         NSString *base64Header = [[header dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
         
         //Add authorization method plus space
-        _authorizationHeader = [NSString stringWithFormat:@"Basic %@", base64Header];
+        authorizationHeader = [NSString stringWithFormat:@"Basic %@", base64Header];
     }
 }
 
 - (NSString*) getAuthorizationHeader
 {
-    return _authorizationHeader;
+    return authorizationHeader;
 }
 
 @end

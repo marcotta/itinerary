@@ -10,6 +10,8 @@
 
 @implementation MAIWaypoint
 
+#pragma mark - Lifecycle
+
 - (instancetype)initWithLocationId:(NSString*)aLocationId
                           withName:(NSString*)aName
                        withAddress:(NSString*)anAddress
@@ -66,6 +68,8 @@
 	return self;
 }
 
+#pragma mark - NSObject
+
 - (BOOL)isEqual:(id)object
 {
     if(!object)
@@ -82,7 +86,7 @@
     return [self.locationId isEqualToString:compareObject.locationId];
 }
 
-#pragma mark NSCopying
+#pragma mark - NSCopying
 - (instancetype)copyWithZone:(NSZone *)zone
 {
     MAIWaypoint *newWaypoint = [[[self class] allocWithZone:zone] initWithLocationId:self.locationId
@@ -92,7 +96,7 @@
     return newWaypoint;
 }
 
-#pragma mark NSCoding
+#pragma mark - NSCoding
 - (instancetype)initWithCoder:(NSCoder *)decoder
 {
 	return [self initWithLocationId:[decoder decodeObjectForKey:@"locationId"]

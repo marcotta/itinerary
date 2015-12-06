@@ -7,6 +7,7 @@
 //
 
 #import "MAIWaypointTableViewCell.h"
+#import "MAIWaypoint.h"
 
 @interface MAIWaypointTableViewCell ()
 

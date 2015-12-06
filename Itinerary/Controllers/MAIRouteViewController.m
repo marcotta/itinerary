@@ -106,7 +106,7 @@
     }
 }
 
-#pragma mark - MAP -
+#pragma mark - MAP
 - (void)updateMap
 {
     [self.mapView removeOverlays:self.mapView.overlays];

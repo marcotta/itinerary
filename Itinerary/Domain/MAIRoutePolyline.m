@@ -11,7 +11,7 @@
 @implementation MAIRoutePolyline
 
 - (instancetype)initWithPolyline:(MKPolyline*)aPolyline
-   withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate
+	withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate
 withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate
 {
 	self = [super init];

@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
-#import "MAIWaypoint.h"
+
+@class MAIWaypoint;
 
 @interface MAIAnnotation : NSObject <MKAnnotation>
 
-@property (nonatomic)           MAIWaypoint              *waypoint;
+@property (nonatomic) MAIWaypoint *waypoint;
 
 - (id)initWithWaypoint:(MAIWaypoint*)aWaypoint;
 

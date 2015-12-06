@@ -275,7 +275,7 @@ static NSString * const cellIdentifier = @"WaypointCell";
     return size.height+1;
 }
 
-#pragma mark UITextFieldDelegate
+#pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField== self.titleField)
@@ -287,7 +287,7 @@ static NSString * const cellIdentifier = @"WaypointCell";
     return YES;
 }
 
-#pragma mark MAIItineraryDelegate
+#pragma mark - MAIItineraryDelegate
 - (void)itineraryDidAddWaypoint:(MAIItinerary*)itinerary waypoint:(MAIWaypoint *)waypoint withSender:(id)sender
 {
     NSLog(@"Waypoint selected %@", waypoint.address);

@@ -12,11 +12,22 @@
 
 + (BOOL)ext_IsNullOrEmpty:(NSString*)obj
 {
-    if(obj!=nil &&  ![obj isEqual:[NSNull null]] && ![self ext_IsEmpty:obj])
+	if(obj==nil)
 	{
-		return NO;
+		return YES;
 	}
-    return YES;
+	
+	if([obj isEqual:[NSNull null]])
+	{
+		return YES;
+	}
+	
+	if([self ext_IsEmpty:obj])
+	{
+		return YES;
+	}
+	
+	return NO;
 }
 
 + (BOOL)ext_IsEmpty:(NSString *)obj
@@ -25,6 +36,7 @@
 	{
 		return YES;
 	}
+	
     return NO;
 }
 

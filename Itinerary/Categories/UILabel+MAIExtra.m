@@ -15,17 +15,21 @@
 {
     if([self respondsToSelector:@selector(setAttributedText:)])
 	{
-        NSString *html = [NSString stringWithFormat:@"<html><head><style type=\"text/css\">body {padding:0, margin:0; font-size: %lipx; font-family:Helvetica; color: #595959; } span { font-weight:bold; } </style></head><body>%@</body></html>", (long)[self.font pointSize], htmlText];
+		NSString *html = [NSString stringWithFormat:@"<html><head><style type=\"text/css\">body"
+						  @"{padding:0, margin:0; font-size: %lipx; font-family:Helvetica; color: #595959; }"
+						  @"span { font-weight:bold; } </style></head><body>%@</body></html>",
+						  (long)[self.font pointSize], htmlText];
         NSError *err = nil;
-        NSMutableAttributedString *formattedText = [[NSMutableAttributedString alloc]
-                                                    initWithData: [html dataUsingEncoding:NSUTF8StringEncoding]
-                                                    options: @{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding) }
-                                                    documentAttributes: nil
-                                                    error: &err];
-        if(err)
+		NSMutableAttributedString *formattedText =
+		[[NSMutableAttributedString alloc]
+		 initWithData: [html dataUsingEncoding:NSUTF8StringEncoding]
+		 options: @{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding) }
+		 documentAttributes: nil
+		 error: &err];
+		if(err)
 		{
-            [self setText:htmlText];
-        }
+			[self setText:htmlText];
+		}
         else
 		{
             [self setAttributedText:formattedText];

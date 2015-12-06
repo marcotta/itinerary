@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MAIItinerary.h"
+@class MAIItinerary;
 
 @interface MAIItineraryTableViewCell : UITableViewCell
 

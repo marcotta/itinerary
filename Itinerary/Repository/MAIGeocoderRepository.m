@@ -24,9 +24,9 @@
 @implementation MAIGeocoderRepository
 
 
-#pragma mark MAIGeocoderRepositoryDelegate
+#pragma mark - MAIGeocoderRepositoryDelegate
 
-- (void)geocoderRepositorySearch:(MAIGeocoderRepository *)repostiry
+- (void)geocoderRepositorySearch:(MAIGeocoderRepository *)repository
 						   query:(NSString*)query
 					withLanguage:(NSString*)language
 		  withSuccessDataHandler:(void (^)(NSArray *items))successDataHandler
@@ -51,8 +51,8 @@
     
     NSString *url= [NSString stringWithFormat:@"%@", GEOCODER_END_POINT];
     NSDictionary *parameters = @{@"searchtext": query,
-                                 @"app_id":APP_ID,
-                                 @"app_code":APP_CODE,
+                                 @"app_id":kAppId,
+                                 @"app_code":kAppCode,
                                  @"language":language,
                                  @"gen":@"8"};
     
