@@ -34,34 +34,35 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    _controller = [storyboard instantiateViewControllerWithIdentifier:@"Itineraries"];
-    [_controller performSelectorOnMainThread:@selector(loadView) withObject:nil waitUntilDone:YES];
+    self.controller = [storyboard instantiateViewControllerWithIdentifier:@"Itineraries"];
+
+	__unused UIView *controllerView = self.controller.view;
 }
 
 - (void)tearDown
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
-    _controller = nil;
+    self.controller = nil;
     [super tearDown];
 }
 
 - (void)testShowItineraries
 {
-    [_controller showItineraries];
-    XCTAssertFalse(_controller.mainTableView.hidden, @"Table View not visible");
-    XCTAssertTrue(_controller.createNewItineraryButton.hidden, @"Create First item visible");
+    [self.controller showItineraries];
+    XCTAssertFalse(self.controller.mainTableView.hidden, @"Table View not visible");
+    XCTAssertTrue(self.controller.createNewItineraryButton.hidden, @"Create First item visible");
 }
 
 - (void)testShowCreateFirstItinerary
 {
-    [_controller showCreateFirstItinerary];
-    XCTAssertTrue(_controller.mainTableView.hidden, @"Table View visible");
-    XCTAssertFalse(_controller.createNewItineraryButton.hidden, @"Create First item not visible");
+    [self.controller showCreateFirstItinerary];
+    XCTAssertTrue(self.controller.mainTableView.hidden, @"Table View visible");
+    XCTAssertFalse(self.controller.createNewItineraryButton.hidden, @"Create First item not visible");
 }
 
 - (void)testShowCreateNewItineraryWhenNoItinerariesSaved
 {
-    id controllerMock = OCMPartialMock(_controller);
+    id controllerMock = OCMPartialMock(self.controller);
     [controllerMock setupDataSource:[[NSMutableArray alloc] initWithCapacity:0]];
     [controllerMock updateItineraryView];
     
@@ -73,8 +74,7 @@
     NSMutableArray *itineraries = [[NSMutableArray alloc] initWithCapacity:0];
     [itineraries addObject:[[MAIItinerary alloc] init]];
     
-    [_controller viewDidLoad];
-    id controllerMock = OCMPartialMock(_controller);
+    id controllerMock = OCMPartialMock(self.controller);
     
     [controllerMock setupDataSource:itineraries];
     [controllerMock updateItineraryView];
@@ -86,19 +86,18 @@
 {
     NSMutableArray *itineraries = [[NSMutableArray alloc] initWithCapacity:0];
     [itineraries addObject:[[MAIItinerary alloc] init]];
-    [_controller viewDidLoad];
-    id controllerMock = OCMPartialMock(_controller);
+    id controllerMock = OCMPartialMock(self.controller);
     [controllerMock setupDataSource:itineraries];
     
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [controllerMock tableView:_controller.mainTableView didSelectRowAtIndexPath:indexPath];
+    [controllerMock tableView:self.controller.mainTableView didSelectRowAtIndexPath:indexPath];
    
     OCMVerify([controllerMock performSegueWithIdentifier:@"Itinerary" sender:[OCMArg any]]);
 }
 
 - (void)testCreateNewItinerary
 {
-    id controllerMock = OCMPartialMock(_controller);
+    id controllerMock = OCMPartialMock(self.controller);
     [controllerMock setupDataSource:nil];
     [[controllerMock createNewItineraryButton] sendActionsForControlEvents: UIControlEventTouchUpInside];
     

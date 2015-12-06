@@ -7,13 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MAIItinerary.h"
+
+@class MAIItineraryRepository;
+@class MAIItinerary;
 
 @protocol MAIItineraryRepositoryDelegate <NSObject>
 
-- (void)getSavedItineraries:(void (^)(NSArray *items))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void)saveItinerary:(MAIItinerary*)anItinerary withSuccessDataHandler:(void (^)(MAIItinerary *amendedItinerary))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void)saveItineraries:(NSArray*)items withSuccessDataHandler:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
-- (void)deleteItineraries:(void (^)(void))successDataHandler withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)itineraryRepositoryGetSavedItineraries:(MAIItineraryRepository *)repository
+						withSuccessDataHandler:(void (^)(NSArray *items))successDataHandler
+						withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)itineraryRepositorySaveItinerary:(MAIItineraryRepository *)repository
+							   itinerary:(MAIItinerary*)anItinerary
+				  withSuccessDataHandler:(void (^)(MAIItinerary *amendedItinerary))successDataHandler
+				  withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)itineraryRepositorySaveItineraries:(MAIItineraryRepository *)repository
+							   itineraries:(NSArray*)items
+					withSuccessDataHandler:(void (^)(void))successDataHandler
+					withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)itineraryRepositoryDeleteItineraries:(MAIItineraryRepository *)repository
+					  withSuccessDataHandler:(void (^)(void))successDataHandler
+					  withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 @end

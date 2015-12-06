@@ -7,13 +7,10 @@
 //
 
 #import "MAIBaseViewController.h"
-#import "MAIArrayDataSource.h"
 
 @interface MAIItinerariesViewController : MAIBaseViewController<UITableViewDelegate>
 
 - (void)updateItineraryView;
-- (IBAction) onCreateItinerary:(id)sender;
-
 - (void)showItineraries;
 - (void)showCreateFirstItinerary;
 - (void)setupDataSource:(NSArray*)items;

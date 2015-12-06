@@ -14,7 +14,7 @@
 @property (copy, nonatomic, readonly) NSString *locationId;
 @property (copy, nonatomic, readonly) NSString *name;
 @property (copy, nonatomic, readonly) NSString *address;
-@property (nonatomic, readonly)       CLLocationCoordinate2D position;
+@property (nonatomic, readonly) CLLocationCoordinate2D position;
 
 
 - (instancetype)init NS_UNAVAILABLE;

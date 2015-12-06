@@ -10,15 +10,20 @@
 #import <XCTest/XCTest.h>
 #import "OCMock.h"
 #import "MAIItineraryViewController.h"
+#import "MAIArrayDataSource.h"
+#import "MAIService.h"
+#import "MAIItinerary.h"
+#import "MAIWaypoint.h"
+
 #import "NSString+MAIExtras.h"
 
-@interface MAIItineraryViewController(UnderTest)
+@interface MAIItineraryViewController()
 
-@property (nonatomic)           MAIArrayDataSource   *dataSource;
-@property (nonatomic) IBOutlet  UITableView          *mainTableView;
-@property (nonatomic) IBOutlet  UILabel              *titleLabel;
-@property (nonatomic) IBOutlet  UITextField          *titleField;
-@property (nonatomic) IBOutlet  UIButton             *mapButton;
+@property (nonatomic) MAIArrayDataSource *dataSource;
+@property (nonatomic) UITableView *mainTableView;
+@property (nonatomic) UILabel *titleLabel;
+@property (nonatomic) UITextField *titleField;
+@property (nonatomic) UIButton *mapButton;
 
 @end
 
@@ -37,42 +42,44 @@
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    _controller = [storyboard instantiateViewControllerWithIdentifier:@"Itinerary"];
-    [_controller performSelectorOnMainThread:@selector(loadView) withObject:nil waitUntilDone:YES];
+    self.waypoint = [[MAIWaypoint alloc] initWithLocationId:@"test" withName:@"Eiffel Tower" withAddress:@"some address" withPosition:CLLocationCoordinate2DMake(0, 0)];
     
-    _waypoint = [[MAIWaypoint alloc] initWithLocationId:@"test" withName:@"Eiffel Tower" withAddress:@"some address" withPosition:CLLocationCoordinate2DMake(0, 0)];
-    
-    _existingItinerary = [[MAIItinerary alloc] init];
-    [_existingItinerary setFriendlyName:@"Friendly name"];
-    [_existingItinerary setItineraryId:[NSString ext_GetGUID]];
-    
-    MAIWaypoint *eiffelTower = [[MAIWaypoint alloc] initWithLocationId:@"NT_CuBhf2en95t66RJnfmfMEC" withName:@"Eiffel Tower" withAddress:@"75007 Paris, France" withPosition:CLLocationCoordinate2DMake(48.85824, 2.2945)];
+    self.existingItinerary = [[MAIItinerary alloc] init];
+    self.existingItinerary.friendlyName = @"Friendly name";
+	
     MAIWaypoint *bigBen = [[MAIWaypoint alloc] initWithLocationId:@"NT_34G1aWqnuHYgLPfyx5A1xB" withName:@"Big Ben" withAddress:@"Bridge Street, London, SW1A 2, United Kingdom" withPosition:CLLocationCoordinate2DMake(51.50071, -0.12456)];
-    MAIWaypoint *brandenburgGate = [[MAIWaypoint alloc] initWithLocationId:@"NT_9PS2YXSuI8zc1mOgut-H0A" withName:@"Brandenburg Gate" withAddress:@"Pariser Platz, 10117 Berlin, Germany" withPosition:CLLocationCoordinate2DMake(52.5163, 13.37769)];
-    [_existingItinerary addItem:bigBen];
-    [_existingItinerary addItem:eiffelTower];
-    [_existingItinerary addItem:brandenburgGate];
+    [self.existingItinerary addItem:bigBen];
+	
+	MAIWaypoint *eiffelTower = [[MAIWaypoint alloc] initWithLocationId:@"NT_CuBhf2en95t66RJnfmfMEC" withName:@"Eiffel Tower" withAddress:@"75007 Paris, France" withPosition:CLLocationCoordinate2DMake(48.85824, 2.2945)];
+    [self.existingItinerary addItem:eiffelTower];
+	
+	MAIWaypoint *brandenburgGate = [[MAIWaypoint alloc] initWithLocationId:@"NT_9PS2YXSuI8zc1mOgut-H0A" withName:@"Brandenburg Gate" withAddress:@"Pariser Platz, 10117 Berlin, Germany" withPosition:CLLocationCoordinate2DMake(52.5163, 13.37769)];
+	[self.existingItinerary addItem:brandenburgGate];
+	
+	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+	self.controller = [storyboard instantiateViewControllerWithIdentifier:@"Itinerary"];
+	[self.controller setItinerary:self.existingItinerary];
+	
+	
 }
 
 - (void)tearDown
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
-    _waypoint = nil;
-    _existingItinerary = nil;
-    _controller = nil;
+    self.waypoint = nil;
+    self.existingItinerary = nil;
+    self.controller = nil;
     [[MAIService sharedInstance] deleteItineraries:nil withFailureDataHandler:nil];
     [super tearDown];
 }
 
 - (void)testAddWaypointToItineraryLaunchesActionSheet
 {
-    [_controller setItinerary:_existingItinerary];
-    [_controller viewDidLoad];
-    
-    id controllerMock = OCMPartialMock(_controller);
-    [controllerMock onAddWaypoint:_waypoint withSender:nil];
+	[self.controller setItinerary:self.existingItinerary];
+	__unused UIView *controllerView = self.controller.view;
+	
+    id controllerMock = OCMPartialMock(self.controller);
+	[controllerMock itineraryDidAddWaypoint:self.existingItinerary waypoint:self.waypoint withSender:nil];
  
     OCMVerify([controllerMock presentViewController:[OCMArg any] animated:YES completion:nil]);
 }
@@ -80,14 +87,15 @@
 
 - (void)testRemoveWaypointFromItinerary
 {
-    id controllerMock = OCMPartialMock(_controller);
-    [controllerMock setItinerary:_existingItinerary];
-    [controllerMock viewDidLoad];
+	[self.controller setItinerary:self.existingItinerary];
+	__unused UIView *controllerView = self.controller.view;
+	
+    id controllerMock = OCMPartialMock(self.controller);
     NSUInteger waypointIndex = 0;
    
     XCTestExpectation *expectation = [self expectationWithDescription:@"Remove waypoints"];
     
-    [controllerMock onRemoveWaypointAtIndex:waypointIndex];
+	[controllerMock itineraryDidRemoveWaypoint:self.existingItinerary atIndex:waypointIndex];
     
     //The item will need to be removed from the itinerary
     OCMExpect([controllerMock saveItinerary]).andDo(^(NSInvocation *invocation) {
@@ -99,16 +107,19 @@
 
 - (void)testReorderWaypoints
 {
-    id controllerMock = OCMPartialMock(_controller);
-    [controllerMock setItinerary:_existingItinerary];
-    [controllerMock viewDidLoad];
-    
+	[self.controller setItinerary:self.existingItinerary];
+	__unused UIView *controllerView = self.controller.view;
+	
+    MAIItineraryViewController *controllerMock = OCMPartialMock(self.controller);
+	
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     NSIndexPath* destinationIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Reorder waypoints"];
     
-    [[controllerMock dataSource] tableView:[controllerMock mainTableView] moveRowAtIndexPath:indexPath toIndexPath:destinationIndexPath];
+    [controllerMock.dataSource tableView:controllerMock.mainTableView
+					  moveRowAtIndexPath:indexPath
+							 toIndexPath:destinationIndexPath];
 
     //the items will also need to be swapped on the itinerary
     OCMExpect([controllerMock saveItinerary]).andDo(^(NSInvocation *invocation) {
@@ -120,25 +131,26 @@
 
 - (void)testCreateNewItinerary
 {
-    [_controller viewDidLoad];
-    
-    XCTAssertNotNil(_controller.view, @"View not loaded");
-    XCTAssertTrue([_controller.title isEqualToString:NSLocalizedString(@"New Itinerary", nil)], @"Wrong title");
-    XCTAssertTrue([_controller.titleField.text isEqualToString:@""], @"Wrong title");
-    XCTAssertEqual(_controller.dataSource.items.count, 0, @"Wrong number of waypoints");
-    XCTAssertTrue(_controller.mapButton.hidden, @"Map Icon should be hidden in create mode");
+	[self.controller setItinerary:[MAIItinerary new]];
+	__unused UIView *controllerView = self.controller.view;
+	
+    XCTAssertNotNil(self.controller.view, @"View not loaded");
+    XCTAssertTrue([self.controller.title isEqualToString:NSLocalizedString(@"New Itinerary", nil)], @"Wrong title");
+    XCTAssertTrue([self.controller.titleField.text isEqualToString:@""], @"Wrong title");
+    XCTAssertEqual(self.controller.dataSource.items.count, 0, @"Wrong number of waypoints");
+    XCTAssertTrue(self.controller.mapButton.hidden, @"Map Icon should be hidden in create mode");
 }
 
 - (void)testLoadExistingItinerary
 {
-    [_controller setItinerary:_existingItinerary];
-    [_controller viewDidLoad];
-    
-    XCTAssertNotNil(_controller.view, @"View not loaded");
-    XCTAssertTrue([_controller.title isEqualToString:_existingItinerary.friendlyName], @"Wrong title");
-    XCTAssertTrue([_controller.titleField.text isEqualToString:_existingItinerary.friendlyName], @"Wrong title");
-    XCTAssertEqual(_controller.dataSource.items.count, _existingItinerary.waypoints.count, @"Wrong number of waypoints");
-    XCTAssertTrue(_controller.mapButton.hidden == !_controller.itinerary.route, @"Map Icon should available only when there is a route");
+	[self.controller setItinerary:self.existingItinerary];
+	__unused UIView *controllerView = self.controller.view;
+	
+	XCTAssertNotNil(self.controller.view, @"View not loaded");
+	XCTAssertTrue([self.controller.title isEqualToString:self.existingItinerary.friendlyName], @"Wrong title");
+	XCTAssertTrue([self.controller.titleField.text isEqualToString:self.existingItinerary.friendlyName], @"Wrong title");
+	XCTAssertEqual(self.controller.dataSource.items.count, self.existingItinerary.waypoints.count, @"Wrong number of waypoints");
+	XCTAssertTrue(self.controller.mapButton.hidden == !self.controller.itinerary.route, @"Map Icon should available only when there is a route");
 }
 
 @end

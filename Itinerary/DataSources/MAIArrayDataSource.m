@@ -93,7 +93,7 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete && self.deleteCellBlock)
 	{
-        self.deleteCellBlock(indexPath.row);
+        self.deleteCellBlock(self.items[indexPath.row], indexPath.row);
     }
 }
 
@@ -106,7 +106,7 @@
 {
     if(self.sortCellBlock)
 	{
-        self.sortCellBlock(sourceIndexPath.row, destinationIndexPath.row);
+        self.sortCellBlock(self.items[sourceIndexPath.row], sourceIndexPath.row, destinationIndexPath.row);
     }
 }
 

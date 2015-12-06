@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPRequestOperationManager.h"
+@class AFHTTPRequestOperation;
 
 @interface MAIBaseHereRepository : NSObject
 

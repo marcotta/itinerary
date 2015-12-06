@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "OCMock.h"
 #import "MAIArrayDataSource.h"
+#import "MAIWaypoint.h"
 
 @interface MAIArrayDataSourceTests : XCTestCase
 
@@ -32,7 +33,7 @@
 - (void)testInitializeWithEditableParameters
 {
     ConfigureCellBlock configureBlock = ^(UITableViewCell *aCell, id item){};
-    DeleteCellBlock deleteBlock = ^(NSUInteger index){};
+    DeleteCellBlock deleteBlock = ^(MAIWaypoint *waypoint, NSUInteger index){};
     id obj1 = [[MAIArrayDataSource alloc] initWithItems:@[]
                                      withCellIdentifier:@"foo"
                                  withConfigureCellBlock:configureBlock
@@ -45,8 +46,8 @@
 - (void)testInitializeWithEditableAndSortableParameters
 {
     ConfigureCellBlock configureBlock = ^(UITableViewCell *aCell, id item){};
-    DeleteCellBlock deleteBlock = ^(NSUInteger index){};
-    SortCellBlock sortBlock = ^(NSUInteger sourceIndex, NSUInteger destinationIndex){};
+    DeleteCellBlock deleteBlock = ^(MAIWaypoint *waypoint, NSUInteger index){};
+    SortCellBlock sortBlock = ^(MAIWaypoint *waypoint, NSUInteger fromIndex, NSUInteger toIndex){};
     id obj1 = [[MAIArrayDataSource alloc] initWithItems:@[]
                                      withCellIdentifier:@"foo"
                                  withConfigureCellBlock:configureBlock
@@ -69,7 +70,7 @@
         configuredCell = a;
         configuredObject = b;
     };
-    _dataSource = [[MAIArrayDataSource alloc] initWithItems:items
+    self.dataSource = [[MAIArrayDataSource alloc] initWithItems:items
                                             withCellIdentifier:@"foo"
                                         withConfigureCellBlock:block];
     
@@ -82,7 +83,7 @@
      dequeueReusableCellWithIdentifier:@"foo"
      forIndexPath:indexPath];
     
-    id result = [_dataSource tableView:mockTableView
+    id result = [self.dataSource tableView:mockTableView
                 cellForRowAtIndexPath:indexPath];
     
     XCTAssertEqual(result, cell, @"Should return the dummy cell.");
@@ -107,10 +108,10 @@
         configuredCell = a;
         configuredObject = b;
     };
-    DeleteCellBlock deleteBlock = ^(NSUInteger index){
+    DeleteCellBlock deleteBlock = ^(MAIWaypoint *waypoint, NSUInteger index){
         deletedObjectIndex = (NSInteger)index;
     };
-    _dataSource = [[MAIArrayDataSource alloc] initWithItems:items
+    self.dataSource = [[MAIArrayDataSource alloc] initWithItems:items
                                          withCellIdentifier:@"foo"
                                      withConfigureCellBlock:configureBlock
                                         withDeleteCellBlock:deleteBlock
@@ -121,7 +122,7 @@
     
     
     
-    [_dataSource tableView:mockTableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+    [self.dataSource tableView:mockTableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
     XCTAssertEqual(deletedObjectIndex, indexPath.row, @"This should have been passed to the block.");
 }
 
@@ -142,14 +143,14 @@
         configuredCell = aCell;
         configuredObject = item;
     };
-    DeleteCellBlock deleteBlock = ^(NSUInteger index){
+    DeleteCellBlock deleteBlock = ^(MAIWaypoint *waypoint, NSUInteger index){
         deletedObjectIndex = (NSInteger)index;
     };
-    SortCellBlock sortBlock = ^(NSUInteger sourceIndex, NSUInteger destionationIndex){
-        movedObjectSourceIndex = (NSInteger)sourceIndex;
-        movedObjectDestinationIndex = (NSInteger)destionationIndex;
+    SortCellBlock sortBlock = ^(MAIWaypoint *waypoint, NSUInteger fromIndex, NSUInteger toIndex){
+        movedObjectSourceIndex = (NSInteger)fromIndex;
+        movedObjectDestinationIndex = (NSInteger)toIndex;
     };
-    _dataSource = [[MAIArrayDataSource alloc] initWithItems:items
+    self.dataSource = [[MAIArrayDataSource alloc] initWithItems:items
                                          withCellIdentifier:@"foo"
                                      withConfigureCellBlock:configureBlock
                                         withDeleteCellBlock:deleteBlock
@@ -161,7 +162,7 @@
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     NSIndexPath* destinationIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     
-    [_dataSource tableView:mockTableView moveRowAtIndexPath:indexPath toIndexPath:destinationIndexPath];
+    [self.dataSource tableView:mockTableView moveRowAtIndexPath:indexPath toIndexPath:destinationIndexPath];
    
     XCTAssertEqual(movedObjectSourceIndex, indexPath.row, @"This should have been passed to the block.");
     XCTAssertEqual(movedObjectDestinationIndex, destinationIndexPath.row, @"This should have been passed to the block.");

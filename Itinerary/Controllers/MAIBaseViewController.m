@@ -9,14 +9,17 @@
 #import "MAIBaseViewController.h"
 #import "UIViewController+MAIExtras.h"
 #import "NSString+MAIExtras.h"
+#import "MATLoadingOverlayViewController.h"
 
 @interface MAIBaseViewController ()
 
-@property (nonatomic) MATLoadingOverlayViewController   *loadingOverlay;
+@property (nonatomic) MATLoadingOverlayViewController *loadingOverlay;
 
 @end
 
 @implementation MAIBaseViewController
+
+#pragma mark - Lifecycle
 
 - (void)viewDidLoad
 {
@@ -25,6 +28,9 @@
 	[self addLoadingOverlay];
 	
 }
+
+
+#pragma mark  - Private
 
 - (void)addLoadingOverlay
 {

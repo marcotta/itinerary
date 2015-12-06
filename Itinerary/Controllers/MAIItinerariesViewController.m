@@ -22,6 +22,8 @@
 
 @implementation MAIItinerariesViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -43,7 +45,7 @@
     [self.createNewItineraryButton setTitle:NSLocalizedString(@"Create your first itinerary", nil) forState:UIControlStateNormal];
     [self setTitle:NSLocalizedString(@"My Itineraries", nil)];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onCreateItinerary:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(actionCreateItinerary:)];
     [self.navigationItem setRightBarButtonItem:addButton];
     
     [self setupDataSource:nil];
@@ -72,6 +74,16 @@
 									}];
     });
 }
+
+#pragma mark IBActions
+
+- (IBAction)actionCreateItinerary:(id)sender
+{
+	[self performSegueWithIdentifier:@"Create Itinerary" sender:nil];
+}
+
+
+#pragma mark - Public
 
 - (void)setupDataSource:(NSArray*)items
 {
@@ -104,10 +116,7 @@
     [self.mainTableView setHidden:YES];
 }
 
-- (IBAction)onCreateItinerary:(id)sender
-{
-    [self performSegueWithIdentifier:@"Create Itinerary" sender:nil];
-}
+
 
 
 #pragma mark - Navigation
@@ -124,7 +133,7 @@
 }
 
 
-#pragma mark - UITableView Delegate methods
+#pragma mark - UITableViewDelegate
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {

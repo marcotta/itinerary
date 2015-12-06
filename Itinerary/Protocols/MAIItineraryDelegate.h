@@ -7,12 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MAIWaypoint.h"
+
+@class MAIItinerary;
+@class MAIWaypoint;
 
 @protocol MAIItineraryDelegate <NSObject>
 
-- (void)onAddWaypoint:(MAIWaypoint*)waypoint withSender:(id) sender;
-- (void)onRemoveWaypointAtIndex:(NSUInteger)index;
-- (void)onMoveWaypointAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)destinationIndex;
+- (void)itineraryDidAddWaypoint:(MAIItinerary *)itinerary
+					   waypoint:(MAIWaypoint *)waypoint
+					 withSender:(id)sender;
+- (void)itineraryDidRemoveWaypoint:(MAIItinerary *)itinerary atIndex:(NSUInteger)index;
+- (void)itineraryDidMoveWaypoint:(MAIItinerary *)itinerary
+			  fromIndex:(NSUInteger)fromIndex
+				toIndex:(NSUInteger)toIndex;
 
 @end

@@ -7,20 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MAIItinerary.h"
-#import "MAIRoute.h"
-#import "MAIRoutePolyline.h"
+
+@class MAIRoutingRepository;
+@class MAIItinerary;
+@class MAIRoute;
+@class MAIRoutePolyline;
 
 @protocol MAIRoutingRepositoryDelegate <NSObject>
 
-- (void)calculateRoute:(MAIItinerary*)anItinerary
-          withLanguage:(NSString*)language
-withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler
-withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)routingRepositoryCalculateRoute:(MAIRoutingRepository*)repository
+							  itinerary:(MAIItinerary*)anItinerary
+						   withLanguage:(NSString*)language
+				 withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler
+				 withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
-- (void)getRoute:(MAIRoute*)aRoute
-    withLanguage:(NSString*)language
-withSuccessDataHandler:(void (^)(MAIRoutePolyline *routePolyline))successDataHandler
-withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)routingRepositoryGetRoute:(MAIRoutingRepository*)repository
+							route:(MAIRoute*)aRoute
+					 withLanguage:(NSString*)language
+		   withSuccessDataHandler:(void (^)(MAIRoutePolyline *routePolyline))successDataHandler
+		   withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 @end

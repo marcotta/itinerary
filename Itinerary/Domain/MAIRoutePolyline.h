@@ -15,7 +15,6 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D topLeft;
 @property (nonatomic, readonly) CLLocationCoordinate2D bottomRight;
 
-
 - (instancetype)initWithPolyline:(MKPolyline*)aPolyline
    withRegionTopLeftCoordinates:(CLLocationCoordinate2D)aTopLeftCoordinate
 withRegionBottomRightCoordinates:(CLLocationCoordinate2D)aBottomRightCoordinate;

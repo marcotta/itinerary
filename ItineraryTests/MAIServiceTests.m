@@ -11,6 +11,9 @@
 #import "MAIService.h"
 #import "MAIItinerary.h"
 #import "MAIWaypoint.h"
+#import "MAIRoute.h"
+#import "MAIRoutePolyline.h"
+
 #import "NSString+MAIExtras.h"
 
 @interface MAIServiceTests : XCTestCase
@@ -152,7 +155,6 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Save Existing Itinerary"];
     
     MAIItinerary *anItinerary = [[MAIItinerary alloc] init];
-    [anItinerary setItineraryId:[NSString ext_GetGUID]];
     [anItinerary setFriendlyName:@"Test Add"];
     [anItinerary addItem:[[MAIWaypoint alloc] initWithLocationId:@"LocationId" withName:@"Test" withAddress:@"Address" withPosition:CLLocationCoordinate2DMake(0, 0)]];
     

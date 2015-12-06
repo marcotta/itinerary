@@ -7,13 +7,15 @@
 //
 
 #import "MAIItineraryViewController.h"
+#import "MAIService.h"
 #import "MAIArrayDataSource.h"
+#import "MAIItinerary.h"
 #import "MAIWaypoint.h"
 #import "MAIWaypointTableViewCell.h"
+#import "MAIConfiguration.h"
 #import "UITableViewCell+MAIExtra.h"
 #import "NSString+MAIExtras.h"
 #import "UIViewController+MAIExtras.h"
-#import "MAIConfiguration.h"
 
 @interface MAIItineraryViewController ()
 
@@ -31,13 +33,16 @@
 
 @implementation MAIItineraryViewController
 
-static NSString *cellIdentifier = @"WaypointCell";
+static NSString * const cellIdentifier = @"WaypointCell";
+
+
+#pragma mark  - Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self configureUI:_itinerary];
+	[self configureUI:self.itinerary];
     
     
     [self.mainTableView registerNib:[UINib nibWithNibName:@"MAIWaypointTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
@@ -51,14 +56,14 @@ static NSString *cellIdentifier = @"WaypointCell";
     ConfigureCellBlock configureResultCell = ^(MAIWaypointTableViewCell *cell, MAIWaypoint *waypoint) {
         __weak MAIWaypoint *weakWaypoint = waypoint;
         [cell bind:waypoint withAcessoryButtonTappedBlock:^(id sender) {
-            [weakSelf onAddWaypoint:weakWaypoint withSender:sender];
+			[weakSelf itineraryDidAddWaypoint:self.itinerary waypoint:weakWaypoint withSender:sender];
         }];
     };
-    DeleteCellBlock deleteCellBlock = ^(NSUInteger index) {
-        [weakSelf onRemoveWaypointAtIndex:index];
+    DeleteCellBlock deleteCellBlock = ^(MAIWaypoint *waypoint, NSUInteger index) {
+		[weakSelf itineraryDidRemoveWaypoint:self.itinerary atIndex:index];
     };
-    SortCellBlock sortCellBlock = ^(NSUInteger sourceIndex, NSUInteger destinationIndex) {
-        [weakSelf onMoveWaypointAtIndex:sourceIndex toIndex:destinationIndex];
+    SortCellBlock sortCellBlock = ^(MAIWaypoint *waypoint, NSUInteger fromIndex, NSUInteger toIndex) {
+		[weakSelf itineraryDidMoveWaypoint:self.itinerary fromIndex:fromIndex toIndex:toIndex];
     };
     
     self.dataSource = [[MAIArrayDataSource alloc] initWithItems:self.itinerary.waypoints
@@ -81,51 +86,100 @@ static NSString *cellIdentifier = @"WaypointCell";
     [self.infoLabel setText:NSLocalizedString(@"Search for addresses or places and add them to your itinerary", nil)];
 }
 
-- (void)configureUI:(MAIItinerary *)anItinerary
+#pragma mark - IBActions
+
+- (IBAction)titleDidChange:(id)sender
 {
-    if (!anItinerary)
+	[_itinerary setFriendlyName:self.titleField.text];
+	[self saveItinerary];
+}
+
+- (IBAction)showRoute:(id)sender
+{
+	[self performSegueWithIdentifier:@"Route" sender:_itinerary];
+}
+
+#pragma mark - Public
+- (void)saveItinerary
+{
+	if([self.searchBar isFirstResponder])
 	{
-        self.title = NSLocalizedString(@"New Itinerary", nil);
-        _itinerary = [MAIItinerary new];
-    }
-    else
+		[self hideSearchResults:self.searchBar];
+	}
+	
+	if([NSString ext_IsNullOrEmpty:_itinerary.friendlyName])
 	{
-        self.title = anItinerary.friendlyName;
-        [self.titleField setText:anItinerary.friendlyName];
-    }
-    [self.mapButton setHidden:!anItinerary.route];
+		[_itinerary setFriendlyName:NSLocalizedString(@"No Title", nil)];
+	}
+	
+	[self showNetworkActivityWithMessage:@"Saving"];
+	
+	__weak MAIItineraryViewController *weakSelf = self;
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		[[MAIService sharedInstance] saveItinerary:_itinerary
+							withSuccessDataHandler:^(MAIItinerary *amendedItinerary) {
+								dispatch_async(dispatch_get_main_queue(), ^{
+									[weakSelf setupDataSource:amendedItinerary];
+									[weakSelf hideNetworkActivity];
+								});
+							}
+							withFailureDataHandler:^(NSString *errorMessage) {
+								NSLog(@"%@", errorMessage);
+								dispatch_async(dispatch_get_main_queue(), ^{
+									[weakSelf ext_showAlert:NSLocalizedString(@"APP_NAME", nil) withMessage:errorMessage andShowCancel:NO withOkHandler:nil withCancelHandler:nil];
+									[weakSelf hideNetworkActivity];
+								});
+							}];
+	});
 }
 
 - (void)setupDataSource:(MAIItinerary*)anItinerary
 {
-    [self configureUI:anItinerary];
-    if(self.navigationItem.rightBarButtonItem)
+	[self configureUI:anItinerary];
+	if(self.navigationItem.rightBarButtonItem)
 	{
-        [self.navigationItem.rightBarButtonItem setEnabled:(anItinerary.waypoints!=nil && anItinerary.waypoints.count>0)];
-    }
-    [self.dataSource setItems:anItinerary.waypoints];
-    [self.mainTableView reloadData];
+		[self.navigationItem.rightBarButtonItem setEnabled:(anItinerary.waypoints!=nil && anItinerary.waypoints.count>0)];
+	}
+	[self.dataSource setItems:anItinerary.waypoints];
+	[self.mainTableView reloadData];
 }
 
 - (void)setupResultsDataSource:(NSArray*)items
 {
-    //    NSLog(@"Results data source");
-    [self.resultsDataSource setItems:items];
-    [self.searchResultsTableView reloadData];
+	[self.resultsDataSource setItems:items];
+	[self.searchResultsTableView reloadData];
 }
-
 
 #pragma mark - Navigation
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if([segue.identifier isEqualToString:@"Route"])
-    {
-        [segue.destinationViewController setItinerary:(MAIItinerary*)sender];
-    }
+	if([segue.identifier isEqualToString:@"Route"])
+	{
+		[segue.destinationViewController setItinerary:(MAIItinerary*)sender];
+	}
 }
+
+#pragma mark - Private
+
+- (void)configureUI:(MAIItinerary *)anItinerary
+{
+    if (!anItinerary)
+	{
+		self.itinerary = [MAIItinerary new];
+	}
+	
+	if([NSString ext_IsNullOrEmpty:anItinerary.friendlyName])
+	{
+		self.title = NSLocalizedString(@"New Itinerary", nil);
+    }
+    else
+	{
+		self.title = anItinerary.friendlyName;
+		[self.titleField setText:anItinerary.friendlyName];
+    }
+    [self.mapButton setHidden:!anItinerary.route];
+}
+
 
 #pragma mark - Search Methods
 - (void)hideSearchResults:(UISearchBar *)aSearchBar
@@ -175,7 +229,7 @@ static NSString *cellIdentifier = @"WaypointCell";
 }
 
 
-#pragma mark - UITableView Delegate methods
+#pragma mark - UITableViewDelegate
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -221,7 +275,7 @@ static NSString *cellIdentifier = @"WaypointCell";
     return size.height+1;
 }
 
-#pragma mark TitleField
+#pragma mark UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField== self.titleField)
@@ -233,87 +287,46 @@ static NSString *cellIdentifier = @"WaypointCell";
     return YES;
 }
 
-- (IBAction)titleDidChange:(id)sender
-{
-    [_itinerary setFriendlyName:self.titleField.text];
-    [self saveItinerary];
-}
-
-- (void)saveItinerary
-{
-    if([self.searchBar isFirstResponder])
-	{
-        [self hideSearchResults:self.searchBar];
-    }
-    
-    if([NSString ext_IsNullOrEmpty:_itinerary.friendlyName])
-    {
-        [_itinerary setFriendlyName:NSLocalizedString(@"No Title", nil)];
-    }
-    
-    [self showNetworkActivityWithMessage:@"Saving"];
-    
-    __weak MAIItineraryViewController *weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[MAIService sharedInstance] saveItinerary:_itinerary
-							withSuccessDataHandler:^(MAIItinerary *amendedItinerary) {
-								dispatch_async(dispatch_get_main_queue(), ^{
-									[weakSelf setupDataSource:amendedItinerary];
-									[weakSelf hideNetworkActivity];
-								});
-							}
-							withFailureDataHandler:^(NSString *errorMessage) {
-								NSLog(@"%@", errorMessage);
-								dispatch_async(dispatch_get_main_queue(), ^{
-									[weakSelf ext_showAlert:NSLocalizedString(@"APP_NAME", nil) withMessage:errorMessage andShowCancel:NO withOkHandler:nil withCancelHandler:nil];
-									[weakSelf hideNetworkActivity];
-								});
-							}];
-    });
-}
-
-- (IBAction)showRoute:(id)sender
-{
-    [self performSegueWithIdentifier:@"Route" sender:_itinerary];
-}
-
 #pragma mark MAIItineraryDelegate
-- (void)onAddWaypoint:(MAIWaypoint *)waypoint withSender:(id)sender
+- (void)itineraryDidAddWaypoint:(MAIItinerary*)itinerary waypoint:(MAIWaypoint *)waypoint withSender:(id)sender
 {
     NSLog(@"Waypoint selected %@", waypoint.address);
     
     [self ext_showActionSheet:self.title withOkCopy:NSLocalizedString(@"Add to itinerary", nil)
 				withOkHandler:^(UIAlertAction *action){
-					[self.itinerary addItem:waypoint];
-					[self setupDataSource:self.itinerary];
+					[itinerary addItem:waypoint];
+					[self setupDataSource:itinerary];
 					[self hideSearchResults:self.searchBar];
 					[self saveItinerary];
 				}
 			withCancelHandler:nil withSender:sender];
 }
 
-- (void)onRemoveWaypointAtIndex:(NSUInteger)index
+- (void)itineraryDidRemoveWaypoint:(MAIItinerary*)itinerary
+						   atIndex:(NSUInteger)index
 {
     __weak MAIItineraryViewController *weakSelf = self;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [weakSelf.itinerary removeItemAtIndex:index];
+        [itinerary removeItemAtIndex:index];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf setupDataSource:weakSelf.itinerary];
+            [weakSelf setupDataSource:itinerary];
             [weakSelf saveItinerary];
         });
     });
 }
 
-- (void)onMoveWaypointAtIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)destinationIndex
+- (void)itineraryDidMoveWaypoint:(MAIItinerary*)itinerary
+			  fromIndex:(NSUInteger)fromIndex
+				toIndex:(NSUInteger)toIndex
 {
     __weak MAIItineraryViewController *weakSelf = self;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [weakSelf.itinerary moveItemAtIndex:sourceIndex toIndex:destinationIndex];
+        [itinerary moveItemAtIndex:fromIndex toIndex:toIndex];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf setupDataSource:weakSelf.itinerary];
+            [weakSelf setupDataSource:itinerary];
             [weakSelf saveItinerary];
         });
     });

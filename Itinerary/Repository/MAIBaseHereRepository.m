@@ -7,6 +7,7 @@
 //
 
 #import "MAIBaseHereRepository.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @implementation MAIBaseHereRepository
 

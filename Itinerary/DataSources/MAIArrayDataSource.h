@@ -10,18 +10,20 @@
 #import <UIKit/UIKit.h>
 
 typedef void (^ConfigureCellBlock)(id cell, id item);
-typedef void (^DeleteCellBlock)(NSUInteger index);
-typedef void (^SortCellBlock)(NSUInteger sourceIndex, NSUInteger destinationIndex);
+typedef void (^DeleteCellBlock)(id item, NSUInteger index);
+typedef void (^SortCellBlock)(id item, NSUInteger sourceIndex, NSUInteger destinationIndex);
 
 @interface MAIArrayDataSource : NSObject<UITableViewDataSource>
 
 @property (nonatomic) NSArray *items;
 @property (copy, nonatomic) NSString *cellIdentifier;
 @property (copy, nonatomic) ConfigureCellBlock configureCellBlock;
-@property (nonatomic, copy) DeleteCellBlock deleteCellBlock;
-@property (nonatomic, copy) SortCellBlock sortCellBlock;
+@property (copy, nonatomic) DeleteCellBlock deleteCellBlock;
+@property (copy, nonatomic) SortCellBlock sortCellBlock;
 @property (nonatomic, getter=isEditable) BOOL editable;
 @property (nonatomic, getter=isSortable) BOOL sortable;
+
++ (instancetype)new NS_UNAVAILABLE;
 
 - (instancetype)init NS_UNAVAILABLE;
 

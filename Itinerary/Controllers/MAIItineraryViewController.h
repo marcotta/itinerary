@@ -7,20 +7,20 @@
 //
 
 #import "MAIBaseViewController.h"
-#import "MAIArrayDataSource.h"
-#import "MAIService.h"
 #import "MAIItineraryDelegate.h"
-#import "MAIItinerary.h"
 
-@interface MAIItineraryViewController : MAIBaseViewController<UITableViewDelegate, MAIItineraryDelegate, UITextFieldDelegate>
+@class MAIItinerary;
 
-@property (nonatomic)           MAIItinerary         *itinerary;
+@interface MAIItineraryViewController : MAIBaseViewController<UITableViewDelegate,
+															 MAIItineraryDelegate,
+															  UITextFieldDelegate>
 
-- (void)setupDataSource:(MAIItinerary*)anItinerary;
-- (void)setupResultsDataSource:(NSArray*)items;
-
+@property (nonatomic) MAIItinerary *itinerary;
 
 - (IBAction) titleDidChange:(id)sender;
 - (IBAction) showRoute:(id)sender;
+
+- (void)setupDataSource:(MAIItinerary*)anItinerary;
+- (void)setupResultsDataSource:(NSArray*)items;
 - (void)saveItinerary;
 @end

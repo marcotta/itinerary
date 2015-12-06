@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MATLoadingOverlayViewController.h"
 
 @interface MAIBaseViewController : UIViewController
 

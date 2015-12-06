@@ -8,6 +8,9 @@
 
 #import "MAIService.h"
 #import "NSString+MAIExtras.h"
+
+#import "MAIItinerary.h"
+
 #import "MAIGeocoderRepository.h"
 #import "MAIItineraryRepository.h"
 #import "MAIRoutingRepository.h"
@@ -42,7 +45,7 @@ withDataSourceCompletionHandler:(void (^)(NSArray *))successDataHandler
 withDataSourceErrorHandler:(void (^)(NSString *))failureDataHandler
 {
     
-    if(!_geocoderRepository)
+    if(!self.geocoderRepository)
 	{
         failureDataHandler(@"Repository cannot be nil.");
         return;
@@ -56,69 +59,74 @@ withDataSourceErrorHandler:(void (^)(NSString *))failureDataHandler
     
     NSString *language = [[[NSBundle mainBundle] preferredLocalizations] firstObject];
     //    NSLog(@"Language %@", language);
-    
-	[_geocoderRepository search:query
-				   withLanguage:language
-		 withSuccessDataHandler:^(NSArray *items){
-			 if(successDataHandler)
-			 {
-				 successDataHandler(items);
-			 }
-		 }
-		 withFailureDataHandler:^(NSString *errorMessage) {
-			 if(failureDataHandler)
-			 {
-				 failureDataHandler(errorMessage);
-			 }
-		 }];
+	
+	[self.geocoderRepository geocoderRepositorySearch:self.geocoderRepository
+												query:query
+										 withLanguage:language
+							   withSuccessDataHandler:^(NSArray *items){
+								   if(successDataHandler)
+								   {
+									   successDataHandler(items);
+								   }
+							   }
+							   withFailureDataHandler:^(NSString *errorMessage) {
+								   if(failureDataHandler)
+								   {
+									   failureDataHandler(errorMessage);
+								   }
+							   }];
 }
 
 #pragma  mark Itinerary
 - (void)getSavedItineraries:(void (^)(NSArray *items))successDataHandler
      withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 {
-	if(!_itineraryRepository)
+	if(!self.itineraryRepository)
 	{
 		failureDataHandler(@"Repository cannot be nil.");
 		return;
 	}
 	
-	[_itineraryRepository getSavedItineraries:^(NSArray *items) {
-							if(successDataHandler)
-							{
-								successDataHandler(items);
-							}
-					   }
-					   withFailureDataHandler:^(NSString *errorMessage) {
-							if(failureDataHandler)
-							{
-								 failureDataHandler(errorMessage);
-							}
-					   }];
+	[self.itineraryRepository itineraryRepositoryGetSavedItineraries:self.itineraryRepository
+											  withSuccessDataHandler:^(NSArray *items) {
+												  if(successDataHandler)
+												  {
+													  successDataHandler(items);
+												  }
+											  }
+											  withFailureDataHandler:^(NSString *errorMessage) {
+												  if(failureDataHandler)
+												  {
+													  failureDataHandler(errorMessage);
+												  }
+											  }];
 }
 
 - (void)storeItinerary:(MAIItinerary *)anItinerary
 withSuccessDataHandler:(void (^)(MAIItinerary *amendeItinerary))successDataHandler
 withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 {
-    [_itineraryRepository saveItinerary:anItinerary withSuccessDataHandler:^(MAIItinerary *amendedItinerary) {
-        if(successDataHandler)
-		{
-            successDataHandler(amendedItinerary);
-        }
-    } withFailureDataHandler:^(NSString *errorMessage) {
-        if(failureDataHandler)
-		{
-            failureDataHandler(errorMessage);
-        }
-    }];
+	[self.itineraryRepository itineraryRepositorySaveItinerary:self.itineraryRepository
+													 itinerary:anItinerary
+										withSuccessDataHandler:^(MAIItinerary *amendedItinerary) {
+											if(successDataHandler)
+											{
+												successDataHandler(amendedItinerary);
+											}
+										}
+										withFailureDataHandler:^(NSString *errorMessage) {
+											if(failureDataHandler)
+											{
+												failureDataHandler(errorMessage);
+											}
+										}];
 }
 
 - (void)saveItinerary:(MAIItinerary*)anItinerary
 withSuccessDataHandler:(void (^)(MAIItinerary *amendeItinerary))successDataHandler
 withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 {
-    if(!_itineraryRepository)
+    if(!self.itineraryRepository)
 	{
         failureDataHandler(@"Repository cannot be nil.");
         return;
@@ -160,48 +168,50 @@ withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
  withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 {
     
-    if(!_itineraryRepository)
+    if(!self.itineraryRepository)
 	{
         failureDataHandler(@"Repository cannot be nil.");
         return;
     }
     
-    [_itineraryRepository saveItineraries:items
-				   withSuccessDataHandler:^{
-						if(successDataHandler)
-						{
-							successDataHandler();
-						}
-					}
-				   withFailureDataHandler:^(NSString *errorMessage) {
-						if(failureDataHandler)
-						{
-							failureDataHandler(errorMessage);
-						}
-					}];
+	[self.itineraryRepository itineraryRepositorySaveItineraries:self.itineraryRepository
+													 itineraries:items
+										  withSuccessDataHandler:^{
+											  if(successDataHandler)
+											  {
+												  successDataHandler();
+											  }
+										  }
+										  withFailureDataHandler:^(NSString *errorMessage) {
+											  if(failureDataHandler)
+											  {
+												  failureDataHandler(errorMessage);
+											  }
+										  }];
 }
 
 - (void)deleteItineraries:(void (^)(void))successDataHandler
    withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 {
-    if(!_itineraryRepository)
+    if(!self.itineraryRepository)
 	{
         failureDataHandler(@"Repository cannot be nil.");
         return;
     }
     
-    [_itineraryRepository deleteItineraries:^{
-							if(successDataHandler)
-							{
-								successDataHandler();
-							}
-						}
-					 withFailureDataHandler:^(NSString *errorMessage) {
-						if(failureDataHandler)
-						{
-							failureDataHandler(errorMessage);
-						}
-					}];
+	[self.itineraryRepository itineraryRepositoryDeleteItineraries:self.itineraryRepository
+											withSuccessDataHandler:^{
+												if(successDataHandler)
+												{
+													successDataHandler();
+												}
+											}
+											withFailureDataHandler:^(NSString *errorMessage) {
+												if(failureDataHandler)
+												{
+													failureDataHandler(errorMessage);
+												}
+											}];
 }
 
 #pragma mark Routing
@@ -209,7 +219,7 @@ withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 withSuccessDataHandler:(void (^)(MAIRoute *route))successDataHandler
 withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 {
-    if(!_routingRepository)
+    if(!self.routingRepository)
 	{
         failureDataHandler(@"Repository cannot be nil.");
         return;
@@ -228,27 +238,28 @@ withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
     }
     
     NSString *language = [[[NSBundle mainBundle] preferredLocalizations] firstObject];
-    [_routingRepository calculateRoute:anItinerary
-						  withLanguage:language
-				withSuccessDataHandler:^(MAIRoute *route) {
-					if(successDataHandler)
-					{
-						successDataHandler(route);
-					}
-				}
-				withFailureDataHandler:^(NSString *errorMessage) {
-					if(failureDataHandler)
-					{
-						failureDataHandler(errorMessage);
-					}
-				}];
+	[self.routingRepository routingRepositoryCalculateRoute:self.routingRepository
+												  itinerary:anItinerary
+											   withLanguage:language
+									 withSuccessDataHandler:^(MAIRoute *route) {
+										 if(successDataHandler)
+										 {
+											 successDataHandler(route);
+										 }
+									 }
+									 withFailureDataHandler:^(NSString *errorMessage) {
+										 if(failureDataHandler)
+										 {
+											 failureDataHandler(errorMessage);
+										 }
+									 }];
 }
 
 - (void)getRoute:(MAIRoute *)aRoute
 withSuccessDataHandler:(void (^)(MAIRoutePolyline *routePolyline))successDataHandler
 withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 {
-    if(!_routingRepository)
+    if(!self.routingRepository)
 	{
         failureDataHandler(@"Repository cannot be nil.");
         return;
@@ -261,19 +272,21 @@ withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
     }
     
     NSString *language = [[[NSBundle mainBundle] preferredLocalizations] firstObject];
-    
-    [_routingRepository getRoute:aRoute
-					withLanguage:language
-		  withSuccessDataHandler:^(MAIRoutePolyline *routePolyline) {
-				if(successDataHandler) {
-					successDataHandler(routePolyline);
-				}
-			}
-		  withFailureDataHandler:^(NSString *errorMessage) {
-			if(failureDataHandler) {
-				failureDataHandler(errorMessage);
-			}
-	}];
+	
+	[self.routingRepository routingRepositoryGetRoute:self.routingRepository
+												route:aRoute withLanguage:language
+							   withSuccessDataHandler:^(MAIRoutePolyline *routePolyline) {
+								   if(successDataHandler)
+								   {
+									   successDataHandler(routePolyline);
+								   }
+							   }
+							   withFailureDataHandler:^(NSString *errorMessage) {
+								   if(failureDataHandler)
+								   {
+									   failureDataHandler(errorMessage);
+								   }
+							   }];
 }
 
 - (void)dealloc

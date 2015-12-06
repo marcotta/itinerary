@@ -7,20 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MAIWaypoint.h"
-#import "MAIRoute.h"
+
+@class MAIWaypoint;
+@class MAIRoute;
 
 @interface MAIItinerary : NSObject<NSCopying, NSCoding>{
     NSMutableArray  *_waypoints;
 }
 
-@property (copy, nonatomic) NSString *itineraryId;
+@property (copy, nonatomic, readonly) NSString *itineraryId;
 @property (copy, nonatomic) NSString *friendlyName;
 @property (nonatomic, readonly) NSMutableArray *waypoints;
 @property (copy, nonatomic) MAIRoute *route;
 
-- (instancetype)init;
+- (instancetype)initWithItineraryId:(NSString *)itineraryId NS_DESIGNATED_INITIALIZER;
 
+- (void)generateItineraryId;
 - (void)addItem:(MAIWaypoint*)waypoint;
 - (void)removeItemAtIndex:(NSUInteger)index;
 - (void)moveItemAtIndex:(NSUInteger)sourceIndex

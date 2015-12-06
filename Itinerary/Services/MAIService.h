@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MAIGeocoderRepositoryDelegate.h"
-#import "MAIItineraryRepositoryDelegate.h"
-#import "MAIRoutingRepositoryDelegate.h"
-#import "MAIRoutePolyline.h"
+#import "MAIItinerary.h"
+
+@protocol MAIGeocoderRepositoryDelegate;
+@protocol MAIItineraryRepositoryDelegate;
+@protocol MAIRoutingRepositoryDelegate;
+
+@class MAIRoutePolyline;
 
 @interface MAIService : NSObject
 

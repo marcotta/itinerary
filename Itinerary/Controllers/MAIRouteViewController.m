@@ -9,8 +9,11 @@
 #import "MAIRouteViewController.h"
 #import "MAIService.h"
 #import "MAIConfiguration.h"
-#import "UIViewController+MAIExtras.h"
 #import "MAIAnnotation.h"
+#import "MAIItinerary.h"
+#import "MAIRoute.h"
+
+#import "UIViewController+MAIExtras.h"
 #import "UILabel+MAIExtra.h"
 
 @interface MAIRouteViewController ()

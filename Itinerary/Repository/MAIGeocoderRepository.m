@@ -26,10 +26,11 @@
 
 #pragma mark MAIGeocoderRepositoryDelegate
 
-- (void)search:(NSString*)query
-   withLanguage:(NSString*)language
-withSuccessDataHandler:(void (^)(NSArray *))successDataHandler
-withFailureDataHandler:(void (^)(NSString *))failureDataHandler
+- (void)geocoderRepositorySearch:(MAIGeocoderRepository *)repostiry
+						   query:(NSString*)query
+					withLanguage:(NSString*)language
+		  withSuccessDataHandler:(void (^)(NSArray *items))successDataHandler
+		  withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler
 {
     if([NSString ext_IsNullOrEmpty:query])
     {
@@ -55,33 +56,33 @@ withFailureDataHandler:(void (^)(NSString *))failureDataHandler
                                  @"language":language,
                                  @"gen":@"8"};
     
-    [manager GET:url
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             //              NSLog(@"JSON: %@", responseObject);
-             
-             NSDictionary *response = (NSDictionary*)responseObject[@"Response"];
-             NSArray *view = response[@"View"];
-             NSArray *results = [view firstObject][@"Result"];
-             
-             __block NSMutableArray *remoteLocations = [[NSMutableArray alloc] initWithCapacity:0];
-             [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                 MAIWaypoint *newLocation = [[MAIWaypoint alloc] initWithJson:obj];
-                 [remoteLocations addObject:newLocation];
-                 newLocation = nil;
-             }];
-             
-             if(successDataHandler)
+	[manager GET:url
+	  parameters:parameters
+		 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+			 //              NSLog(@"JSON: %@", responseObject);
+			 
+			 NSDictionary *response = (NSDictionary*)responseObject[@"Response"];
+			 NSArray *view = response[@"View"];
+			 NSArray *results = [view firstObject][@"Result"];
+			 
+			 __block NSMutableArray *remoteLocations = [[NSMutableArray alloc] initWithCapacity:0];
+			 [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+				 MAIWaypoint *newLocation = [[MAIWaypoint alloc] initWithJson:obj];
+				 [remoteLocations addObject:newLocation];
+				 newLocation = nil;
+			 }];
+			 
+			 if(successDataHandler)
 			 {
-                 successDataHandler(remoteLocations);
-             }
-         }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             if(failureDataHandler)
+				 successDataHandler(remoteLocations);
+			 }
+		 }
+		 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+			 if(failureDataHandler)
 			 {
-                 failureDataHandler([self parseErrorMessage:operation withError:error]);
-             }
-         }];
+				 failureDataHandler([self parseErrorMessage:operation withError:error]);
+			 }
+		 }];
 }
 
 @end

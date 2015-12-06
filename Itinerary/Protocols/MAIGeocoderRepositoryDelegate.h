@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class MAIGeocoderRepository;
+
 @protocol MAIGeocoderRepositoryDelegate <NSObject>
 
-
-- (void)search:(NSString*)query
-  withLanguage:(NSString*)language
-withSuccessDataHandler:(void (^)(NSArray *items))successDataHandler
-withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
+- (void)geocoderRepositorySearch:(MAIGeocoderRepository *)repostiry
+						   query:(NSString*)query
+					withLanguage:(NSString*)language
+		  withSuccessDataHandler:(void (^)(NSArray *items))successDataHandler
+		  withFailureDataHandler:(void (^)(NSString *errorMessage))failureDataHandler;
 
 @end

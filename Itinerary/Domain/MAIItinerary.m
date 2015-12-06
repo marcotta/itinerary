@@ -7,7 +7,15 @@
 //
 
 #import "MAIItinerary.h"
+#import "MAIWaypoint.h"
+
 #import "NSString+MAIExtras.h"
+
+@interface MAIItinerary()
+
+@property (copy, nonatomic, readwrite) NSString *itineraryId;
+
+@end
 
 @implementation MAIItinerary
 
@@ -18,14 +26,28 @@ static dispatch_queue_t _queue;
     _queue = dispatch_queue_create("com.marcoattanasio.itinerary", DISPATCH_QUEUE_CONCURRENT);
 }
 
-- (MAIItinerary*)init
+- (instancetype)init
 {
-    self = [super init];
-    if (self)
+	return [self initWithItineraryId:[NSString ext_GetGUID]];
+}
+
+- (instancetype)initWithItineraryId:(NSString *)itineraryId
+{
+	self = [super init];
+	if (self)
 	{
-        _waypoints = [[NSMutableArray alloc] initWithCapacity:0];
-    }
-    return self;
+		_itineraryId = itineraryId;
+		_waypoints = [[NSMutableArray alloc] initWithCapacity:0];
+	}
+	return self;
+}
+
+- (void)generateItineraryId
+{
+	if ([NSString ext_IsNullOrEmpty:self.itineraryId])
+	{
+		self.itineraryId = [NSString ext_GetGUID];
+	}
 }
 
 - (NSMutableArray*)waypoints
@@ -110,7 +132,7 @@ static dispatch_queue_t _queue;
 #pragma mark NSCoding
 - (instancetype)initWithCoder:(NSCoder *)decoder
 {
-    self = [super init];
+    self = [self init];
     if (!self)
 	{
         return nil;
